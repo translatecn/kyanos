@@ -1,4 +1,4 @@
-V:=1
+V:=2
 OUTPUT := .output
 CLANG ?= clang
 LIBBPF_SRC := $(abspath ./libbpf/src)
@@ -19,7 +19,7 @@ ARCH ?= $(shell uname -m | sed 's/x86_64/x86/' \
 CLANG_BPF_SYS_INCLUDES ?= $(shell $(CLANG) -v -E - </dev/null 2>&1 \
 	| sed -n '/<...> search starts here:/,/End of search list./{ s| \(/.*\)|-idirafter \1|p }')
 APPS = kyanos
-CFLAGS := -O2 -Wall 
+CFLAGS := -O2 -Wall
 ALL_LDFLAGS := $(LDFLAGS) $(EXTRA_LDFLAGS)
 
 ifeq ($(V),1)
@@ -50,9 +50,10 @@ $(OUTPUT) $(OUTPUT)/libbpf $(BPFTOOL_OUTPUT):
 	$(Q)mkdir -p $@
 
 # Build libbpf
+# 只在 $(LIBBPF_SRC) 中的 .c、.h 文件或 Makefile 更新后，才会重新构建 $(LIBBPF_OBJ)。
 $(LIBBPF_OBJ): $(wildcard $(LIBBPF_SRC)/*.[ch] $(LIBBPF_SRC)/Makefile) | $(OUTPUT)/libbpf
-	$(call msg,LIB,$@)
-	$(Q)$(MAKE) -C $(LIBBPF_SRC) BUILD_STATIC_ONLY=1		      \
+    $(call msg,LIB,$@)
+	$(MAKE) -C $(LIBBPF_SRC) BUILD_STATIC_ONLY=1		      \
 		    OBJDIR=$(dir $@)/libbpf DESTDIR=$(dir $@)		      \
 		    INCLUDEDIR= LIBDIR= UAPIDIR=			      \
 		    install
@@ -62,7 +63,7 @@ $(BPFTOOL): | $(BPFTOOL_OUTPUT)
 	$(call msg,BPFTOOL,$@)
 	$(Q)$(MAKE) ARCH= CROSS_COMPILE= OUTPUT=$(BPFTOOL_OUTPUT)/ -C $(BPFTOOL_SRC) bootstrap
 
-GO_FILES := $(shell find $(SRC_DIR) -type f -name '*.go' | sort)  
+GO_FILES := $(shell find $(SRC_DIR) -type f -name '*.go' | sort)
 
 .PHONY: build-bpf
 build-bpf: $(LIBBPF_OBJ) $(wildcard bpf/*.[ch]) | $(OUTPUT)
@@ -71,12 +72,14 @@ build-bpf: $(LIBBPF_OBJ) $(wildcard bpf/*.[ch]) | $(OUTPUT)
 
 kyanos: $(GO_FILES)
 	$(call msg,BINARY,$@)
-	export CGO_LDFLAGS="-Xlinker -rpath=. -static" && go build
+	apt install musl musl-tools -y
+	export CC=musl-gcc && export CGO_LDFLAGS="-Xlinker -rpath=. -static" && go build
 
 .PHONY: kyanos-compress
 kyanos-compress: $(GO_FILES)
+	echo 123123
 	$(call msg,BINARY,$@)
-	export CGO_LDFLAGS="-Xlinker -rpath=. -static" && go build && upx -9 kyanos
+	export CC=musl-gcc && export CGO_LDFLAGS="-Xlinker -rpath=. -static" && go build && upx -9 kyanos
 
 
 .PHONY: btfgen
@@ -112,12 +115,12 @@ format-md:
 
 .PHONY: dlv
 dlv:
-	chmod +x kyanos && dlv --headless --listen=:2345 --api-version=2 --check-go-version=false exec ./kyanos 
+	chmod +x kyanos && dlv --headless --listen=:2345 --api-version=2 --check-go-version=false exec ./kyanos
 
 .PHONY: kyanos-debug
 kyanos-debug: $(GO_FILES)
 	$(call msg,BINARY,$@)
-	export CGO_LDFLAGS="-Xlinker -rpath=. -static" && go build -gcflags "all=-N -l"
+	export CC=musl-gcc && export CGO_LDFLAGS="-Xlinker -rpath=. -static" && go build -gcflags "all=-N -l"
 
 .PHONY: remote-debug
 remote-debug: build-bpf kyanos-debug dlv
