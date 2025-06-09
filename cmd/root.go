@@ -81,14 +81,9 @@ func init() {
 	rootCmd.PersistentFlags().StringVar(&ContainerId, "container-id", "", "Filter by container id (only TCP and UDP packets are supported)")
 	rootCmd.PersistentFlags().StringVar(&ContainerName, "container-name", "", "Filter by container name (only TCP and UDP packets are supported)")
 	rootCmd.PersistentFlags().StringVar(&PodName, "pod-name", "", "Filter by pod name (format: NAME.NAMESPACE, only TCP and UDP packets are supported)")
-	rootCmd.PersistentFlags().StringVar(&DockerEndpoint, "docker-address", "unix:///var/run/docker.sock",
-		`Address of Docker Engine service`)
-	rootCmd.PersistentFlags().StringVar(&ContainerdEndpoint, "containerd-address", "/run/containerd/containerd.sock",
-		`Address of containerd service`)
-	rootCmd.PersistentFlags().StringVar(&CriRuntimeEndpoint, "cri-runtime-address", "",
-		"Address of CRI container runtime service "+
-			fmt.Sprintf("(default: uses in order the first successful one of [%s])",
-				strings.Join(getDefaultCriRuntimeEndpoint(), ", ")))
+	rootCmd.PersistentFlags().StringVar(&DockerEndpoint, "docker-address", "unix:///var/run/docker.sock", `Address of Docker Engine service`)
+	rootCmd.PersistentFlags().StringVar(&ContainerdEndpoint, "containerd-address", "/run/containerd/containerd.sock", `Address of containerd service`)
+	rootCmd.PersistentFlags().StringVar(&CriRuntimeEndpoint, "cri-runtime-address", "", "Address of CRI container runtime service "+fmt.Sprintf("(default: uses in order the first successful one of [%s])", strings.Join(getDefaultCriRuntimeEndpoint(), ", ")))
 
 	// pageNum of eBPF map
 	rootCmd.PersistentFlags().IntVar(&options.SyscallPerfEventMapPageNum, "syscall-perf-event-map-page-num", 2048, "pageNum of eBPF map size for syscall data events buffer")
@@ -111,17 +106,18 @@ func init() {
 	rootCmd.PersistentFlags().MarkHidden("bpf-event-log-level")
 	rootCmd.PersistentFlags().MarkHidden("conntrack-log-level")
 	rootCmd.PersistentFlags().MarkHidden("protocol-log-level")
+
 	rootCmd.PersistentFlags().MarkHidden("bpf-verify-log-size")
 	rootCmd.PersistentFlags().MarkHidden("kern-perf-event-buffer-size")
 	rootCmd.PersistentFlags().MarkHidden("data-perf-event-buffer-size")
 	rootCmd.PersistentFlags().MarkHidden("performance-mode")
 	rootCmd.PersistentFlags().MarkHidden("conntrack-close-wait-time-mills")
+	rootCmd.PersistentFlags().MarkHidden("max-allow-stuck-time-mills")
 	rootCmd.PersistentFlags().MarkHidden("syscall-perf-event-map-page-num")
 	rootCmd.PersistentFlags().MarkHidden("ssl-perf-event-map-page-num")
 	rootCmd.PersistentFlags().MarkHidden("conn-perf-event-map-page-num")
 	rootCmd.PersistentFlags().MarkHidden("kern-perf-event-map-page-num")
 	rootCmd.PersistentFlags().MarkHidden("first-packet-event-map-page-num")
-	rootCmd.PersistentFlags().MarkHidden("max-allow-stuck-time-mills")
 
 	rootCmd.Flags().SortFlags = false
 	rootCmd.PersistentFlags().SortFlags = false
