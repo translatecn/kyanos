@@ -43,7 +43,7 @@ all: $(APPS)
 
 clean:
 	$(call msg,CLEAN)
-	$(Q)rm -rf $(OUTPUT) $(APPS) kyanos kyanos.log
+	$(Q)rm -rf $(OUTPUT) $(APPS) kyanos kyanos.log ./bpf/*_bpfel.o ./bpf/*_bpfel.go
 
 $(OUTPUT) $(OUTPUT)/libbpf $(BPFTOOL_OUTPUT):
 	$(call msg,MKDIR,$@)
@@ -71,12 +71,12 @@ build-bpf: $(LIBBPF_OBJ) $(wildcard bpf/*.[ch]) | $(OUTPUT)
 
 kyanos: $(GO_FILES)
 	$(call msg,BINARY,$@)
-	export CGO_LDFLAGS="-Xlinker -rpath=. -static" && go build
+	export CC=musl-gcc && export CGO_LDFLAGS="-Xlinker -rpath=. -static" && go build
 
 .PHONY: kyanos-compress
 kyanos-compress: $(GO_FILES)
 	$(call msg,BINARY,$@)
-	export CGO_LDFLAGS="-Xlinker -rpath=. -static" && go build && upx -9 kyanos
+	export CC=musl-gcc && export CGO_LDFLAGS="-Xlinker -rpath=. -static" && go build && upx -9 kyanos
 
 
 .PHONY: btfgen
@@ -117,7 +117,7 @@ dlv:
 .PHONY: kyanos-debug
 kyanos-debug: $(GO_FILES)
 	$(call msg,BINARY,$@)
-	export CGO_LDFLAGS="-Xlinker -rpath=. -static" && go build -gcflags "all=-N -l"
+	export CC=musl-gcc export CGO_LDFLAGS="-Xlinker -rpath=. -static" && go build -gcflags "all=-N -l"
 
 .PHONY: remote-debug
 remote-debug: build-bpf kyanos-debug dlv

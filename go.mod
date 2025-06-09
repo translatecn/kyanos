@@ -21,6 +21,7 @@ require (
 	github.com/jefurry/logrus v2.0.6+incompatible
 	github.com/lucasb-eyer/go-colorful v1.2.0
 	github.com/mandiant/GoReSym v1.7.2-0.20240819162932-534ca84b42d5
+	github.com/miekg/dns v1.1.64
 	github.com/muesli/termenv v0.15.2
 	github.com/sevlyar/go-daemon v0.1.6
 	github.com/shirou/gopsutil v3.21.11+incompatible
@@ -39,7 +40,6 @@ require (
 )
 
 require (
-	github.com/miekg/dns v1.1.64 // indirect
 	golang.org/x/mod v0.23.0 // indirect
 	golang.org/x/tools v0.30.0 // indirect
 )

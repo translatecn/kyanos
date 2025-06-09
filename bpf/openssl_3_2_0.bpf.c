@@ -69,7 +69,6 @@
 
 #define SSL_ST_RBIO SSL_CONNECTION_ST_RBIO
 
-
 #include "openssl.h"
 
 #endif

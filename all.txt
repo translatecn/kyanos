@@ -1,0 +1,3948 @@
+export CGO_LDFLAGS="-Xlinker -rpath=. -static" && go build
+# GNU Make 4.3
+# Built for aarch64-unknown-linux-gnu
+# Copyright (C) 1988-2020 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+
+# Make data base, printed on Thu Jun  5 21:32:03 2025
+
+# Variables
+
+# makefile (from 'Makefile', line 5)
+BPFTOOL_SRC := /root/kyanos/bpftool/src
+# environment
+SSH_TTY = /dev/pts/0
+# default
+PREPROCESS.S = $(CC) -E $(CPPFLAGS)
+# default
+COMPILE.m = $(OBJC) $(OBJCFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
+# default
+ARFLAGS = rv
+# default
+AS = as
+# makefile (from 'Makefile', line 2)
+OUTPUT := .output
+# environment
+LC_ALL = en_US.UTF-8
+# environment
+ISTIO_HOME = /Users/acejilam/software/istio-1.12.2
+# default
+AR = ar
+# environment
+SDKROOT = /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
+# environment
+JMETER_HOME = /Users/acejilam/software/apache-jmeter-5.5
+# default
+OBJC = cc
+# makefile (from 'Makefile', line 8)
+LIBBPF_OBJ := /root/kyanos/.output/libbpf.a
+# default
+LINK.S = $(CC) $(ASFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_MACH)
+# makefile (from 'Makefile', line 3)
+CLANG = clang
+# default
+LINK.s = $(CC) $(ASFLAGS) $(LDFLAGS) $(TARGET_MACH)
+# default
+MAKE_COMMAND := make
+# environment
+HISTFILE = /Users/acejilam/Desktop/SyncZone/zsh_history
+# environment
+GONOSUMDB = gitlab.datacanvas.com,git@gitlab.datacanvas.com
+# environment
+GOPATH = /root/.gopath
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# environment
+HOMEBREW_BREW_GIT_REMOTE = https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git
+# default
+COFLAGS = 
+# environment
+GONOPROXY = gitlab.datacanvas.com/*,git@gitlab.datacanvas.com/*
+# makefile (from 'Makefile', line 26)
+Q = 
+# default
+COMPILE.mod = $(M2C) $(M2FLAGS) $(MODFLAGS) $(TARGET_ARCH)
+# default
+.VARIABLES := 
+# environment
+PWD = /root/kyanos
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# environment
+LSCOLORS = Gxfxcxdxbxegedabagacad
+# default
+LINK.o = $(CC) $(LDFLAGS) $(TARGET_ARCH)
+# environment
+K8S_DEBUG = 1
+# makefile (from 'Makefile', line 1)
+V := 1
+# environment
+OLDPWD = /root/kyanos
+# default
+TEXI2DVI = texi2dvi
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# automatic
+%F = $(notdir $%)
+# default
+LEX.l = $(LEX) $(LFLAGS) -t
+# makefile (from 'Makefile', line 9)
+VMLINUX := ./vmlinux//vmlinux.h
+# environment
+LANG = en_US.UTF-8
+# environment
+HELM_CONFIG_HOME = /Users/acejilam/.helm/conf
+# default
+.LOADED := 
+# default
+.INCLUDE_DIRS = /usr/local/include /usr/include /usr/include
+# default
+COMPILE.c = $(CC) $(CFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
+# makefile
+MAKEFLAGS = np
+# default
+LINK.f = $(FC) $(FFLAGS) $(LDFLAGS) $(TARGET_ARCH)
+# environment
+GIT_EDITOR = code --wait
+# default
+TANGLE = tangle
+# makefile
+CURDIR := /root/kyanos
+# default
+PREPROCESS.F = $(FC) $(FFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -F
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+MFLAGS = -np
+# environment
+SSH_AUTH_SOCK = /tmp/saf29928dd4-935d-4683-974b-8471944b63ac
+# default
+.SHELLFLAGS := -c
+# default
+M2C = m2c
+# default
+COMPILE.p = $(PC) $(PFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
+# default
+COMPILE.cpp = $(COMPILE.cc)
+# default
+TEX = tex
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# environment
+P9K_SSH = 1
+# makefile (from 'Makefile', line 1)
+MAKEFILE_LIST := Makefile
+# default
+F77FLAGS = $(FFLAGS)
+# makefile (from 'Makefile', line 21)
+APPS = kyanos
+# environment
+HELM_CACHE_HOME = /Users/acejilam/.helm/cache
+# automatic
+@F = $(notdir $@)
+# environment
+REMOTE_DEV_LAUNCHER_NAME_FOR_USAGE = remote-dev-server.sh
+# environment
+ZSH = /root/.oh-my-zsh
+# environment
+XDG_SESSION_TYPE = tty
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# default
+COMPILE.def = $(M2C) $(M2FLAGS) $(DEFFLAGS) $(TARGET_ARCH)
+# default
+CTANGLE = ctangle
+# makefile (from 'Makefile', line 10)
+INCLUDES := -I.output -I./libbpf/include/uapi -I./vmlinux//
+# environment
+VAGRANT_DEFAULT_PROVIDER = vmware_fusion
+# automatic
+*F = $(notdir $*)
+# environment
+HOMEBREW_CORE_GIT_REMOTE = https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git
+# environment
+DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/0/bus
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# default
+COMPILE.C = $(COMPILE.cc)
+# default
+YACC.m = $(YACC) $(YFLAGS)
+# environment
+P9K_TTY = old
+# default
+LINK.C = $(LINK.cc)
+# default
+MAKE_HOST := aarch64-unknown-linux-gnu
+# default
+LINK.c = $(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH)
+# makefile
+SHELL = /bin/sh
+# makefile (from 'Makefile', line 27)
+msg = 
+# default
+LINK.F = $(FC) $(FFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH)
+# environment
+SHLVL = 1
+# environment
+_P9K_SSH_TTY = /dev/pts/1
+# environment
+MAKELEVEL := 0
+# default
+MAKE = $(MAKE_COMMAND)
+# environment
+HELM_DATA_HOME = /Users/acejilam/.helm/data
+# environment
+PATH = /Users/acejilam/Library/Application Support/JetBrains/Toolbox/scripts:/Library/Frameworks/Python.framework/Versions/3.12/bin:/usr/local/opt/llvm/bin:/usr/local/opt/openssl@3/bin:/usr/local/opt/make/libexec/gnubin:/usr/local/opt/mysql-client/bin:/Users/acejilam/.krew/bin:/Users/acejilam/.yarn/bin:/Users/acejilam/.config/yarn/global/node_modules/.bin:/Users/acejilam/software/apache-jmeter-5.5/bin:/Users/acejilam/software/apache-maven-3.6.3/bin:/Users/acejilam/software/istio-1.12.2/bin:/Users/acejilam/software/protoc-3.14.0/bin:/Users/acejilam/.gopath/bin:/Users/acejilam/software:/Users/acejilam/script:/Users/acejilam/software/myself::/Users/acejilam/Library/Application Support/JetBrains/Toolbox/scripts:/Library/Frameworks/Python.framework/Versions/3.12/bin:/usr/local/opt/llvm/bin:/usr/local/opt/openssl@3/bin:/usr/local/opt/make/libexec/gnubin:/usr/local/opt/mysql-client/bin:/Users/acejilam/.krew/bin:/Users/acejilam/.yarn/bin:/Users/acejilam/.config/yarn/global/node_modules/.bin:/Users/acejilam/software/apache-jmeter-5.5/bin:/Users/acejilam/software/apache-maven-3.6.3/bin:/Users/acejilam/software/istio-1.12.2/bin:/Users/acejilam/software/protoc-3.14.0/bin:/Users/acejilam/.gopath/bin:/Users/acejilam/software:/Users/acejilam/script:/Users/acejilam/software/myself::/Users/acejilam/Library/Application Support/JetBrains/Toolbox/scripts:/Library/Frameworks/Python.framework/Versions/3.12/bin:/usr/local/opt/llvm/bin:/usr/local/opt/openssl@3/bin:/usr/local/opt/make/libexec/gnubin:/usr/local/opt/mysql-client/bin:/Users/acejilam/.krew/bin:/Users/acejilam/.yarn/bin:/Users/acejilam/.config/yarn/global/node_modules/.bin:/Users/acejilam/software/apache-jmeter-5.5/bin:/Users/acejilam/software/apache-maven-3.6.3/bin:/Users/acejilam/software/istio-1.12.2/bin:/Users/acejilam/software/protoc-3.14.0/bin:/Users/acejilam/.gopath/bin:/Users/acejilam/software:/Users/acejilam/script:/Users/acejilam/software/myself::/Users/acejilam/Library/Application Support/JetBrains/Toolbox/scripts:/Library/Frameworks/Python.framework/Versions/3.12/bin:/usr/local/opt/llvm/bin:/usr/local/opt/openssl@3/bin:/usr/local/opt/make/libexec/gnubin:/usr/local/opt/mysql-client/bin:/Users/acejilam/.krew/bin:/Users/acejilam/.yarn/bin:/Users/acejilam/.config/yarn/global/node_modules/.bin:/Users/acejilam/software/apache-jmeter-5.5/bin:/Users/acejilam/software/apache-maven-3.6.3/bin:/Users/acejilam/software/istio-1.12.2/bin:/Users/acejilam/software/protoc-3.14.0/bin:/Users/acejilam/.gopath/bin:/Users/acejilam/software:/Users/acejilam/script:/Users/acejilam/software/myself::/root/.cargo/bin:/Users/acejilam/Library/Application Support/JetBrains/Toolbox/scripts:/Library/Frameworks/Python.framework/Versions/3.12/bin:/usr/local/opt/llvm/bin:/usr/local/opt/openssl@3/bin:/usr/local/opt/make/libexec/gnubin:/usr/local/opt/mysql-client/bin:/Users/acejilam/.krew/bin:/Users/acejilam/.yarn/bin:/Users/acejilam/.config/yarn/global/node_modules/.bin:/Users/acejilam/software/apache-jmeter-5.5/bin:/Users/acejilam/software/apache-maven-3.6.3/bin:/Users/acejilam/software/istio-1.12.2/bin:/Users/acejilam/software/protoc-3.14.0/bin:/Users/acejilam/.gopath/bin:/Users/acejilam/software:/Users/acejilam/script:/Users/acejilam/software/myself::/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/Users/acejilam/.dapr/bin:/usr/local/go1.24.3/bin:/root/.gopath/bin:/Users/acejilam/.dapr/bin:/usr/local/go1.24.3/bin:/root/.gopath/bin:/Users/acejilam/.dapr/bin:/usr/local/go1.24.3/bin:/root/.gopath/bin:/root/kyanos/node_modules/.bin:/Users/acejilam/.dapr/bin:/usr/local/go1.24.3/bin:/root/.gopath/bin:/Users/acejilam/.dapr/bin:/usr/local/go1.24.3/bin:/root/.gopath/bin:/perf-tools/bin
+# default
+FC = f77
+# default
+LINT = lint
+# default
+PC = pc
+# default
+MAKEFILES := 
+# automatic
+^F = $(notdir $^)
+# default
+LEX.m = $(LEX) $(LFLAGS) -t
+# environment
+PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION = python
+# environment
+CARGO_HOME = /Users/acejilam/.cargo
+# default
+.LIBPATTERNS = lib%.so lib%.a
+# environment
+KUBE_EDITOR = code --wait
+# environment
+GOROOT = /usr/local/go1.24.3
+# environment
+SSH_CLIENT = 192.168.33.1 51120 22
+# makefile (from 'Makefile', line 6)
+BPFTOOL_OUTPUT = $(abspath $(OUTPUT)/bpftool)
+# default
+CPP = $(CC) -E
+# default
+LINK.cc = $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH)
+# makefile (from 'Makefile', line 23)
+ALL_LDFLAGS := $(subst ,, )
+# default
+CHECKOUT,v = +$(if $(wildcard $@),,$(CO) $(COFLAGS) $< $@)
+# default
+COMPILE.f = $(FC) $(FFLAGS) $(TARGET_ARCH) -c
+# default
+COMPILE.r = $(FC) $(FFLAGS) $(RFLAGS) $(TARGET_ARCH) -c
+# environment
+GOPRIVATE = gitlab.datacanvas.com/*,git@gitlab.datacanvas.com/*
+# default
+COMPILE.S = $(CC) $(ASFLAGS) $(CPPFLAGS) $(TARGET_MACH) -c
+# automatic
+?F = $(notdir $?)
+# default
+GET = get
+# environment
+myself = /Users/acejilam/software/myself
+# environment
+PY_PATH = /Library/Frameworks/Python.framework/Versions/Current
+# default
+LINK.r = $(FC) $(FFLAGS) $(RFLAGS) $(LDFLAGS) $(TARGET_ARCH)
+# environment
+LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:
+# automatic
++F = $(notdir $+)
+# environment
+LESS = -R
+# default
+MAKEINFO = makeinfo
+# 'override' directive
+GNUMAKEFLAGS := 
+# default
+PREPROCESS.r = $(FC) $(FFLAGS) $(RFLAGS) $(TARGET_ARCH) -F
+# environment
+MVN_HOME = /Users/acejilam/software/apache-maven-3.6.3
+# default
+LINK.m = $(OBJC) $(OBJCFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH)
+# environment
+LOGNAME = root
+# default
+LINK.p = $(PC) $(PFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH)
+# default
+YACC = yacc
+# makefile (from 'Makefile', line 4)
+LIBBPF_SRC := /root/kyanos/libbpf/src
+# makefile
+.DEFAULT_GOAL := all
+# default
+RM = rm -f
+# makefile (from 'Makefile', line 11)
+ARCH = $(shell uname -m | sed 's/x86_64/x86/' | sed 's/arm.*/arm/' | sed 's/aarch64/arm64/' | sed 's/ppc64le/powerpc/' | sed 's/mips.*/mips/' | sed 's/riscv64/riscv/' | sed 's/loongarch64/loongarch/')
+# default
+WEAVE = weave
+# environment
+USER = root
+# environment
+TERMINAL_EMULATOR = JetBrains-JediTerm
+# default
+MAKE_VERSION := 4.3
+# environment
+REMOTE_DEV_SERVER_IS_NATIVE_LAUNCHER = 1
+# 'override' directive
+.SHELLSTATUS := 0
+# default
+F77 = $(FC)
+# environment
+TERM_SESSION_ID = 4a4d37f3-9018-4614-8215-f5e7cd499b5a
+# environment
+PROTOC_HOME = /Users/acejilam/software/protoc-3.14.0
+# default
+CWEAVE = cweave
+# environment
+PAGER = less
+# environment
+_ = /usr/bin/make
+# default
+YACC.y = $(YACC) $(YFLAGS)
+# default
+LINK.cpp = $(LINK.cc)
+# default
+CO = co
+# environment
+XDG_RUNTIME_DIR = /run/user/0
+# makefile (from 'Makefile', line 22)
+CFLAGS := -O2 -Wall 
+# environment
+RUSTUP_DIST_SERVER = https://mirrors.ustc.edu.cn/rust-static
+# default
+OUTPUT_OPTION = -o $@
+# default
+COMPILE.s = $(AS) $(ASFLAGS) $(TARGET_MACH)
+# environment
+RUSTUP_UPDATE_ROOT = https://mirrors.ustc.edu.cn/rust-static/rustup
+# default
+MAKE_TERMERR := /dev/pts/1
+# environment
+XDG_SESSION_CLASS = user
+# environment
+HOME = /root
+# default
+LEX = lex
+# environment
+IDEA_RESTART_VIA_EXIT_CODE = 88
+# environment
+TERM = xterm-256color
+# environment
+XDG_SESSION_ID = 5
+# makefile (from 'Makefile', line 7)
+BPFTOOL = $(BPFTOOL_OUTPUT)/bootstrap/bpftool
+# default
+LINT.c = $(LINT) $(LINTFLAGS) $(CPPFLAGS) $(TARGET_ARCH)
+# default
+COMPILE.F = $(FC) $(FFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
+# environment
+GOPROXY = https://goproxy.cn/,direct
+# default
+.RECIPEPREFIX := 
+# environment
+GOFLAGS = -buildvcs=false
+# automatic
+<F = $(notdir $<)
+# default
+SUFFIXES := .out .a .ln .o .c .cc .C .cpp .p .f .F .m .r .y .l .ym .yl .s .S .mod .sym .def .h .info .dvi .tex .texinfo .texi .txinfo .w .ch .web .sh .elc .el
+# default
+LD = ld
+# environment
+HOMEBREW_BOTTLE_DOMAIN = https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
+# environment
+_P9K_TTY = /dev/pts/1
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink load
+# default
+CXX = g++
+# environment
+CC = musl-gcc
+# makefile (from 'Makefile', line 19)
+CLANG_BPF_SYS_INCLUDES = $(shell $(CLANG) -v -E - </dev/null 2>&1 | sed -n '/<...> search starts here:/,/End of search list./{ s| \(/.*\)|-idirafter \1|p }')
+# default
+COMPILE.cc = $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
+# makefile (from 'Makefile', line 65)
+GO_FILES := ./agent/agent.go ./agent/agent_test.go ./agent/agent_utils_test.go ./agent/analysis/analysis.go ./agent/analysis/analysis_test.go ./agent/analysis/classfier.go ./agent/analysis/common/classfier.go ./agent/analysis/common/json.go ./agent/analysis/common/types.go ./agent/analysis/percentile.go ./agent/analysis/stat.go ./agent/analysis/types.go ./agent/buffer/stream_buffer.go ./agent/buffer/stream_buffer_test.go ./agent/common/objects.go ./agent/common/options.go ./agent/common/permission.go ./agent/common/stopper.go ./agent/compatible/type.go ./agent/compatible/type_test.go ./agent/conn/conntrack.go ./agent/conn/constant.go ./agent/conn/first_packet_processor.go ./agent/conn/kern_event_handler.go ./agent/conn/metrics.go ./agent/conn/net.go ./agent/conn/processor.go ./agent/conn/record_processor.go ./agent/metadata/container/containerd/containerd.go ./agent/metadata/container/container.go ./agent/metadata/container/docker/docker.go ./agent/metadata/container/docker/events.go ./agent/metadata/container.go ./agent/metadata/container/multiple.go ./agent/metadata/k8s/cri.go ./agent/metadata/process.go ./agent/metadata/types/container.go ./agent/metadata/types/kubernetes.go ./agent/protocol/common.go ./agent/protocol/decoder.go ./agent/protocol/dns/dns.go ./agent/protocol/dns/filter.go ./agent/protocol/dns/type.go ./agent/protocol/fakedata.go ./agent/protocol/generic_filter.go ./agent/protocol/http.go ./agent/protocol/http_test.go ./agent/protocol/kafka/common/fetch.go ./agent/protocol/kafka/common/join_group.go ./agent/protocol/kafka/common/message_set.go ./agent/protocol/kafka/common/metadata.go ./agent/protocol/kafka/common/produce.go ./agent/protocol/kafka/common/sync_group.go ./agent/protocol/kafka/common/types.go ./agent/protocol/kafka/decoder/fetch.go ./agent/protocol/kafka/decoder/fetch_test.go ./agent/protocol/kafka/decoder/join_group.go ./agent/protocol/kafka/decoder/join_group_test.go ./agent/protocol/kafka/decoder/message_set.go ./agent/protocol/kafka/decoder/message_set_test.go ./agent/protocol/kafka/decoder/metadata.go ./agent/protocol/kafka/decoder/metadata_test.go ./agent/protocol/kafka/decoder/packet_decoder.go ./agent/protocol/kafka/decoder/packet_decoder_test.go ./agent/protocol/kafka/decoder/produce.go ./agent/protocol/kafka/decoder/produce_test.go ./agent/protocol/kafka/decoder/sync_group.go ./agent/protocol/kafka/decoder/sync_group_test.go ./agent/protocol/kafka/filter.go ./agent/protocol/kafka/kafka.go ./agent/protocol/kafka/kafka_test.go ./agent/protocol/mongodb/mongodb.go ./agent/protocol/mongodb/mongodb_test.go ./agent/protocol/mongodb/stitcher.go ./agent/protocol/mongodb/types.go ./agent/protocol/mysql/filter.go ./agent/protocol/mysql/handler.go ./agent/protocol/mysql/mysql.go ./agent/protocol/mysql/types.go ./agent/protocol/mysql/utils.go ./agent/protocol/mysql/utils_test.go ./agent/protocol/protocol.go ./agent/protocol/redis..go ./agent/protocol/rocketmq/filter.go ./agent/protocol/rocketmq/language_code.go ./agent/protocol/rocketmq/rocketmq.go ./agent/protocol/rocketmq/types.go ./agent/render/common/common.go ./agent/render/loader/loader_render.go ./agent/render/stat/stat.go ./agent/render/watch/option.go ./agent/render/watch/time_detail.go ./agent/render/watch/watch_render.go ./agent/time.go ./agent/uprobe/common.go ./agent/uprobe/dwarf_reader/buf.go ./agent/uprobe/dwarf_reader/reader.go ./agent/uprobe/gotls.go ./agent/uprobe/manager.go ./agent/uprobe/ssl_test.go ./agent/uprobe/ssl/types.go ./agent/uprobe/types.go ./bpf/agent_arm64_bpfel.go ./bpf/agentlagacykernel310_arm64_bpfel.go ./bpf/agentlagacykernel310_x86_bpfel.go ./bpf/agent_x86_bpfel.go ./bpf/common.go ./bpf/embed.go ./bpf/events.go ./bpf/gen.go ./bpf/gotls_arm64_bpfel.go ./bpf/gotlslagacykernel310_arm64_bpfel.go ./bpf/gotlslagacykernel310_x86_bpfel.go ./bpf/gotls_x86_bpfel.go ./bpf/loader/btf.go ./bpf/loader/container.go ./bpf/loader/loader.go ./bpf/loader/loader_test.go ./bpf/loader/utils.go ./bpf/map.go ./bpf/openssl102a_arm64_bpfel.go ./bpf/openssl102a_x86_bpfel.go ./bpf/openssl110a_arm64_bpfel.go ./bpf/openssl110a_x86_bpfel.go ./bpf/openssl111a_arm64_bpfel.go ./bpf/openssl111a_x86_bpfel.go ./bpf/openssl111b_arm64_bpfel.go ./bpf/openssl111b_x86_bpfel.go ./bpf/openssl111d_arm64_bpfel.go ./bpf/openssl111d_x86_bpfel.go ./bpf/openssl111j_arm64_bpfel.go ./bpf/openssl111j_x86_bpfel.go ./bpf/openssl300_arm64_bpfel.go ./bpf/openssl300_x86_bpfel.go ./bpf/openssl310_arm64_bpfel.go ./bpf/openssl310_x86_bpfel.go ./bpf/openssl320_arm64_bpfel.go ./bpf/openssl320_x86_bpfel.go ./bpf/openssl323_arm64_bpfel.go ./bpf/openssl323_x86_bpfel.go ./bpf/openssl330_arm64_bpfel.go ./bpf/openssl330_x86_bpfel.go ./bpf/openssl340_arm64_bpfel.go ./bpf/openssl340_x86_bpfel.go ./bpf/openssl350_arm64_bpfel.go ./bpf/openssl350_x86_bpfel.go ./bpf/prog.go ./bpf/prog_test.go ./bpf/types.go ./cmd/common.go ./cmd/dns.go ./cmd/http.go ./cmd/kafka.go ./cmd/mongodb.go ./cmd/mysql.go ./cmd/overview.go ./cmd/redis.go ./cmd/rocketmq.go ./cmd/root.go ./cmd/stat.go ./cmd/top.go ./cmd/version.go ./cmd/watch.go ./common/byte_util.go ./common/byte_util_test.go ./common/constant.go ./common/errors.go ./common/kernel_config.go ./common/kernel_version.go ./common/log.go ./common/namspace.go ./common/nsenter.go ./common/nsenter_test.go ./common/offset.go ./common/osinfo.go ./common/pclntab.go ./common/proc.go ./common/proc_test.go ./common/ringbuffer.go ./common/system.go ./common/term.go ./common/type.go ./common/utils.go ./common/utils_test.go ./deps/btfhub/cmd/btfhub/main.go ./deps/btfhub/pkg/job/btf.go ./deps/btfhub/pkg/job/extract.go ./deps/btfhub/pkg/job/job.go ./deps/btfhub/pkg/job/utils.go ./deps/btfhub/pkg/job/worker.go ./deps/btfhub/pkg/kernel/kernel.go ./deps/btfhub/pkg/kernel/kernel_test.go ./deps/btfhub/pkg/pkg/centos.go ./deps/btfhub/pkg/pkg/fedora.go ./deps/btfhub/pkg/pkg/package.go ./deps/btfhub/pkg/pkg/rhel.go ./deps/btfhub/pkg/pkg/suse.go ./deps/btfhub/pkg/pkg/ubuntu.go ./deps/btfhub/pkg/pkg/utils.go ./deps/btfhub/pkg/pkg/utils_test.go ./deps/btfhub/pkg/repo/amazon.go ./deps/btfhub/pkg/repo/centos.go ./deps/btfhub/pkg/repo/debian.go ./deps/btfhub/pkg/repo/fedora.go ./deps/btfhub/pkg/repo/oracle.go ./deps/btfhub/pkg/repo/repository.go ./deps/btfhub/pkg/repo/rhel.go ./deps/btfhub/pkg/repo/suse.go ./deps/btfhub/pkg/repo/ubuntu.go ./deps/btfhub/pkg/repo/utils.go ./deps/btfhub/pkg/utils/btf.go ./deps/btfhub/pkg/utils/download.go ./deps/btfhub/pkg/utils/progress.go ./deps/btfhub/pkg/utils/rpm.go ./deps/btfhub/pkg/utils/utils.go ./deps/btfhub/pkg/utils/zypper.go ./main.go ./monitor/monitor.go ./testdata/https-request/http_request.go ./version/detect.go ./version/version.go  
+# environment
+SSH_CONNECTION = 192.168.33.1 51120 192.168.33.13 22
+# variable set hash-table stats:
+# Load=180/1024=18%, Rehash=0, Collisions=21/255=8%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# agent/analysis/RCS: could not be stat'd.
+# version (device 64512, inode 1835634): 4 files, 38 impossibilities.
+# agent/protocol/dns/RCS: could not be stat'd.
+# agent/render/stat/SCCS: could not be stat'd.
+# deps/btfhub/pkg/kernel (device 64512, inode 1835589): 4 files, 38 impossibilities.
+# agent/metadata (device 64512, inode 1835253): 7 files, 38 impossibilities.
+# bpf (device 64512, inode 1835276): 101 files, 798 impossibilities.
+# agent/common/SCCS: could not be stat'd.
+# agent/metadata/k8s (device 64512, inode 1835257): 3 files, 19 impossibilities.
+# agent/render/watch/RCS: could not be stat'd.
+# agent/uprobe/ssl (device 64512, inode 1835275): 3 files, 19 impossibilities.
+# deps/btfhub/pkg/utils (device 64512, inode 1835592): 8 files, 114 impossibilities.
+# agent/protocol/kafka (device 64512, inode 1835261): 7 files, 57 impossibilities.
+# agent/render/loader/SCCS: could not be stat'd.
+# agent/uprobe/SCCS: could not be stat'd.
+# deps/btfhub/pkg/kernel/RCS: could not be stat'd.
+# agent/protocol/mongodb/SCCS: could not be stat'd.
+# agent/analysis/common/RCS: could not be stat'd.
+# agent/SCCS: could not be stat'd.
+# agent/uprobe/dwarf_reader (device 64512, inode 1835274): 4 files, 38 impossibilities.
+# RCS: could not be stat'd.
+# agent/uprobe/ssl/RCS: could not be stat'd.
+# bpf/loader/RCS: could not be stat'd.
+# agent/RCS: could not be stat'd.
+# deps/btfhub/cmd/btfhub/RCS: could not be stat'd.
+# deps/btfhub/pkg/job/SCCS: could not be stat'd.
+# agent/conn/RCS: could not be stat'd.
+# agent/protocol/kafka/SCCS: could not be stat'd.
+# agent/render/loader (device 64512, inode 1835270): 3 files, 19 impossibilities.
+# testdata/https-request/RCS: could not be stat'd.
+# agent/render/watch (device 64512, inode 1835272): 5 files, 57 impossibilities.
+# agent/metadata/RCS: could not be stat'd.
+# agent/conn (device 64512, inode 1835252): 10 files, 152 impossibilities.
+# agent/metadata/types (device 64512, inode 1835258): 4 files, 38 impossibilities.
+# testdata/https-request/SCCS: could not be stat'd.
+# agent/compatible (device 64512, inode 1835251): 4 files, 38 impossibilities.
+# agent/metadata/container/containerd (device 64512, inode 1835255): 3 files, 19 impossibilities.
+# common/SCCS: could not be stat'd.
+# agent/analysis/common (device 64512, inode 1835248): 5 files, 57 impossibilities.
+# SCCS: could not be stat'd.
+# agent/protocol/mongodb (device 64512, inode 1835265): 6 files, 76 impossibilities.
+# agent/protocol/rocketmq/SCCS: could not be stat'd.
+# agent/render/stat (device 64512, inode 1835271): 3 files, 19 impossibilities.
+# agent/protocol/kafka/common (device 64512, inode 1835262): 9 files, 133 impossibilities.
+# agent/uprobe/dwarf_reader/SCCS: could not be stat'd.
+# agent/uprobe/dwarf_reader/RCS: could not be stat'd.
+# agent/render/loader/RCS: could not be stat'd.
+# monitor/SCCS: could not be stat'd.
+# agent/metadata/k8s/SCCS: could not be stat'd.
+# agent/compatible/SCCS: could not be stat'd.
+# agent/protocol/mysql/SCCS: could not be stat'd.
+# agent/protocol/rocketmq (device 64512, inode 1835267): 6 files, 76 impossibilities.
+# deps/btfhub/pkg/job/RCS: could not be stat'd.
+# agent/protocol/dns/SCCS: could not be stat'd.
+# bpf/SCCS: could not be stat'd.
+# agent/compatible/RCS: could not be stat'd.
+# deps/btfhub/cmd/btfhub/SCCS: could not be stat'd.
+# agent/protocol/mongodb/RCS: could not be stat'd.
+# agent/analysis/SCCS: could not be stat'd.
+# agent/protocol/SCCS: could not be stat'd.
+# agent/uprobe (device 64512, inode 1835273): 9 files, 95 impossibilities.
+# version/RCS: could not be stat'd.
+# agent/uprobe/RCS: could not be stat'd.
+# . (device 64512, inode 1835042): 39 files, 38 impossibilities.
+# agent/buffer (device 64512, inode 1835249): 4 files, 38 impossibilities.
+# agent/protocol/rocketmq/RCS: could not be stat'd.
+# testdata/https-request (device 64512, inode 1835632): 4 files, 19 impossibilities.
+# agent/metadata/types/SCCS: could not be stat'd.
+# agent/render/common (device 64512, inode 1835269): 3 files, 19 impossibilities.
+# agent/metadata/container/containerd/RCS: could not be stat'd.
+# cmd (device 64512, inode 1835329): 16 files, 266 impossibilities.
+# deps/btfhub/pkg/kernel/SCCS: could not be stat'd.
+# monitor (device 64512, inode 1835629): 3 files, 19 impossibilities.
+# agent/metadata/container/SCCS: could not be stat'd.
+# agent/protocol/mysql/RCS: could not be stat'd.
+# agent/metadata/container/containerd/SCCS: could not be stat'd.
+# agent/protocol/mysql (device 64512, inode 1835266): 8 files, 114 impossibilities.
+# agent/protocol/dns (device 64512, inode 1835260): 5 files, 57 impossibilities.
+# bpf/RCS: could not be stat'd.
+# agent/metadata/types/RCS: could not be stat'd.
+# version/SCCS: could not be stat'd.
+# deps/btfhub/pkg/pkg/RCS: could not be stat'd.
+# agent/render/stat/RCS: could not be stat'd.
+# agent/protocol/kafka/decoder/RCS: could not be stat'd.
+# agent/protocol/kafka/decoder/SCCS: could not be stat'd.
+# deps/btfhub/pkg/pkg (device 64512, inode 1835590): 10 files, 152 impossibilities.
+# deps/btfhub/pkg/utils/SCCS: could not be stat'd.
+# agent/buffer/RCS: could not be stat'd.
+# agent/protocol/kafka/common/RCS: could not be stat'd.
+# deps/btfhub/pkg/job (device 64512, inode 1835588): 7 files, 95 impossibilities.
+# agent/metadata/container/docker (device 64512, inode 1835256): 4 files, 38 impossibilities.
+# agent/analysis (device 64512, inode 1835247): 9 files, 114 impossibilities.
+# common/RCS: could not be stat'd.
+# agent/render/watch/SCCS: could not be stat'd.
+# cmd/SCCS: could not be stat'd.
+# agent/protocol/kafka/common/SCCS: could not be stat'd.
+# deps/btfhub/pkg/repo/RCS: could not be stat'd.
+# agent/metadata/k8s/RCS: could not be stat'd.
+# agent/common (device 64512, inode 1835250): 6 files, 76 impossibilities.
+# agent (device 64512, inode 1835246): 15 files, 76 impossibilities.
+# deps/btfhub/pkg/pkg/SCCS: could not be stat'd.
+# agent/conn/SCCS: could not be stat'd.
+# agent/protocol/kafka/RCS: could not be stat'd.
+# agent/render/common/SCCS: could not be stat'd.
+# agent/metadata/container/docker/SCCS: could not be stat'd.
+# agent/common/RCS: could not be stat'd.
+# agent/protocol/kafka/decoder (device 64512, inode 1835264): 16 files, 266 impossibilities.
+# common (device 64512, inode 1835330): 23 files, 399 impossibilities.
+# /root/kyanos/libbpf/src (device 64512, inode 1835628): 47 files, no impossibilities.
+# agent/metadata/container/RCS: could not be stat'd.
+# agent/render/common/RCS: could not be stat'd.
+# agent/protocol/RCS: could not be stat'd.
+# agent/metadata/container (device 64512, inode 1835254): 6 files, 38 impossibilities.
+# agent/analysis/common/SCCS: could not be stat'd.
+# agent/uprobe/ssl/SCCS: could not be stat'd.
+# agent/buffer/SCCS: could not be stat'd.
+# agent/protocol (device 64512, inode 1835259): 15 files, 152 impossibilities.
+# deps/btfhub/cmd/btfhub (device 64512, inode 1835535): 3 files, 19 impossibilities.
+# cmd/RCS: could not be stat'd.
+# deps/btfhub/pkg/repo/SCCS: could not be stat'd.
+# monitor/RCS: could not be stat'd.
+# bpf/loader/SCCS: could not be stat'd.
+# deps/btfhub/pkg/repo (device 64512, inode 1835591): 12 files, 190 impossibilities.
+# agent/metadata/container/docker/RCS: could not be stat'd.
+# bpf/loader (device 64512, inode 1835328): 7 files, 95 impossibilities.
+# deps/btfhub/pkg/utils/RCS: could not be stat'd.
+# agent/metadata/SCCS: could not be stat'd.
+
+# 470 files, 4218 impossibilities in 127 directories.
+
+# Implicit Rules
+
+%.out:
+
+%.a:
+
+%.ln:
+
+%.o:
+
+%: %.o
+#  recipe to execute (built-in):
+	$(LINK.o) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.c:
+
+%: %.c
+#  recipe to execute (built-in):
+	$(LINK.c) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.ln: %.c
+#  recipe to execute (built-in):
+	$(LINT.c) -C$* $<
+
+%.o: %.c
+#  recipe to execute (built-in):
+	$(COMPILE.c) $(OUTPUT_OPTION) $<
+
+%.cc:
+
+%: %.cc
+#  recipe to execute (built-in):
+	$(LINK.cc) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.cc
+#  recipe to execute (built-in):
+	$(COMPILE.cc) $(OUTPUT_OPTION) $<
+
+%.C:
+
+%: %.C
+#  recipe to execute (built-in):
+	$(LINK.C) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.C
+#  recipe to execute (built-in):
+	$(COMPILE.C) $(OUTPUT_OPTION) $<
+
+%.cpp:
+
+%: %.cpp
+#  recipe to execute (built-in):
+	$(LINK.cpp) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.cpp
+#  recipe to execute (built-in):
+	$(COMPILE.cpp) $(OUTPUT_OPTION) $<
+
+%.p:
+
+%: %.p
+#  recipe to execute (built-in):
+	$(LINK.p) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.p
+#  recipe to execute (built-in):
+	$(COMPILE.p) $(OUTPUT_OPTION) $<
+
+%.f:
+
+%: %.f
+#  recipe to execute (built-in):
+	$(LINK.f) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.f
+#  recipe to execute (built-in):
+	$(COMPILE.f) $(OUTPUT_OPTION) $<
+
+%.F:
+
+%: %.F
+#  recipe to execute (built-in):
+	$(LINK.F) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.F
+#  recipe to execute (built-in):
+	$(COMPILE.F) $(OUTPUT_OPTION) $<
+
+%.f: %.F
+#  recipe to execute (built-in):
+	$(PREPROCESS.F) $(OUTPUT_OPTION) $<
+
+%.m:
+
+%: %.m
+#  recipe to execute (built-in):
+	$(LINK.m) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.m
+#  recipe to execute (built-in):
+	$(COMPILE.m) $(OUTPUT_OPTION) $<
+
+%.r:
+
+%: %.r
+#  recipe to execute (built-in):
+	$(LINK.r) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.r
+#  recipe to execute (built-in):
+	$(COMPILE.r) $(OUTPUT_OPTION) $<
+
+%.f: %.r
+#  recipe to execute (built-in):
+	$(PREPROCESS.r) $(OUTPUT_OPTION) $<
+
+%.y:
+
+%.ln: %.y
+#  recipe to execute (built-in):
+	$(YACC.y) $< 
+	 $(LINT.c) -C$* y.tab.c 
+	 $(RM) y.tab.c
+
+%.c: %.y
+#  recipe to execute (built-in):
+	$(YACC.y) $< 
+	 mv -f y.tab.c $@
+
+%.l:
+
+%.ln: %.l
+#  recipe to execute (built-in):
+	@$(RM) $*.c
+	 $(LEX.l) $< > $*.c
+	$(LINT.c) -i $*.c -o $@
+	 $(RM) $*.c
+
+%.c: %.l
+#  recipe to execute (built-in):
+	@$(RM) $@ 
+	 $(LEX.l) $< > $@
+
+%.r: %.l
+#  recipe to execute (built-in):
+	$(LEX.l) $< > $@ 
+	 mv -f lex.yy.r $@
+
+%.ym:
+
+%.m: %.ym
+#  recipe to execute (built-in):
+	$(YACC.m) $< 
+	 mv -f y.tab.c $@
+
+%.yl:
+
+%.s:
+
+%: %.s
+#  recipe to execute (built-in):
+	$(LINK.s) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.s
+#  recipe to execute (built-in):
+	$(COMPILE.s) -o $@ $<
+
+%.S:
+
+%: %.S
+#  recipe to execute (built-in):
+	$(LINK.S) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.S
+#  recipe to execute (built-in):
+	$(COMPILE.S) -o $@ $<
+
+%.s: %.S
+#  recipe to execute (built-in):
+	$(PREPROCESS.S) $< > $@
+
+%.mod:
+
+%: %.mod
+#  recipe to execute (built-in):
+	$(COMPILE.mod) -o $@ -e $@ $^
+
+%.o: %.mod
+#  recipe to execute (built-in):
+	$(COMPILE.mod) -o $@ $<
+
+%.sym:
+
+%.def:
+
+%.sym: %.def
+#  recipe to execute (built-in):
+	$(COMPILE.def) -o $@ $<
+
+%.h:
+
+%.info:
+
+%.dvi:
+
+%.tex:
+
+%.dvi: %.tex
+#  recipe to execute (built-in):
+	$(TEX) $<
+
+%.texinfo:
+
+%.info: %.texinfo
+#  recipe to execute (built-in):
+	$(MAKEINFO) $(MAKEINFO_FLAGS) $< -o $@
+
+%.dvi: %.texinfo
+#  recipe to execute (built-in):
+	$(TEXI2DVI) $(TEXI2DVI_FLAGS) $<
+
+%.texi:
+
+%.info: %.texi
+#  recipe to execute (built-in):
+	$(MAKEINFO) $(MAKEINFO_FLAGS) $< -o $@
+
+%.dvi: %.texi
+#  recipe to execute (built-in):
+	$(TEXI2DVI) $(TEXI2DVI_FLAGS) $<
+
+%.txinfo:
+
+%.info: %.txinfo
+#  recipe to execute (built-in):
+	$(MAKEINFO) $(MAKEINFO_FLAGS) $< -o $@
+
+%.dvi: %.txinfo
+#  recipe to execute (built-in):
+	$(TEXI2DVI) $(TEXI2DVI_FLAGS) $<
+
+%.w:
+
+%.c: %.w
+#  recipe to execute (built-in):
+	$(CTANGLE) $< - $@
+
+%.tex: %.w
+#  recipe to execute (built-in):
+	$(CWEAVE) $< - $@
+
+%.ch:
+
+%.web:
+
+%.p: %.web
+#  recipe to execute (built-in):
+	$(TANGLE) $<
+
+%.tex: %.web
+#  recipe to execute (built-in):
+	$(WEAVE) $<
+
+%.sh:
+
+%: %.sh
+#  recipe to execute (built-in):
+	cat $< >$@ 
+	 chmod a+x $@
+
+%.elc:
+
+%.el:
+
+(%): %
+#  recipe to execute (built-in):
+	$(AR) $(ARFLAGS) $@ $<
+
+%.out: %
+#  recipe to execute (built-in):
+	@rm -f $@ 
+	 cp $< $@
+
+%.c: %.w %.ch
+#  recipe to execute (built-in):
+	$(CTANGLE) $^ $@
+
+%.tex: %.w %.ch
+#  recipe to execute (built-in):
+	$(CWEAVE) $^ $@
+
+%:: %,v
+#  recipe to execute (built-in):
+	$(CHECKOUT,v)
+
+%:: RCS/%,v
+#  recipe to execute (built-in):
+	$(CHECKOUT,v)
+
+%:: RCS/%
+#  recipe to execute (built-in):
+	$(CHECKOUT,v)
+
+%:: s.%
+#  recipe to execute (built-in):
+	$(GET) $(GFLAGS) $(SCCS_OUTPUT_OPTION) $<
+
+%:: SCCS/s.%
+#  recipe to execute (built-in):
+	$(GET) $(GFLAGS) $(SCCS_OUTPUT_OPTION) $<
+
+# 92 implicit rules, 5 (5.4%) terminal.
+# Files
+
+# Not a target:
+.cpp:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(LINK.cpp) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# Not a target:
+common/byte_util.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+/root/kyanos/libbpf/src/gen_loader.c:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+bpf/loader/container.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.c.o:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(COMPILE.c) $(OUTPUT_OPTION) $<
+
+# Not a target:
+deps/btfhub/pkg/pkg/utils_test.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 22:58:05
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+/root/kyanos/libbpf/src/libbpf_errno.c:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+common/nsenter_test.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+deps/btfhub/pkg/pkg/suse.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 22:58:05
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/protocol/kafka/decoder/sync_group_test.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+/root/kyanos/libbpf/src/strset.h:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+agent/protocol/rocketmq/types.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+common/utils.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/gotlslagacykernel310_arm64_bpfel.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-04 23:25:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/openssl_1_1_0a.bpf.c:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+bpf/gotls_arm64_bpfel.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-04 23:25:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/openssl320_arm64_bpfel.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-04 23:25:30
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/uprobe/dwarf_reader/reader.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/protocol/http.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/openssl_1_0_2a.bpf.c:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.h:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+/root/kyanos/libbpf/src/bpf_tracing.h:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+agent/compatible/type.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+/root/kyanos/libbpf/src/ringbuf.c:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+bpf/agentlagacykernel310_arm64_bpfel.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-04 23:25:27
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.sh:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	cat $< >$@ 
+	 chmod a+x $@
+
+dlv:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 115):
+	chmod +x kyanos && dlv --headless --listen=:2345 --api-version=2 --check-go-version=false exec ./kyanos 
+
+# Not a target:
+.ch:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+deps/btfhub/pkg/job/worker.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 22:58:05
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.r.f:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(PREPROCESS.r) $(OUTPUT_OPTION) $<
+
+# Not a target:
+.dvi:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+agent/protocol/common.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/openssl111b_x86_bpfel.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-04 23:25:18
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.def.sym:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(COMPILE.def) -o $@ $<
+
+# Not a target:
+/root/kyanos/libbpf/src/linker.c:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+agent/render/watch/time_detail.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/loader/btf.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+/root/kyanos/libbpf/src/bpf_core_read.h:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+bpf/openssl102a_x86_bpfel.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-04 23:25:17
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+cmd/common.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+/root/kyanos/libbpf/src/btf_dump.c:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+agent/common/stopper.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+/root/kyanos/libbpf/src/str_error.c:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+kyanos: agent/agent.go agent/agent_test.go agent/agent_utils_test.go agent/analysis/analysis.go agent/analysis/analysis_test.go agent/analysis/classfier.go agent/analysis/common/classfier.go agent/analysis/common/json.go agent/analysis/common/types.go agent/analysis/percentile.go agent/analysis/stat.go agent/analysis/types.go agent/buffer/stream_buffer.go agent/buffer/stream_buffer_test.go agent/common/objects.go agent/common/options.go agent/common/permission.go agent/common/stopper.go agent/compatible/type.go agent/compatible/type_test.go agent/conn/conntrack.go agent/conn/constant.go agent/conn/first_packet_processor.go agent/conn/kern_event_handler.go agent/conn/metrics.go agent/conn/net.go agent/conn/processor.go agent/conn/record_processor.go agent/metadata/container/containerd/containerd.go agent/metadata/container/container.go agent/metadata/container/docker/docker.go agent/metadata/container/docker/events.go agent/metadata/container.go agent/metadata/container/multiple.go agent/metadata/k8s/cri.go agent/metadata/process.go agent/metadata/types/container.go agent/metadata/types/kubernetes.go agent/protocol/common.go agent/protocol/decoder.go agent/protocol/dns/dns.go agent/protocol/dns/filter.go agent/protocol/dns/type.go agent/protocol/fakedata.go agent/protocol/generic_filter.go agent/protocol/http.go agent/protocol/http_test.go agent/protocol/kafka/common/fetch.go agent/protocol/kafka/common/join_group.go agent/protocol/kafka/common/message_set.go agent/protocol/kafka/common/metadata.go agent/protocol/kafka/common/produce.go agent/protocol/kafka/common/sync_group.go agent/protocol/kafka/common/types.go agent/protocol/kafka/decoder/fetch.go agent/protocol/kafka/decoder/fetch_test.go agent/protocol/kafka/decoder/join_group.go agent/protocol/kafka/decoder/join_group_test.go agent/protocol/kafka/decoder/message_set.go agent/protocol/kafka/decoder/message_set_test.go agent/protocol/kafka/decoder/metadata.go agent/protocol/kafka/decoder/metadata_test.go agent/protocol/kafka/decoder/packet_decoder.go agent/protocol/kafka/decoder/packet_decoder_test.go agent/protocol/kafka/decoder/produce.go agent/protocol/kafka/decoder/produce_test.go agent/protocol/kafka/decoder/sync_group.go agent/protocol/kafka/decoder/sync_group_test.go agent/protocol/kafka/filter.go agent/protocol/kafka/kafka.go agent/protocol/kafka/kafka_test.go agent/protocol/mongodb/mongodb.go agent/protocol/mongodb/mongodb_test.go agent/protocol/mongodb/stitcher.go agent/protocol/mongodb/types.go agent/protocol/mysql/filter.go agent/protocol/mysql/handler.go agent/protocol/mysql/mysql.go agent/protocol/mysql/types.go agent/protocol/mysql/utils.go agent/protocol/mysql/utils_test.go agent/protocol/protocol.go agent/protocol/redis..go agent/protocol/rocketmq/filter.go agent/protocol/rocketmq/language_code.go agent/protocol/rocketmq/rocketmq.go agent/protocol/rocketmq/types.go agent/render/common/common.go agent/render/loader/loader_render.go agent/render/stat/stat.go agent/render/watch/option.go agent/render/watch/time_detail.go agent/render/watch/watch_render.go agent/time.go agent/uprobe/common.go agent/uprobe/dwarf_reader/buf.go agent/uprobe/dwarf_reader/reader.go agent/uprobe/gotls.go agent/uprobe/manager.go agent/uprobe/ssl_test.go agent/uprobe/ssl/types.go agent/uprobe/types.go bpf/agent_arm64_bpfel.go bpf/agentlagacykernel310_arm64_bpfel.go bpf/agentlagacykernel310_x86_bpfel.go bpf/agent_x86_bpfel.go bpf/common.go bpf/embed.go bpf/events.go bpf/gen.go bpf/gotls_arm64_bpfel.go bpf/gotlslagacykernel310_arm64_bpfel.go bpf/gotlslagacykernel310_x86_bpfel.go bpf/gotls_x86_bpfel.go bpf/loader/btf.go bpf/loader/container.go bpf/loader/loader.go bpf/loader/loader_test.go bpf/loader/utils.go bpf/map.go bpf/openssl102a_arm64_bpfel.go bpf/openssl102a_x86_bpfel.go bpf/openssl110a_arm64_bpfel.go bpf/openssl110a_x86_bpfel.go bpf/openssl111a_arm64_bpfel.go bpf/openssl111a_x86_bpfel.go bpf/openssl111b_arm64_bpfel.go bpf/openssl111b_x86_bpfel.go bpf/openssl111d_arm64_bpfel.go bpf/openssl111d_x86_bpfel.go bpf/openssl111j_arm64_bpfel.go bpf/openssl111j_x86_bpfel.go bpf/openssl300_arm64_bpfel.go bpf/openssl300_x86_bpfel.go bpf/openssl310_arm64_bpfel.go bpf/openssl310_x86_bpfel.go bpf/openssl320_arm64_bpfel.go bpf/openssl320_x86_bpfel.go bpf/openssl323_arm64_bpfel.go bpf/openssl323_x86_bpfel.go bpf/openssl330_arm64_bpfel.go bpf/openssl330_x86_bpfel.go bpf/openssl340_arm64_bpfel.go bpf/openssl340_x86_bpfel.go bpf/openssl350_arm64_bpfel.go bpf/openssl350_x86_bpfel.go bpf/prog.go bpf/prog_test.go bpf/types.go cmd/common.go cmd/dns.go cmd/http.go cmd/kafka.go cmd/mongodb.go cmd/mysql.go cmd/overview.go cmd/redis.go cmd/rocketmq.go cmd/root.go cmd/stat.go cmd/top.go cmd/version.go cmd/watch.go common/byte_util.go common/byte_util_test.go common/constant.go common/errors.go common/kernel_config.go common/kernel_version.go common/log.go common/namspace.go common/nsenter.go common/nsenter_test.go common/offset.go common/osinfo.go common/pclntab.go common/proc.go common/proc_test.go common/ringbuffer.go common/system.go common/term.go common/type.go common/utils.go common/utils_test.go deps/btfhub/cmd/btfhub/main.go deps/btfhub/pkg/job/btf.go deps/btfhub/pkg/job/extract.go deps/btfhub/pkg/job/job.go deps/btfhub/pkg/job/utils.go deps/btfhub/pkg/job/worker.go deps/btfhub/pkg/kernel/kernel.go deps/btfhub/pkg/kernel/kernel_test.go deps/btfhub/pkg/pkg/centos.go deps/btfhub/pkg/pkg/fedora.go deps/btfhub/pkg/pkg/package.go deps/btfhub/pkg/pkg/rhel.go deps/btfhub/pkg/pkg/suse.go deps/btfhub/pkg/pkg/ubuntu.go deps/btfhub/pkg/pkg/utils.go deps/btfhub/pkg/pkg/utils_test.go deps/btfhub/pkg/repo/amazon.go deps/btfhub/pkg/repo/centos.go deps/btfhub/pkg/repo/debian.go deps/btfhub/pkg/repo/fedora.go deps/btfhub/pkg/repo/oracle.go deps/btfhub/pkg/repo/repository.go deps/btfhub/pkg/repo/rhel.go deps/btfhub/pkg/repo/suse.go deps/btfhub/pkg/repo/ubuntu.go deps/btfhub/pkg/repo/utils.go deps/btfhub/pkg/utils/btf.go deps/btfhub/pkg/utils/download.go deps/btfhub/pkg/utils/progress.go deps/btfhub/pkg/utils/rpm.go deps/btfhub/pkg/utils/utils.go deps/btfhub/pkg/utils/zypper.go main.go monitor/monitor.go testdata/https-request/http_request.go version/detect.go version/version.go
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: ''
+#  File is an intermediate prerequisite.
+#  Last modified 2514-05-30 09:53:03.107374182
+#  File has been updated.
+#  Successfully updated.
+# automatic
+# @ := kyanos
+# automatic
+# * := 
+# automatic
+# < := agent/agent.go
+# automatic
+# + := agent/agent.go agent/agent_test.go agent/agent_utils_test.go agent/analysis/analysis.go agent/analysis/analysis_test.go agent/analysis/classfier.go agent/analysis/common/classfier.go agent/analysis/common/json.go agent/analysis/common/types.go agent/analysis/percentile.go agent/analysis/stat.go agent/analysis/types.go agent/buffer/stream_buffer.go agent/buffer/stream_buffer_test.go agent/common/objects.go agent/common/options.go agent/common/permission.go agent/common/stopper.go agent/compatible/type.go agent/compatible/type_test.go agent/conn/conntrack.go agent/conn/constant.go agent/conn/first_packet_processor.go agent/conn/kern_event_handler.go agent/conn/metrics.go agent/conn/net.go agent/conn/processor.go agent/conn/record_processor.go agent/metadata/container/containerd/containerd.go agent/metadata/container/container.go agent/metadata/container/docker/docker.go agent/metadata/container/docker/events.go agent/metadata/container.go agent/metadata/container/multiple.go agent/metadata/k8s/cri.go agent/metadata/process.go agent/metadata/types/container.go agent/metadata/types/kubernetes.go agent/protocol/common.go agent/protocol/decoder.go agent/protocol/dns/dns.go agent/protocol/dns/filter.go agent/protocol/dns/type.go agent/protocol/fakedata.go agent/protocol/generic_filter.go agent/protocol/http.go agent/protocol/http_test.go agent/protocol/kafka/common/fetch.go agent/protocol/kafka/common/join_group.go agent/protocol/kafka/common/message_set.go agent/protocol/kafka/common/metadata.go agent/protocol/kafka/common/produce.go agent/protocol/kafka/common/sync_group.go agent/protocol/kafka/common/types.go agent/protocol/kafka/decoder/fetch.go agent/protocol/kafka/decoder/fetch_test.go agent/protocol/kafka/decoder/join_group.go agent/protocol/kafka/decoder/join_group_test.go agent/protocol/kafka/decoder/message_set.go agent/protocol/kafka/decoder/message_set_test.go agent/protocol/kafka/decoder/metadata.go agent/protocol/kafka/decoder/metadata_test.go agent/protocol/kafka/decoder/packet_decoder.go agent/protocol/kafka/decoder/packet_decoder_test.go agent/protocol/kafka/decoder/produce.go agent/protocol/kafka/decoder/produce_test.go agent/protocol/kafka/decoder/sync_group.go agent/protocol/kafka/decoder/sync_group_test.go agent/protocol/kafka/filter.go agent/protocol/kafka/kafka.go agent/protocol/kafka/kafka_test.go agent/protocol/mongodb/mongodb.go agent/protocol/mongodb/mongodb_test.go agent/protocol/mongodb/stitcher.go agent/protocol/mongodb/types.go agent/protocol/mysql/filter.go agent/protocol/mysql/handler.go agent/protocol/mysql/mysql.go agent/protocol/mysql/types.go agent/protocol/mysql/utils.go agent/protocol/mysql/utils_test.go agent/protocol/protocol.go agent/protocol/redis..go agent/protocol/rocketmq/filter.go agent/protocol/rocketmq/language_code.go agent/protocol/rocketmq/rocketmq.go agent/protocol/rocketmq/types.go agent/render/common/common.go agent/render/loader/loader_render.go agent/render/stat/stat.go agent/render/watch/option.go agent/render/watch/time_detail.go agent/render/watch/watch_render.go agent/time.go agent/uprobe/common.go agent/uprobe/dwarf_reader/buf.go agent/uprobe/dwarf_reader/reader.go agent/uprobe/gotls.go agent/uprobe/manager.go agent/uprobe/ssl_test.go agent/uprobe/ssl/types.go agent/uprobe/types.go bpf/agent_arm64_bpfel.go bpf/agentlagacykernel310_arm64_bpfel.go bpf/agentlagacykernel310_x86_bpfel.go bpf/agent_x86_bpfel.go bpf/common.go bpf/embed.go bpf/events.go bpf/gen.go bpf/gotls_arm64_bpfel.go bpf/gotlslagacykernel310_arm64_bpfel.go bpf/gotlslagacykernel310_x86_bpfel.go bpf/gotls_x86_bpfel.go bpf/loader/btf.go bpf/loader/container.go bpf/loader/loader.go bpf/loader/loader_test.go bpf/loader/utils.go bpf/map.go bpf/openssl102a_arm64_bpfel.go bpf/openssl102a_x86_bpfel.go bpf/openssl110a_arm64_bpfel.go bpf/openssl110a_x86_bpfel.go bpf/openssl111a_arm64_bpfel.go bpf/openssl111a_x86_bpfel.go bpf/openssl111b_arm64_bpfel.go bpf/openssl111b_x86_bpfel.go bpf/openssl111d_arm64_bpfel.go bpf/openssl111d_x86_bpfel.go bpf/openssl111j_arm64_bpfel.go bpf/openssl111j_x86_bpfel.go bpf/openssl300_arm64_bpfel.go bpf/openssl300_x86_bpfel.go bpf/openssl310_arm64_bpfel.go bpf/openssl310_x86_bpfel.go bpf/openssl320_arm64_bpfel.go bpf/openssl320_x86_bpfel.go bpf/openssl323_arm64_bpfel.go bpf/openssl323_x86_bpfel.go bpf/openssl330_arm64_bpfel.go bpf/openssl330_x86_bpfel.go bpf/openssl340_arm64_bpfel.go bpf/openssl340_x86_bpfel.go bpf/openssl350_arm64_bpfel.go bpf/openssl350_x86_bpfel.go bpf/prog.go bpf/prog_test.go bpf/types.go cmd/common.go cmd/dns.go cmd/http.go cmd/kafka.go cmd/mongodb.go cmd/mysql.go cmd/overview.go cmd/redis.go cmd/rocketmq.go cmd/root.go cmd/stat.go cmd/top.go cmd/version.go cmd/watch.go common/byte_util.go common/byte_util_test.go common/constant.go common/errors.go common/kernel_config.go common/kernel_version.go common/log.go common/namspace.go common/nsenter.go common/nsenter_test.go common/offset.go common/osinfo.go common/pclntab.go common/proc.go common/proc_test.go common/ringbuffer.go common/system.go common/term.go common/type.go common/utils.go common/utils_test.go deps/btfhub/cmd/btfhub/main.go deps/btfhub/pkg/job/btf.go deps/btfhub/pkg/job/extract.go deps/btfhub/pkg/job/job.go deps/btfhub/pkg/job/utils.go deps/btfhub/pkg/job/worker.go deps/btfhub/pkg/kernel/kernel.go deps/btfhub/pkg/kernel/kernel_test.go deps/btfhub/pkg/pkg/centos.go deps/btfhub/pkg/pkg/fedora.go deps/btfhub/pkg/pkg/package.go deps/btfhub/pkg/pkg/rhel.go deps/btfhub/pkg/pkg/suse.go deps/btfhub/pkg/pkg/ubuntu.go deps/btfhub/pkg/pkg/utils.go deps/btfhub/pkg/pkg/utils_test.go deps/btfhub/pkg/repo/amazon.go deps/btfhub/pkg/repo/centos.go deps/btfhub/pkg/repo/debian.go deps/btfhub/pkg/repo/fedora.go deps/btfhub/pkg/repo/oracle.go deps/btfhub/pkg/repo/repository.go deps/btfhub/pkg/repo/rhel.go deps/btfhub/pkg/repo/suse.go deps/btfhub/pkg/repo/ubuntu.go deps/btfhub/pkg/repo/utils.go deps/btfhub/pkg/utils/btf.go deps/btfhub/pkg/utils/download.go deps/btfhub/pkg/utils/progress.go deps/btfhub/pkg/utils/rpm.go deps/btfhub/pkg/utils/utils.go deps/btfhub/pkg/utils/zypper.go main.go monitor/monitor.go testdata/https-request/http_request.go version/detect.go version/version.go
+# automatic
+# % := 
+# automatic
+# ^ := agent/agent.go agent/agent_test.go agent/agent_utils_test.go agent/analysis/analysis.go agent/analysis/analysis_test.go agent/analysis/classfier.go agent/analysis/common/classfier.go agent/analysis/common/json.go agent/analysis/common/types.go agent/analysis/percentile.go agent/analysis/stat.go agent/analysis/types.go agent/buffer/stream_buffer.go agent/buffer/stream_buffer_test.go agent/common/objects.go agent/common/options.go agent/common/permission.go agent/common/stopper.go agent/compatible/type.go agent/compatible/type_test.go agent/conn/conntrack.go agent/conn/constant.go agent/conn/first_packet_processor.go agent/conn/kern_event_handler.go agent/conn/metrics.go agent/conn/net.go agent/conn/processor.go agent/conn/record_processor.go agent/metadata/container/containerd/containerd.go agent/metadata/container/container.go agent/metadata/container/docker/docker.go agent/metadata/container/docker/events.go agent/metadata/container.go agent/metadata/container/multiple.go agent/metadata/k8s/cri.go agent/metadata/process.go agent/metadata/types/container.go agent/metadata/types/kubernetes.go agent/protocol/common.go agent/protocol/decoder.go agent/protocol/dns/dns.go agent/protocol/dns/filter.go agent/protocol/dns/type.go agent/protocol/fakedata.go agent/protocol/generic_filter.go agent/protocol/http.go agent/protocol/http_test.go agent/protocol/kafka/common/fetch.go agent/protocol/kafka/common/join_group.go agent/protocol/kafka/common/message_set.go agent/protocol/kafka/common/metadata.go agent/protocol/kafka/common/produce.go agent/protocol/kafka/common/sync_group.go agent/protocol/kafka/common/types.go agent/protocol/kafka/decoder/fetch.go agent/protocol/kafka/decoder/fetch_test.go agent/protocol/kafka/decoder/join_group.go agent/protocol/kafka/decoder/join_group_test.go agent/protocol/kafka/decoder/message_set.go agent/protocol/kafka/decoder/message_set_test.go agent/protocol/kafka/decoder/metadata.go agent/protocol/kafka/decoder/metadata_test.go agent/protocol/kafka/decoder/packet_decoder.go agent/protocol/kafka/decoder/packet_decoder_test.go agent/protocol/kafka/decoder/produce.go agent/protocol/kafka/decoder/produce_test.go agent/protocol/kafka/decoder/sync_group.go agent/protocol/kafka/decoder/sync_group_test.go agent/protocol/kafka/filter.go agent/protocol/kafka/kafka.go agent/protocol/kafka/kafka_test.go agent/protocol/mongodb/mongodb.go agent/protocol/mongodb/mongodb_test.go agent/protocol/mongodb/stitcher.go agent/protocol/mongodb/types.go agent/protocol/mysql/filter.go agent/protocol/mysql/handler.go agent/protocol/mysql/mysql.go agent/protocol/mysql/types.go agent/protocol/mysql/utils.go agent/protocol/mysql/utils_test.go agent/protocol/protocol.go agent/protocol/redis..go agent/protocol/rocketmq/filter.go agent/protocol/rocketmq/language_code.go agent/protocol/rocketmq/rocketmq.go agent/protocol/rocketmq/types.go agent/render/common/common.go agent/render/loader/loader_render.go agent/render/stat/stat.go agent/render/watch/option.go agent/render/watch/time_detail.go agent/render/watch/watch_render.go agent/time.go agent/uprobe/common.go agent/uprobe/dwarf_reader/buf.go agent/uprobe/dwarf_reader/reader.go agent/uprobe/gotls.go agent/uprobe/manager.go agent/uprobe/ssl_test.go agent/uprobe/ssl/types.go agent/uprobe/types.go bpf/agent_arm64_bpfel.go bpf/agentlagacykernel310_arm64_bpfel.go bpf/agentlagacykernel310_x86_bpfel.go bpf/agent_x86_bpfel.go bpf/common.go bpf/embed.go bpf/events.go bpf/gen.go bpf/gotls_arm64_bpfel.go bpf/gotlslagacykernel310_arm64_bpfel.go bpf/gotlslagacykernel310_x86_bpfel.go bpf/gotls_x86_bpfel.go bpf/loader/btf.go bpf/loader/container.go bpf/loader/loader.go bpf/loader/loader_test.go bpf/loader/utils.go bpf/map.go bpf/openssl102a_arm64_bpfel.go bpf/openssl102a_x86_bpfel.go bpf/openssl110a_arm64_bpfel.go bpf/openssl110a_x86_bpfel.go bpf/openssl111a_arm64_bpfel.go bpf/openssl111a_x86_bpfel.go bpf/openssl111b_arm64_bpfel.go bpf/openssl111b_x86_bpfel.go bpf/openssl111d_arm64_bpfel.go bpf/openssl111d_x86_bpfel.go bpf/openssl111j_arm64_bpfel.go bpf/openssl111j_x86_bpfel.go bpf/openssl300_arm64_bpfel.go bpf/openssl300_x86_bpfel.go bpf/openssl310_arm64_bpfel.go bpf/openssl310_x86_bpfel.go bpf/openssl320_arm64_bpfel.go bpf/openssl320_x86_bpfel.go bpf/openssl323_arm64_bpfel.go bpf/openssl323_x86_bpfel.go bpf/openssl330_arm64_bpfel.go bpf/openssl330_x86_bpfel.go bpf/openssl340_arm64_bpfel.go bpf/openssl340_x86_bpfel.go bpf/openssl350_arm64_bpfel.go bpf/openssl350_x86_bpfel.go bpf/prog.go bpf/prog_test.go bpf/types.go cmd/common.go cmd/dns.go cmd/http.go cmd/kafka.go cmd/mongodb.go cmd/mysql.go cmd/overview.go cmd/redis.go cmd/rocketmq.go cmd/root.go cmd/stat.go cmd/top.go cmd/version.go cmd/watch.go common/byte_util.go common/byte_util_test.go common/constant.go common/errors.go common/kernel_config.go common/kernel_version.go common/log.go common/namspace.go common/nsenter.go common/nsenter_test.go common/offset.go common/osinfo.go common/pclntab.go common/proc.go common/proc_test.go common/ringbuffer.go common/system.go common/term.go common/type.go common/utils.go common/utils_test.go deps/btfhub/cmd/btfhub/main.go deps/btfhub/pkg/job/btf.go deps/btfhub/pkg/job/extract.go deps/btfhub/pkg/job/job.go deps/btfhub/pkg/job/utils.go deps/btfhub/pkg/job/worker.go deps/btfhub/pkg/kernel/kernel.go deps/btfhub/pkg/kernel/kernel_test.go deps/btfhub/pkg/pkg/centos.go deps/btfhub/pkg/pkg/fedora.go deps/btfhub/pkg/pkg/package.go deps/btfhub/pkg/pkg/rhel.go deps/btfhub/pkg/pkg/suse.go deps/btfhub/pkg/pkg/ubuntu.go deps/btfhub/pkg/pkg/utils.go deps/btfhub/pkg/pkg/utils_test.go deps/btfhub/pkg/repo/amazon.go deps/btfhub/pkg/repo/centos.go deps/btfhub/pkg/repo/debian.go deps/btfhub/pkg/repo/fedora.go deps/btfhub/pkg/repo/oracle.go deps/btfhub/pkg/repo/repository.go deps/btfhub/pkg/repo/rhel.go deps/btfhub/pkg/repo/suse.go deps/btfhub/pkg/repo/ubuntu.go deps/btfhub/pkg/repo/utils.go deps/btfhub/pkg/utils/btf.go deps/btfhub/pkg/utils/download.go deps/btfhub/pkg/utils/progress.go deps/btfhub/pkg/utils/rpm.go deps/btfhub/pkg/utils/utils.go deps/btfhub/pkg/utils/zypper.go main.go monitor/monitor.go testdata/https-request/http_request.go version/detect.go version/version.go
+# automatic
+# ? := agent/agent.go agent/agent_test.go agent/agent_utils_test.go agent/analysis/analysis.go agent/analysis/analysis_test.go agent/analysis/classfier.go agent/analysis/common/classfier.go agent/analysis/common/json.go agent/analysis/common/types.go agent/analysis/percentile.go agent/analysis/stat.go agent/analysis/types.go agent/buffer/stream_buffer.go agent/buffer/stream_buffer_test.go agent/common/objects.go agent/common/options.go agent/common/permission.go agent/common/stopper.go agent/compatible/type.go agent/compatible/type_test.go agent/conn/conntrack.go agent/conn/constant.go agent/conn/first_packet_processor.go agent/conn/kern_event_handler.go agent/conn/metrics.go agent/conn/net.go agent/conn/processor.go agent/conn/record_processor.go agent/metadata/container/containerd/containerd.go agent/metadata/container/container.go agent/metadata/container/docker/docker.go agent/metadata/container/docker/events.go agent/metadata/container.go agent/metadata/container/multiple.go agent/metadata/k8s/cri.go agent/metadata/process.go agent/metadata/types/container.go agent/metadata/types/kubernetes.go agent/protocol/common.go agent/protocol/decoder.go agent/protocol/dns/dns.go agent/protocol/dns/filter.go agent/protocol/dns/type.go agent/protocol/fakedata.go agent/protocol/generic_filter.go agent/protocol/http.go agent/protocol/http_test.go agent/protocol/kafka/common/fetch.go agent/protocol/kafka/common/join_group.go agent/protocol/kafka/common/message_set.go agent/protocol/kafka/common/metadata.go agent/protocol/kafka/common/produce.go agent/protocol/kafka/common/sync_group.go agent/protocol/kafka/common/types.go agent/protocol/kafka/decoder/fetch.go agent/protocol/kafka/decoder/fetch_test.go agent/protocol/kafka/decoder/join_group.go agent/protocol/kafka/decoder/join_group_test.go agent/protocol/kafka/decoder/message_set.go agent/protocol/kafka/decoder/message_set_test.go agent/protocol/kafka/decoder/metadata.go agent/protocol/kafka/decoder/metadata_test.go agent/protocol/kafka/decoder/packet_decoder.go agent/protocol/kafka/decoder/packet_decoder_test.go agent/protocol/kafka/decoder/produce.go agent/protocol/kafka/decoder/produce_test.go agent/protocol/kafka/decoder/sync_group.go agent/protocol/kafka/decoder/sync_group_test.go agent/protocol/kafka/filter.go agent/protocol/kafka/kafka.go agent/protocol/kafka/kafka_test.go agent/protocol/mongodb/mongodb.go agent/protocol/mongodb/mongodb_test.go agent/protocol/mongodb/stitcher.go agent/protocol/mongodb/types.go agent/protocol/mysql/filter.go agent/protocol/mysql/handler.go agent/protocol/mysql/mysql.go agent/protocol/mysql/types.go agent/protocol/mysql/utils.go agent/protocol/mysql/utils_test.go agent/protocol/protocol.go agent/protocol/redis..go agent/protocol/rocketmq/filter.go agent/protocol/rocketmq/language_code.go agent/protocol/rocketmq/rocketmq.go agent/protocol/rocketmq/types.go agent/render/common/common.go agent/render/loader/loader_render.go agent/render/stat/stat.go agent/render/watch/option.go agent/render/watch/time_detail.go agent/render/watch/watch_render.go agent/time.go agent/uprobe/common.go agent/uprobe/dwarf_reader/buf.go agent/uprobe/dwarf_reader/reader.go agent/uprobe/gotls.go agent/uprobe/manager.go agent/uprobe/ssl_test.go agent/uprobe/ssl/types.go agent/uprobe/types.go bpf/agent_arm64_bpfel.go bpf/agentlagacykernel310_arm64_bpfel.go bpf/agentlagacykernel310_x86_bpfel.go bpf/agent_x86_bpfel.go bpf/common.go bpf/embed.go bpf/events.go bpf/gen.go bpf/gotls_arm64_bpfel.go bpf/gotlslagacykernel310_arm64_bpfel.go bpf/gotlslagacykernel310_x86_bpfel.go bpf/gotls_x86_bpfel.go bpf/loader/btf.go bpf/loader/container.go bpf/loader/loader.go bpf/loader/loader_test.go bpf/loader/utils.go bpf/map.go bpf/openssl102a_arm64_bpfel.go bpf/openssl102a_x86_bpfel.go bpf/openssl110a_arm64_bpfel.go bpf/openssl110a_x86_bpfel.go bpf/openssl111a_arm64_bpfel.go bpf/openssl111a_x86_bpfel.go bpf/openssl111b_arm64_bpfel.go bpf/openssl111b_x86_bpfel.go bpf/openssl111d_arm64_bpfel.go bpf/openssl111d_x86_bpfel.go bpf/openssl111j_arm64_bpfel.go bpf/openssl111j_x86_bpfel.go bpf/openssl300_arm64_bpfel.go bpf/openssl300_x86_bpfel.go bpf/openssl310_arm64_bpfel.go bpf/openssl310_x86_bpfel.go bpf/openssl320_arm64_bpfel.go bpf/openssl320_x86_bpfel.go bpf/openssl323_arm64_bpfel.go bpf/openssl323_x86_bpfel.go bpf/openssl330_arm64_bpfel.go bpf/openssl330_x86_bpfel.go bpf/openssl340_arm64_bpfel.go bpf/openssl340_x86_bpfel.go bpf/openssl350_arm64_bpfel.go bpf/openssl350_x86_bpfel.go bpf/prog.go bpf/prog_test.go bpf/types.go cmd/common.go cmd/dns.go cmd/http.go cmd/kafka.go cmd/mongodb.go cmd/mysql.go cmd/overview.go cmd/redis.go cmd/rocketmq.go cmd/root.go cmd/stat.go cmd/top.go cmd/version.go cmd/watch.go common/byte_util.go common/byte_util_test.go common/constant.go common/errors.go common/kernel_config.go common/kernel_version.go common/log.go common/namspace.go common/nsenter.go common/nsenter_test.go common/offset.go common/osinfo.go common/pclntab.go common/proc.go common/proc_test.go common/ringbuffer.go common/system.go common/term.go common/type.go common/utils.go common/utils_test.go deps/btfhub/cmd/btfhub/main.go deps/btfhub/pkg/job/btf.go deps/btfhub/pkg/job/extract.go deps/btfhub/pkg/job/job.go deps/btfhub/pkg/job/utils.go deps/btfhub/pkg/job/worker.go deps/btfhub/pkg/kernel/kernel.go deps/btfhub/pkg/kernel/kernel_test.go deps/btfhub/pkg/pkg/centos.go deps/btfhub/pkg/pkg/fedora.go deps/btfhub/pkg/pkg/package.go deps/btfhub/pkg/pkg/rhel.go deps/btfhub/pkg/pkg/suse.go deps/btfhub/pkg/pkg/ubuntu.go deps/btfhub/pkg/pkg/utils.go deps/btfhub/pkg/pkg/utils_test.go deps/btfhub/pkg/repo/amazon.go deps/btfhub/pkg/repo/centos.go deps/btfhub/pkg/repo/debian.go deps/btfhub/pkg/repo/fedora.go deps/btfhub/pkg/repo/oracle.go deps/btfhub/pkg/repo/repository.go deps/btfhub/pkg/repo/rhel.go deps/btfhub/pkg/repo/suse.go deps/btfhub/pkg/repo/ubuntu.go deps/btfhub/pkg/repo/utils.go deps/btfhub/pkg/utils/btf.go deps/btfhub/pkg/utils/download.go deps/btfhub/pkg/utils/progress.go deps/btfhub/pkg/utils/rpm.go deps/btfhub/pkg/utils/utils.go deps/btfhub/pkg/utils/zypper.go main.go monitor/monitor.go testdata/https-request/http_request.go version/detect.go version/version.go
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/13=8%
+#  recipe to execute (from 'Makefile', line 73):
+	$(call msg,BINARY,$@)
+	export CGO_LDFLAGS="-Xlinker -rpath=. -static" && go build
+
+# Not a target:
+agent/analysis/stat.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.m.o:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(COMPILE.m) $(OUTPUT_OPTION) $<
+
+# Not a target:
+/root/kyanos/libbpf/src/bpf_gen_internal.h:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+deps/btfhub/pkg/job/utils.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 22:58:05
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+common/kernel_config.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/conn/first_packet_processor.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/analysis/classfier.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/time.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/embed.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+deps/btfhub/pkg/utils/download.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 22:58:05
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+deps/btfhub/pkg/repo/centos.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 22:58:05
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/compatible/type_test.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.lm.m:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	@$(RM) $@ 
+	 $(LEX.m) $< > $@
+
+# Not a target:
+/root/kyanos/libbpf/src/zip.c:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+common/offset.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/loader/loader_test.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+/root/kyanos/libbpf/src/Makefile:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.p.o:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(COMPILE.p) $(OUTPUT_OPTION) $<
+
+# Not a target:
+agent/protocol/mysql/utils_test.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+main.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.texinfo:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.ln:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.C:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(LINK.C) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# Not a target:
+agent/conn/constant.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+/root/kyanos/libbpf/src/libbpf_internal.h:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.web:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+agent/protocol/kafka/common/message_set.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/loader/loader.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/openssl111j_arm64_bpfel.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-04 23:25:29
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+/root/kyanos/libbpf/src/libbpf_legacy.h:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+bpf/openssl_3_2_0.bpf.c:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+build-bpf: /root/kyanos/.output/libbpf.a bpf/data_common.h bpf/go_common.h bpf/gotls.bpf.c bpf/openssl_1_0_2a.bpf.c bpf/openssl_1_1_0a.bpf.c bpf/openssl_1_1_1a.bpf.c bpf/openssl_1_1_1b.bpf.c bpf/openssl_1_1_1d.bpf.c bpf/openssl_1_1_1j.bpf.c bpf/openssl_3_0_0.bpf.c bpf/openssl_3_1_0.bpf.c bpf/openssl_3_2_0.bpf.c bpf/openssl_3_2_3.bpf.c bpf/openssl_3_3_0.bpf.c bpf/openssl_3_4_0.bpf.c bpf/openssl_3_5_0.bpf.c bpf/openssl.h bpf/pktlatency.bpf.c bpf/pktlatency.h bpf/protocol_inference.h | .output
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 69):
+	TARGET=amd64 go generate ./bpf/
+	TARGET=arm64 go generate ./bpf/
+
+# Not a target:
+agent/analysis/percentile.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/openssl_1_1_1b.bpf.c:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+agent/protocol/kafka/decoder/join_group.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/openssl320_x86_bpfel.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-04 23:25:20
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+common/term.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/buffer/stream_buffer_test.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.elc:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+agent/protocol/kafka/kafka_test.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/openssl310_x86_bpfel.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-04 23:25:19
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.y.ln:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(YACC.y) $< 
+	 $(LINT.c) -C$* y.tab.c 
+	 $(RM) y.tab.c
+
+# Not a target:
+.l.c:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	@$(RM) $@ 
+	 $(LEX.l) $< > $@
+
+.output/libbpf:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 49):
+	$(call msg,MKDIR,$@)
+	$(Q)mkdir -p $@
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2025-06-05 00:03:54
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+cmd/watch.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+cmd/kafka.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/uprobe/common.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+deps/btfhub/pkg/pkg/package.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 22:58:05
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/protocol/dns/dns.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/protocol/kafka/decoder/produce.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/render/common/common.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.sym:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+common/namspace.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+/root/kyanos/libbpf/src/bpf_helper_defs.h:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+deps/btfhub/pkg/pkg/ubuntu.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 22:58:05
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.r.o:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(COMPILE.r) $(OUTPUT_OPTION) $<
+
+# Not a target:
+.mod:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(COMPILE.mod) -o $@ -e $@ $^
+
+# Not a target:
+.def:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+deps/btfhub/pkg/utils/zypper.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 22:58:05
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/openssl300_x86_bpfel.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-04 23:25:19
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.S:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(LINK.S) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# Not a target:
+agent/protocol/mongodb/mongodb.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.texi.dvi:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(TEXI2DVI) $(TEXI2DVI_FLAGS) $<
+
+# Not a target:
+bpf/pktlatency.bpf.c:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+cmd/root.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/render/loader/loader_render.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/common/objects.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/openssl111a_arm64_bpfel.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-04 23:25:28
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+/root/kyanos/libbpf/src/skel_internal.h:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+common/utils_test.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.txinfo.dvi:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(TEXI2DVI) $(TEXI2DVI_FLAGS) $<
+
+.DELETE_ON_ERROR:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+deps/btfhub/pkg/repo/suse.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 22:58:05
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/openssl111d_x86_bpfel.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-04 23:25:18
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.y.c:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(YACC.y) $< 
+	 mv -f y.tab.c $@
+
+clean:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 45):
+	$(call msg,CLEAN)
+	$(Q)rm -rf $(OUTPUT) $(APPS) kyanos kyanos.log
+
+# Not a target:
+agent/uprobe/gotls.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+cmd/stat.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+deps/btfhub/pkg/job/btf.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 22:58:05
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/protocol/kafka/common/types.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/openssl_3_0_0.bpf.c:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+cmd/mongodb.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.cpp.o:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(COMPILE.cpp) $(OUTPUT_OPTION) $<
+
+# Not a target:
+agent/conn/processor.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+test-go:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 97):
+	go test -v ./...
+
+/root/kyanos/.output/libbpf.a: /root/kyanos/libbpf/src/bpf.c /root/kyanos/libbpf/src/bpf_core_read.h /root/kyanos/libbpf/src/bpf_endian.h /root/kyanos/libbpf/src/bpf_gen_internal.h /root/kyanos/libbpf/src/bpf.h /root/kyanos/libbpf/src/bpf_helper_defs.h /root/kyanos/libbpf/src/bpf_helpers.h /root/kyanos/libbpf/src/bpf_prog_linfo.c /root/kyanos/libbpf/src/bpf_tracing.h /root/kyanos/libbpf/src/btf.c /root/kyanos/libbpf/src/btf_dump.c /root/kyanos/libbpf/src/btf.h /root/kyanos/libbpf/src/elf.c /root/kyanos/libbpf/src/features.c /root/kyanos/libbpf/src/gen_loader.c /root/kyanos/libbpf/src/hashmap.c /root/kyanos/libbpf/src/hashmap.h /root/kyanos/libbpf/src/libbpf.c /root/kyanos/libbpf/src/libbpf_common.h /root/kyanos/libbpf/src/libbpf_errno.c /root/kyanos/libbpf/src/libbpf.h /root/kyanos/libbpf/src/libbpf_internal.h /root/kyanos/libbpf/src/libbpf_legacy.h /root/kyanos/libbpf/src/libbpf_probes.c /root/kyanos/libbpf/src/libbpf_version.h /root/kyanos/libbpf/src/linker.c /root/kyanos/libbpf/src/netlink.c /root/kyanos/libbpf/src/nlattr.c /root/kyanos/libbpf/src/nlattr.h /root/kyanos/libbpf/src/relo_core.c /root/kyanos/libbpf/src/relo_core.h /root/kyanos/libbpf/src/ringbuf.c /root/kyanos/libbpf/src/skel_internal.h /root/kyanos/libbpf/src/str_error.c /root/kyanos/libbpf/src/str_error.h /root/kyanos/libbpf/src/strset.c /root/kyanos/libbpf/src/strset.h /root/kyanos/libbpf/src/usdt.bpf.h /root/kyanos/libbpf/src/usdt.c /root/kyanos/libbpf/src/zip.c /root/kyanos/libbpf/src/zip.h /root/kyanos/libbpf/src/Makefile | .output/libbpf
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 54):
+	$(call msg,LIB,$@)
+	$(Q)$(MAKE) -C $(LIBBPF_SRC) BUILD_STATIC_ONLY=1		      \
+		    OBJDIR=$(dir $@)/libbpf DESTDIR=$(dir $@)		      \
+		    INCLUDEDIR= LIBDIR= UAPIDIR=			      \
+		    install
+
+# Not a target:
+deps/btfhub/pkg/kernel/kernel_test.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 22:58:05
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.el:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.cc:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(LINK.cc) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# Not a target:
+agent/analysis/common/types.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/agent_arm64_bpfel.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-04 23:25:24
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/openssl111b_arm64_bpfel.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-04 23:25:28
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/common/options.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+/root/kyanos/libbpf/src/elf.c:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.tex:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+agent/metadata/container/docker/events.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/protocol/kafka/decoder/packet_decoder.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+btfgen:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 84):
+	./bpf/btfgen.sh $(BUILD_ARCH) $(ARCH_BPF_NAME)
+
+# Not a target:
+.m:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(LINK.m) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# Not a target:
+.F:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(LINK.F) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# Not a target:
+.web.tex:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(WEAVE) $<
+
+# Not a target:
+cmd/redis.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+deps/btfhub/pkg/repo/amazon.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 22:58:05
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+/root/kyanos/libbpf/src/relo_core.c:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+agent/uprobe/ssl_test.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.texinfo.info:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(MAKEINFO) $(MAKEINFO_FLAGS) $< -o $@
+
+# Not a target:
+bpf/gotls_x86_bpfel.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-04 23:25:21
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/protocol/mongodb/stitcher.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/protocol/rocketmq/rocketmq.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+cmd/version.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/openssl102a_arm64_bpfel.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-04 23:25:27
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/protocol/mysql/filter.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+common/proc.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/go_common.h:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+deps/btfhub/pkg/repo/repository.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 22:58:05
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.ym.m:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(YACC.m) $< 
+	 mv -f y.tab.c $@
+
+# Not a target:
+version/detect.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/render/watch/option.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+/root/kyanos/libbpf/src/bpf_endian.h:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+bpf/openssl330_x86_bpfel.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-04 23:25:20
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+deps/btfhub/pkg/pkg/fedora.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 22:58:05
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+/root/kyanos/libbpf/src/zip.h:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+agent/protocol/kafka/decoder/message_set_test.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/metadata/container/containerd/containerd.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+remote-debug: build-bpf kyanos-debug dlv
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+
+# Not a target:
+agent/protocol/mongodb/types.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+deps/btfhub/pkg/kernel/kernel.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 22:58:05
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.l:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+common/constant.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/prog_test.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/metadata/container/container.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+deps/btfhub/pkg/repo/rhel.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 22:58:05
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+deps/btfhub/pkg/utils/rpm.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 22:58:05
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+/root/kyanos/libbpf/src/usdt.bpf.h:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+/root/kyanos/libbpf/src/hashmap.c:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.f:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(LINK.f) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# Not a target:
+.texi:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+bpf/data_common.h:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+agent/metadata/process.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/openssl340_x86_bpfel.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-04 23:25:21
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+cmd/rocketmq.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/conn/metrics.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/openssl310_arm64_bpfel.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-04 23:25:30
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/pktlatency.h:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+bpf/openssl330_arm64_bpfel.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-04 23:25:31
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+cmd/overview.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+version/version.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+/root/kyanos/libbpf/src/strset.c:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.r:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(LINK.r) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+/root/kyanos/.output/bpftool/bootstrap/bpftool: | /root/kyanos/.output/bpftool
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 62):
+	$(call msg,BPFTOOL,$@)
+	$(Q)$(MAKE) ARCH= CROSS_COMPILE= OUTPUT=$(BPFTOOL_OUTPUT)/ -C $(BPFTOOL_SRC) bootstrap
+
+# Not a target:
+.a:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+common/ringbuffer.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+deps/btfhub/pkg/utils/utils.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 22:58:05
+#  File has been updated.
+#  Successfully updated.
+
+kyanos-compress: agent/agent.go agent/agent_test.go agent/agent_utils_test.go agent/analysis/analysis.go agent/analysis/analysis_test.go agent/analysis/classfier.go agent/analysis/common/classfier.go agent/analysis/common/json.go agent/analysis/common/types.go agent/analysis/percentile.go agent/analysis/stat.go agent/analysis/types.go agent/buffer/stream_buffer.go agent/buffer/stream_buffer_test.go agent/common/objects.go agent/common/options.go agent/common/permission.go agent/common/stopper.go agent/compatible/type.go agent/compatible/type_test.go agent/conn/conntrack.go agent/conn/constant.go agent/conn/first_packet_processor.go agent/conn/kern_event_handler.go agent/conn/metrics.go agent/conn/net.go agent/conn/processor.go agent/conn/record_processor.go agent/metadata/container/containerd/containerd.go agent/metadata/container/container.go agent/metadata/container/docker/docker.go agent/metadata/container/docker/events.go agent/metadata/container.go agent/metadata/container/multiple.go agent/metadata/k8s/cri.go agent/metadata/process.go agent/metadata/types/container.go agent/metadata/types/kubernetes.go agent/protocol/common.go agent/protocol/decoder.go agent/protocol/dns/dns.go agent/protocol/dns/filter.go agent/protocol/dns/type.go agent/protocol/fakedata.go agent/protocol/generic_filter.go agent/protocol/http.go agent/protocol/http_test.go agent/protocol/kafka/common/fetch.go agent/protocol/kafka/common/join_group.go agent/protocol/kafka/common/message_set.go agent/protocol/kafka/common/metadata.go agent/protocol/kafka/common/produce.go agent/protocol/kafka/common/sync_group.go agent/protocol/kafka/common/types.go agent/protocol/kafka/decoder/fetch.go agent/protocol/kafka/decoder/fetch_test.go agent/protocol/kafka/decoder/join_group.go agent/protocol/kafka/decoder/join_group_test.go agent/protocol/kafka/decoder/message_set.go agent/protocol/kafka/decoder/message_set_test.go agent/protocol/kafka/decoder/metadata.go agent/protocol/kafka/decoder/metadata_test.go agent/protocol/kafka/decoder/packet_decoder.go agent/protocol/kafka/decoder/packet_decoder_test.go agent/protocol/kafka/decoder/produce.go agent/protocol/kafka/decoder/produce_test.go agent/protocol/kafka/decoder/sync_group.go agent/protocol/kafka/decoder/sync_group_test.go agent/protocol/kafka/filter.go agent/protocol/kafka/kafka.go agent/protocol/kafka/kafka_test.go agent/protocol/mongodb/mongodb.go agent/protocol/mongodb/mongodb_test.go agent/protocol/mongodb/stitcher.go agent/protocol/mongodb/types.go agent/protocol/mysql/filter.go agent/protocol/mysql/handler.go agent/protocol/mysql/mysql.go agent/protocol/mysql/types.go agent/protocol/mysql/utils.go agent/protocol/mysql/utils_test.go agent/protocol/protocol.go agent/protocol/redis..go agent/protocol/rocketmq/filter.go agent/protocol/rocketmq/language_code.go agent/protocol/rocketmq/rocketmq.go agent/protocol/rocketmq/types.go agent/render/common/common.go agent/render/loader/loader_render.go agent/render/stat/stat.go agent/render/watch/option.go agent/render/watch/time_detail.go agent/render/watch/watch_render.go agent/time.go agent/uprobe/common.go agent/uprobe/dwarf_reader/buf.go agent/uprobe/dwarf_reader/reader.go agent/uprobe/gotls.go agent/uprobe/manager.go agent/uprobe/ssl_test.go agent/uprobe/ssl/types.go agent/uprobe/types.go bpf/agent_arm64_bpfel.go bpf/agentlagacykernel310_arm64_bpfel.go bpf/agentlagacykernel310_x86_bpfel.go bpf/agent_x86_bpfel.go bpf/common.go bpf/embed.go bpf/events.go bpf/gen.go bpf/gotls_arm64_bpfel.go bpf/gotlslagacykernel310_arm64_bpfel.go bpf/gotlslagacykernel310_x86_bpfel.go bpf/gotls_x86_bpfel.go bpf/loader/btf.go bpf/loader/container.go bpf/loader/loader.go bpf/loader/loader_test.go bpf/loader/utils.go bpf/map.go bpf/openssl102a_arm64_bpfel.go bpf/openssl102a_x86_bpfel.go bpf/openssl110a_arm64_bpfel.go bpf/openssl110a_x86_bpfel.go bpf/openssl111a_arm64_bpfel.go bpf/openssl111a_x86_bpfel.go bpf/openssl111b_arm64_bpfel.go bpf/openssl111b_x86_bpfel.go bpf/openssl111d_arm64_bpfel.go bpf/openssl111d_x86_bpfel.go bpf/openssl111j_arm64_bpfel.go bpf/openssl111j_x86_bpfel.go bpf/openssl300_arm64_bpfel.go bpf/openssl300_x86_bpfel.go bpf/openssl310_arm64_bpfel.go bpf/openssl310_x86_bpfel.go bpf/openssl320_arm64_bpfel.go bpf/openssl320_x86_bpfel.go bpf/openssl323_arm64_bpfel.go bpf/openssl323_x86_bpfel.go bpf/openssl330_arm64_bpfel.go bpf/openssl330_x86_bpfel.go bpf/openssl340_arm64_bpfel.go bpf/openssl340_x86_bpfel.go bpf/openssl350_arm64_bpfel.go bpf/openssl350_x86_bpfel.go bpf/prog.go bpf/prog_test.go bpf/types.go cmd/common.go cmd/dns.go cmd/http.go cmd/kafka.go cmd/mongodb.go cmd/mysql.go cmd/overview.go cmd/redis.go cmd/rocketmq.go cmd/root.go cmd/stat.go cmd/top.go cmd/version.go cmd/watch.go common/byte_util.go common/byte_util_test.go common/constant.go common/errors.go common/kernel_config.go common/kernel_version.go common/log.go common/namspace.go common/nsenter.go common/nsenter_test.go common/offset.go common/osinfo.go common/pclntab.go common/proc.go common/proc_test.go common/ringbuffer.go common/system.go common/term.go common/type.go common/utils.go common/utils_test.go deps/btfhub/cmd/btfhub/main.go deps/btfhub/pkg/job/btf.go deps/btfhub/pkg/job/extract.go deps/btfhub/pkg/job/job.go deps/btfhub/pkg/job/utils.go deps/btfhub/pkg/job/worker.go deps/btfhub/pkg/kernel/kernel.go deps/btfhub/pkg/kernel/kernel_test.go deps/btfhub/pkg/pkg/centos.go deps/btfhub/pkg/pkg/fedora.go deps/btfhub/pkg/pkg/package.go deps/btfhub/pkg/pkg/rhel.go deps/btfhub/pkg/pkg/suse.go deps/btfhub/pkg/pkg/ubuntu.go deps/btfhub/pkg/pkg/utils.go deps/btfhub/pkg/pkg/utils_test.go deps/btfhub/pkg/repo/amazon.go deps/btfhub/pkg/repo/centos.go deps/btfhub/pkg/repo/debian.go deps/btfhub/pkg/repo/fedora.go deps/btfhub/pkg/repo/oracle.go deps/btfhub/pkg/repo/repository.go deps/btfhub/pkg/repo/rhel.go deps/btfhub/pkg/repo/suse.go deps/btfhub/pkg/repo/ubuntu.go deps/btfhub/pkg/repo/utils.go deps/btfhub/pkg/utils/btf.go deps/btfhub/pkg/utils/download.go deps/btfhub/pkg/utils/progress.go deps/btfhub/pkg/utils/rpm.go deps/btfhub/pkg/utils/utils.go deps/btfhub/pkg/utils/zypper.go main.go monitor/monitor.go testdata/https-request/http_request.go version/detect.go version/version.go
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 78):
+	$(call msg,BINARY,$@)
+	export CGO_LDFLAGS="-Xlinker -rpath=. -static" && go build && upx -9 kyanos
+
+all: kyanos
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/4=0%
+
+# Not a target:
+bpf/prog.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.w.tex:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(CWEAVE) $< - $@
+
+# Not a target:
+agent/protocol/dns/type.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/protocol/kafka/common/sync_group.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+deps/btfhub/pkg/repo/utils.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 22:58:05
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.s.o:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(COMPILE.s) -o $@ $<
+
+# Not a target:
+.txinfo:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.c.ln:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(LINT.c) -C$* $<
+
+# Not a target:
+.tex.dvi:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(TEX) $<
+
+# Not a target:
+deps/btfhub/pkg/utils/progress.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 22:58:05
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.info:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.out:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.texinfo.dvi:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(TEXI2DVI) $(TEXI2DVI_FLAGS) $<
+
+# Not a target:
+agent/conn/kern_event_handler.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/conn/record_processor.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+common/system.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/metadata/types/container.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.F.o:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(COMPILE.F) $(OUTPUT_OPTION) $<
+
+# Not a target:
+/root/kyanos/libbpf/src/bpf.h:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+agent/protocol/mysql/utils.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/protocol/http_test.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/analysis/analysis.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/metadata/container/multiple.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/protocol/kafka/decoder/produce_test.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+/root/kyanos/libbpf/src/libbpf.c:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+agent/conn/net.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/protocol/protocol.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+/root/kyanos/libbpf/src/netlink.c:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+agent/common/permission.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+common/byte_util_test.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/protocol/kafka/common/fetch.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/agent_test.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+deps/btfhub/pkg/job/extract.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 22:58:05
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+/root/kyanos/libbpf/src/hashmap.h:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+test: test-go
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+
+# Not a target:
+bpf/gen.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/protocol/mysql/mysql.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/openssl323_arm64_bpfel.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-04 23:25:31
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/metadata/container.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/protocol/kafka/kafka.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+common/kernel_version.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.yl:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+deps/btfhub/pkg/pkg/centos.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 22:58:05
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/protocol/kafka/common/produce.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+.output:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 49):
+	$(call msg,MKDIR,$@)
+	$(Q)mkdir -p $@
+
+# Not a target:
+.s:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(LINK.s) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+kyanos-debug: agent/agent.go agent/agent_test.go agent/agent_utils_test.go agent/analysis/analysis.go agent/analysis/analysis_test.go agent/analysis/classfier.go agent/analysis/common/classfier.go agent/analysis/common/json.go agent/analysis/common/types.go agent/analysis/percentile.go agent/analysis/stat.go agent/analysis/types.go agent/buffer/stream_buffer.go agent/buffer/stream_buffer_test.go agent/common/objects.go agent/common/options.go agent/common/permission.go agent/common/stopper.go agent/compatible/type.go agent/compatible/type_test.go agent/conn/conntrack.go agent/conn/constant.go agent/conn/first_packet_processor.go agent/conn/kern_event_handler.go agent/conn/metrics.go agent/conn/net.go agent/conn/processor.go agent/conn/record_processor.go agent/metadata/container/containerd/containerd.go agent/metadata/container/container.go agent/metadata/container/docker/docker.go agent/metadata/container/docker/events.go agent/metadata/container.go agent/metadata/container/multiple.go agent/metadata/k8s/cri.go agent/metadata/process.go agent/metadata/types/container.go agent/metadata/types/kubernetes.go agent/protocol/common.go agent/protocol/decoder.go agent/protocol/dns/dns.go agent/protocol/dns/filter.go agent/protocol/dns/type.go agent/protocol/fakedata.go agent/protocol/generic_filter.go agent/protocol/http.go agent/protocol/http_test.go agent/protocol/kafka/common/fetch.go agent/protocol/kafka/common/join_group.go agent/protocol/kafka/common/message_set.go agent/protocol/kafka/common/metadata.go agent/protocol/kafka/common/produce.go agent/protocol/kafka/common/sync_group.go agent/protocol/kafka/common/types.go agent/protocol/kafka/decoder/fetch.go agent/protocol/kafka/decoder/fetch_test.go agent/protocol/kafka/decoder/join_group.go agent/protocol/kafka/decoder/join_group_test.go agent/protocol/kafka/decoder/message_set.go agent/protocol/kafka/decoder/message_set_test.go agent/protocol/kafka/decoder/metadata.go agent/protocol/kafka/decoder/metadata_test.go agent/protocol/kafka/decoder/packet_decoder.go agent/protocol/kafka/decoder/packet_decoder_test.go agent/protocol/kafka/decoder/produce.go agent/protocol/kafka/decoder/produce_test.go agent/protocol/kafka/decoder/sync_group.go agent/protocol/kafka/decoder/sync_group_test.go agent/protocol/kafka/filter.go agent/protocol/kafka/kafka.go agent/protocol/kafka/kafka_test.go agent/protocol/mongodb/mongodb.go agent/protocol/mongodb/mongodb_test.go agent/protocol/mongodb/stitcher.go agent/protocol/mongodb/types.go agent/protocol/mysql/filter.go agent/protocol/mysql/handler.go agent/protocol/mysql/mysql.go agent/protocol/mysql/types.go agent/protocol/mysql/utils.go agent/protocol/mysql/utils_test.go agent/protocol/protocol.go agent/protocol/redis..go agent/protocol/rocketmq/filter.go agent/protocol/rocketmq/language_code.go agent/protocol/rocketmq/rocketmq.go agent/protocol/rocketmq/types.go agent/render/common/common.go agent/render/loader/loader_render.go agent/render/stat/stat.go agent/render/watch/option.go agent/render/watch/time_detail.go agent/render/watch/watch_render.go agent/time.go agent/uprobe/common.go agent/uprobe/dwarf_reader/buf.go agent/uprobe/dwarf_reader/reader.go agent/uprobe/gotls.go agent/uprobe/manager.go agent/uprobe/ssl_test.go agent/uprobe/ssl/types.go agent/uprobe/types.go bpf/agent_arm64_bpfel.go bpf/agentlagacykernel310_arm64_bpfel.go bpf/agentlagacykernel310_x86_bpfel.go bpf/agent_x86_bpfel.go bpf/common.go bpf/embed.go bpf/events.go bpf/gen.go bpf/gotls_arm64_bpfel.go bpf/gotlslagacykernel310_arm64_bpfel.go bpf/gotlslagacykernel310_x86_bpfel.go bpf/gotls_x86_bpfel.go bpf/loader/btf.go bpf/loader/container.go bpf/loader/loader.go bpf/loader/loader_test.go bpf/loader/utils.go bpf/map.go bpf/openssl102a_arm64_bpfel.go bpf/openssl102a_x86_bpfel.go bpf/openssl110a_arm64_bpfel.go bpf/openssl110a_x86_bpfel.go bpf/openssl111a_arm64_bpfel.go bpf/openssl111a_x86_bpfel.go bpf/openssl111b_arm64_bpfel.go bpf/openssl111b_x86_bpfel.go bpf/openssl111d_arm64_bpfel.go bpf/openssl111d_x86_bpfel.go bpf/openssl111j_arm64_bpfel.go bpf/openssl111j_x86_bpfel.go bpf/openssl300_arm64_bpfel.go bpf/openssl300_x86_bpfel.go bpf/openssl310_arm64_bpfel.go bpf/openssl310_x86_bpfel.go bpf/openssl320_arm64_bpfel.go bpf/openssl320_x86_bpfel.go bpf/openssl323_arm64_bpfel.go bpf/openssl323_x86_bpfel.go bpf/openssl330_arm64_bpfel.go bpf/openssl330_x86_bpfel.go bpf/openssl340_arm64_bpfel.go bpf/openssl340_x86_bpfel.go bpf/openssl350_arm64_bpfel.go bpf/openssl350_x86_bpfel.go bpf/prog.go bpf/prog_test.go bpf/types.go cmd/common.go cmd/dns.go cmd/http.go cmd/kafka.go cmd/mongodb.go cmd/mysql.go cmd/overview.go cmd/redis.go cmd/rocketmq.go cmd/root.go cmd/stat.go cmd/top.go cmd/version.go cmd/watch.go common/byte_util.go common/byte_util_test.go common/constant.go common/errors.go common/kernel_config.go common/kernel_version.go common/log.go common/namspace.go common/nsenter.go common/nsenter_test.go common/offset.go common/osinfo.go common/pclntab.go common/proc.go common/proc_test.go common/ringbuffer.go common/system.go common/term.go common/type.go common/utils.go common/utils_test.go deps/btfhub/cmd/btfhub/main.go deps/btfhub/pkg/job/btf.go deps/btfhub/pkg/job/extract.go deps/btfhub/pkg/job/job.go deps/btfhub/pkg/job/utils.go deps/btfhub/pkg/job/worker.go deps/btfhub/pkg/kernel/kernel.go deps/btfhub/pkg/kernel/kernel_test.go deps/btfhub/pkg/pkg/centos.go deps/btfhub/pkg/pkg/fedora.go deps/btfhub/pkg/pkg/package.go deps/btfhub/pkg/pkg/rhel.go deps/btfhub/pkg/pkg/suse.go deps/btfhub/pkg/pkg/ubuntu.go deps/btfhub/pkg/pkg/utils.go deps/btfhub/pkg/pkg/utils_test.go deps/btfhub/pkg/repo/amazon.go deps/btfhub/pkg/repo/centos.go deps/btfhub/pkg/repo/debian.go deps/btfhub/pkg/repo/fedora.go deps/btfhub/pkg/repo/oracle.go deps/btfhub/pkg/repo/repository.go deps/btfhub/pkg/repo/rhel.go deps/btfhub/pkg/repo/suse.go deps/btfhub/pkg/repo/ubuntu.go deps/btfhub/pkg/repo/utils.go deps/btfhub/pkg/utils/btf.go deps/btfhub/pkg/utils/download.go deps/btfhub/pkg/utils/progress.go deps/btfhub/pkg/utils/rpm.go deps/btfhub/pkg/utils/utils.go deps/btfhub/pkg/utils/zypper.go main.go monitor/monitor.go testdata/https-request/http_request.go version/detect.go version/version.go
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 119):
+	$(call msg,BINARY,$@)
+	export CGO_LDFLAGS="-Xlinker -rpath=. -static" && go build -gcflags "all=-N -l"
+
+# Not a target:
+agent/protocol/generic_filter.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+common/pclntab.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+deps/btfhub/pkg/repo/fedora.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 22:58:05
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/protocol/kafka/decoder/fetch_test.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/protocol/mysql/handler.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/openssl323_x86_bpfel.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-04 23:25:20
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.S.o:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(COMPILE.S) -o $@ $<
+
+# Not a target:
+bpf/protocol_inference.h:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+bpf/types.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/loader/utils.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+deps/btfhub/pkg/repo/ubuntu.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 22:58:05
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+/root/kyanos/libbpf/src/libbpf_common.h:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+/root/kyanos/libbpf/src/bpf.c:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+agent/agent_utils_test.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/conn/conntrack.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/render/stat/stat.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.o:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(LINK.o) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# Not a target:
+agent/protocol/kafka/decoder/metadata_test.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/metadata/container/docker/docker.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+/root/kyanos/libbpf/src/btf.h:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+agent/uprobe/manager.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/protocol/mysql/types.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/openssl111d_arm64_bpfel.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-04 23:25:29
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/protocol/dns/filter.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+/root/kyanos/libbpf/src/bpf_prog_linfo.c:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+bpf/openssl340_arm64_bpfel.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-04 23:25:31
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.C.o:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(COMPILE.C) $(OUTPUT_OPTION) $<
+
+# Not a target:
+/root/kyanos/libbpf/src/libbpf_version.h:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+agent/protocol/decoder.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/protocol/kafka/decoder/fetch.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/openssl300_arm64_bpfel.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-04 23:25:29
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+cmd/mysql.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.c:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(LINK.c) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# Not a target:
+/root/kyanos/libbpf/src/libbpf_probes.c:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.txinfo.info:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(MAKEINFO) $(MAKEINFO_FLAGS) $< -o $@
+
+# Not a target:
+bpf/openssl_3_2_3.bpf.c:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+/root/kyanos/libbpf/src/usdt.c:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+/root/kyanos/libbpf/src/btf.c:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+testdata/https-request/http_request.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.texi.info:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(MAKEINFO) $(MAKEINFO_FLAGS) $< -o $@
+
+# Not a target:
+bpf/openssl110a_x86_bpfel.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-04 23:25:17
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/protocol/kafka/filter.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/buffer/stream_buffer.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/metadata/types/kubernetes.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+/root/kyanos/libbpf/src/relo_core.h:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+agent/metadata/k8s/cri.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.y:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+/root/kyanos/libbpf/src/nlattr.c:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+.SECONDARY:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+agent/protocol/kafka/decoder/metadata.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/protocol/redis..go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+format: format-go
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+
+format-go:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 104):
+	goimports -w .
+	gofmt -s -w .
+
+# Not a target:
+bpf/agentlagacykernel310_x86_bpfel.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-04 23:25:16
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/protocol/mongodb/mongodb_test.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+common/type.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/openssl_3_5_0.bpf.c:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+/root/kyanos/libbpf/src/features.c:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+format-md:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 109):
+	find . -type f -name "*.md" | xargs npx prettier --write
+	find docs/cn -type f -name "*.md" | xargs npx md-padding -i
+	find . -type f -name "*_CN.md" | xargs npx md-padding -i
+
+# Not a target:
+agent/agent.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/analysis/types.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+common/osinfo.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.l.r:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(LEX.l) $< > $@ 
+	 mv -f lex.yy.r $@
+
+# Not a target:
+bpf/openssl_3_4_0.bpf.c:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.p:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(LINK.p) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# Not a target:
+deps/btfhub/pkg/repo/oracle.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 22:58:05
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/analysis/analysis_test.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+/root/kyanos/libbpf/src/libbpf.h:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+/root/kyanos/libbpf/src/nlattr.h:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+/root/kyanos/libbpf/src/bpf_helpers.h:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+cmd/top.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.l.ln:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	@$(RM) $*.c
+	 $(LEX.l) $< > $*.c
+	$(LINT.c) -i $*.c -o $@
+	 $(RM) $*.c
+
+# Not a target:
+agent/uprobe/types.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/openssl111j_x86_bpfel.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-04 23:25:19
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+deps/btfhub/pkg/pkg/utils.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 22:58:05
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/openssl.h:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+bpf/openssl_3_1_0.bpf.c:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+bpf/openssl_1_1_1a.bpf.c:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+agent/protocol/kafka/decoder/message_set.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/render/watch/watch_render.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/openssl350_arm64_bpfel.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-04 23:25:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/openssl_3_3_0.bpf.c:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+bpf/openssl350_x86_bpfel.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-04 23:25:21
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+deps/btfhub/pkg/pkg/rhel.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 22:58:05
+#  File has been updated.
+#  Successfully updated.
+
+/root/kyanos/.output/bpftool:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 49):
+	$(call msg,MKDIR,$@)
+	$(Q)mkdir -p $@
+
+# Not a target:
+agent/protocol/kafka/decoder/join_group_test.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/protocol/rocketmq/filter.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/protocol/kafka/common/join_group.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.w:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+bpf/common.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/analysis/common/json.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+deps/btfhub/pkg/repo/debian.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 22:58:05
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.SUFFIXES: .out .a .ln .o .c .cc .C .cpp .p .f .F .m .r .y .l .ym .yl .s .S .mod .sym .def .h .info .dvi .tex .texinfo .texi .txinfo .w .ch .web .sh .elc .el
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+agent/protocol/kafka/common/metadata.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/gotlslagacykernel310_x86_bpfel.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-04 23:25:22
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/uprobe/ssl/types.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/gotls.bpf.c:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+.PHONY: all build-bpf kyanos-compress btfgen test test-go format format-go format-md dlv kyanos-debug remote-debug
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+agent/uprobe/dwarf_reader/buf.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.mod.o:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(COMPILE.mod) -o $@ $<
+
+# Not a target:
+agent/analysis/common/classfier.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/openssl110a_arm64_bpfel.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-04 23:25:28
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/protocol/kafka/decoder/sync_group.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/protocol/fakedata.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.web.p:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(TANGLE) $<
+
+# Not a target:
+deps/btfhub/pkg/utils/btf.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 22:58:05
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/openssl_1_1_1d.bpf.c:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+deps/btfhub/cmd/btfhub/main.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 22:58:05
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+common/errors.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.S.s:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(PREPROCESS.S) $< > $@
+
+# Not a target:
+agent/protocol/kafka/decoder/packet_decoder_test.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+common/nsenter.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/agent_x86_bpfel.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-04 23:25:14
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+agent/protocol/rocketmq/language_code.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+/root/kyanos/libbpf/src/str_error.h:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.f.o:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(COMPILE.f) $(OUTPUT_OPTION) $<
+
+# Not a target:
+deps/btfhub/pkg/job/job.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 22:58:05
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+monitor/monitor.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+cmd/http.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/openssl_1_1_1j.bpf.c:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+cmd/dns.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bpf/events.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.ym:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.cc.o:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(COMPILE.cc) $(OUTPUT_OPTION) $<
+
+# Not a target:
+common/proc_test.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.F.f:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(PREPROCESS.F) $(OUTPUT_OPTION) $<
+
+# Not a target:
+bpf/map.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+common/log.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-03 21:16:32
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.w.c:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(CTANGLE) $< - $@
+
+# Not a target:
+bpf/openssl111a_x86_bpfel.go:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2025-06-04 23:25:17
+#  File has been updated.
+#  Successfully updated.
+
+# files hash-table stats:
+# Load=378/1024=37%, Rehash=0, Collisions=25856/36588=71%
+# VPATH Search Paths
+
+# No 'vpath' search paths.
+
+# No general ('VPATH' variable) search path.
+
+# strcache buffers: 119 (118) / strings = 30437 / storage = 965715 B / avg = 31 B
+# current buf: size = 8162 B / used = 4423 B / count = 184 / avg = 24 B
+# other used: total = 961292 B / count = 30253 / avg = 31 B
+# other free: total = 1824 B / max = 34 B / min = 1 B / avg = 15 B
+
+# strcache performance: lookups = 43823 / hit rate = 30%
+# hash-table stats:
+# Load=30437/32768=93%, Rehash=2, Collisions=449683/66867=673%
+# Finished Make data base on Thu Jun  5 21:32:03 2025
+

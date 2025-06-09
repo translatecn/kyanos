@@ -8,6 +8,8 @@
 *.so
 *.dylib
 *.o
+*_bpfel.go
+
 __debug**
 node_modules/
 docs/.vitepress/dist
@@ -30,9 +32,9 @@ go.work
 .vscode/
 .idea/
 .output/
-deps/**
-
 eapm-ebpf
 kyanos
 
 dist/
+vendor
+cmake-build-debug

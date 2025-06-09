@@ -60,10 +60,10 @@ done
 [ ! -d ${BTFHUB_DIR} ] && git clone "${BTFHUB_REPO}" ${BTFHUB_DIR}
 [ ! -d ${BTFHUB_ARCH_DIR} ] && git clone --depth=1 "${BTFHUB_ARCH_REPO}" ${BTFHUB_ARCH_DIR}
 
-if [ -z ${SKIP_FETCH} ]; then
-    branch_clean ${BTFHUB_DIR}
-    branch_clean ${BTFHUB_ARCH_DIR}
-fi
+#if [ -z ${SKIP_FETCH} ]; then
+#    branch_clean ${BTFHUB_DIR}
+#    branch_clean ${BTFHUB_ARCH_DIR}
+#fi
 
 cd ${BTFHUB_DIR}
 
