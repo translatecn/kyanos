@@ -8,6 +8,7 @@
 *.so
 *.dylib
 *.o
+*_bpfel.o
 *_bpfel.go
 
 __debug**
@@ -37,4 +38,4 @@ kyanos
 
 dist/
 vendor
-cmake-build-debug
+cmake-build-debug/

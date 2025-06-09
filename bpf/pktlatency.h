@@ -1,40 +1,38 @@
-_Pragma("GCC diagnostic ignored \"-Wint-conversion\"")
+//_Pragma("GCC diagnostic ignored \"-Wint-conversion\"")
+
+#pragma GCC diagnostic ignored "-Wint-conversion"
 
 #ifndef __KPROBE_H__
 #define __KPROBE_H__
 
-#define PX_AF_UNKNOWN 0xff
-#define AF_INET 2
-#define AF_INET6 10
-#define MAX_MSG_SIZE 30720
-#define EINPROGRESS 115
-#define MSG_OOB 1
-#define MSG_PEEK 2
+#define PX_AF_UNKNOWN 0xff // 无效或未知的地址族
+#define AF_INET 2          // IPv4 地址族
+#define AF_INET6 10        // IPv6 地址族
+#define MAX_MSG_SIZE 30720 // 最大的消息缓冲区大小为 30,720 字节（30 KB）。
+#define EINPROGRESS 115 // 是 POSIX 标准错误码的一种，表示“操作正在进行中”。 见于非阻塞 socket 操作，比如非阻塞连接时
+#define MSG_OOB 1       // 发送 高优先级的数据包
+#define MSG_PEEK 2      // 在使用 recv() 接收数据时表示窥视数据而不将其从缓冲区移除。
 
-    // #include <bpf/bpf_tracing.h>
-    // #include <bpf/bpf_endian.h>
-    // #include <linux/in.h>
-    // #include <linux/in6.h>
-    // #include <linux/socket.h>
-
-    enum step_t {
-        start = 0,
-        SSL_OUT,
-        SYSCALL_OUT,
-        TCP_OUT,
-        IP_OUT,
-        QDISC_OUT,
-        DEV_OUT,
-        NIC_OUT,
-        NIC_IN,
-        DEV_IN,
-        IP_IN,
-        TCP_IN,
-        USER_COPY,
-        SYSCALL_IN,
-        SSL_IN,
-        end
-    };
+// 描述网络数据包（或请求）在系统中传输的完整生命周期过程 ——
+// 从用户空间的应用程序发出请求，一直到通过网络发送出去，并从远端接收到响应
+enum step_t {
+    start = 0,   // 初始状态
+    SSL_OUT,     // 数据被加密（SSL层）
+    SYSCALL_OUT, // 用户空间调用系统调用（如 send）
+    TCP_OUT,     // 数据进入 TCP 协议处理流程
+    IP_OUT,      // 通过 IP 层路由处理
+    QDISC_OUT,   // 流量控制/排队规则（例如 Linux 的 qdisc）
+    DEV_OUT,     // 准备通过网络设备驱动发送
+    NIC_OUT,     // 数据包被发送到网卡（Network Interface Card）
+    NIC_IN,      // 接收到远端网卡的数据
+    DEV_IN,      // 网络驱动处理接收数据
+    IP_IN,       // 数据传到 IP 层
+    TCP_IN,      // 数据到达 TCP 层
+    USER_COPY,   // 内核空间数据拷贝到用户空间
+    SYSCALL_IN,  // 系统调用返回（如 recv）
+    SSL_IN,      // 解密收到的数据
+    end          // 流程结束
+};
 
 enum traffic_protocol_t {
     kProtocolUnset = 0,
@@ -92,28 +90,31 @@ enum source_function_t {
 };
 
 enum conn_trace_state_t {
-    unset = 0,
-    traceable,
-    protocol_not_matched,
-    protocol_unknown,
-    other,
+    unset = 0,            // 未设置：表示当前没有设置连接追踪状态
+    traceable,            // 可追踪：连接可以被追踪（可能符合某种协议或者规则）
+    protocol_not_matched, // 协议不匹配：连接的协议与预期不一致，无法进行追踪
+    protocol_unknown,     // 协议未知：无法识别连接使用的协议
+    other,                // 其他：所有无法归类到上述状态的情况
 };
 
 enum control_value_index_t {
-    // This specify one pid to monitor. This is used during test to eliminate noise.
-    // TODO: We need a more robust mechanism for production use, which should be able to:
-    // * Specify multiple pids up to a certain limit, let's say 1024.
-    // * Support efficient lookup inside bpf to minimize overhead.
-    kTargetTGIDIndex = 0,
-    kStirlingTGIDIndex,
-    kEnabledXdpIndex,
-    kEnableFilterByPid,
-    kEnableFilterByLocalPort,
-    kEnableFilterByRemotePort,
-    kEnableFilterByRemoteHost,
-    kSideFilter, // 0-all 1-server 2-client
-    kNumControlValues,
-    kTraceProtocol, // see traffic_protocol_t
+    // 指定一个 PID（进程 ID）进行监控，常用于测试时排除干扰
+    // TODO: 生产环境应采用更健壮的机制，例如：
+    // - 支持最多 1024 个 PID 的指定；
+    // - 在 BPF 中高效查找以减少性能开销。
+    kTargetTGIDIndex = 0, // 目标进程 TGID（通常等于 PID）
+
+    kStirlingTGIDIndex,        // Stirling 本身的进程 ID，用于排除自身影响
+    kEnabledXdpIndex,          // 是否启用 XDP（eXpress Data Path）
+    kEnableFilterByPid,        // 是否按 PID 过滤
+    kEnableFilterByLocalPort,  // 是否按本地端口过滤
+    kEnableFilterByRemotePort, // 是否按远程端口过滤
+    kEnableFilterByRemoteHost, // 是否按远程 IP 主机过滤
+    kSideFilter,               // 端类型过滤：0=全部，1=服务端，2=客户端
+
+    kNumControlValues, // 控制值数量（用于数组大小等场景）
+
+    kTraceProtocol, // 指定要追踪的协议类型，见 traffic_protocol_t 枚举
 };
 
 enum message_type_t { kUnknown, kRequest, kResponse };
@@ -129,16 +130,16 @@ enum traffic_direction_t {
 };
 
 enum conn_type_t {
-    kConnect,
-    kClose,
-    kProtocolInfer,
+    kConnect,       // 连接事件：表示一个新的连接已建立（如 TCP 三次握手完成）
+    kClose,         // 关闭事件：表示连接被关闭（如 TCP 四次挥手）
+    kProtocolInfer, // 协议推断事件：用于从连接数据中推测所使用的协议
 };
 
 struct sock_key {
-    uint64_t sip[2];
-    uint64_t dip[2];
-    uint16_t sport;
-    uint16_t dport;
+    uint64_t sip[2]; // 源 IP 地址，128 位，支持 IPv6（IPv4 也可以兼容表示）
+    uint64_t dip[2]; // 目的 IP 地址，128 位
+    uint16_t sport;  // 源端口
+    uint16_t dport;  // 目的端口
 };
 
 #define FUNC_NAME_LIMIT 16
@@ -153,12 +154,9 @@ struct upid_t {
 };
 
 struct conn_id_t {
-    //  pid/tgid.
-    struct upid_t upid;
-    // The file descriptor to the opened network connection.
-    int32_t fd;
-    // Unique id of the conn_id (timestamp).
-    uint64_t tsid;
+    struct upid_t upid; // 唯一进程标识（包括 PID/TGID + 启动时间）
+    int32_t fd;         // 网络连接对应的文件描述符
+    uint64_t tsid; // 时间戳形式的连接唯一标识符，通常用于区分连接实例（如多个连接复用了同一个 FD）
 };
 
 struct conn_id_s_t {
@@ -167,26 +165,26 @@ struct conn_id_s_t {
 };
 
 struct kern_evt {
-    char func_name[FUNC_NAME_LIMIT];
-    uint64_t ts;
-    uint32_t ts_delta;
-    uint32_t seq;
-    uint32_t len;
-    uint8_t flags;
-    bool prepend_length_header;
-    uint32_t ifindex;
-    struct conn_id_s_t conn_id_s;
-    enum step_t step;
-    uint32_t length_header;
+    char func_name[FUNC_NAME_LIMIT]; // 函数名（事件来源函数），用于调试或标记
+    uint64_t ts;                     // 时间戳（事件发生的绝对时间，通常是单调时钟 ns）
+    uint32_t ts_delta;               // 与上一个事件的时间差（优化性能/压缩存储）
+    uint32_t seq;                    // 序列号（按时间递增，可用于乱序恢复）
+    uint32_t len;                    // 数据长度（如网络 payload 长度等）
+    uint8_t flags;                   // 事件标志（位字段，描述事件属性）
+    bool prepend_length_header;      // 是否在数据前加上长度头（用于 framing）
+    uint32_t ifindex;                // 网络接口索引（如 eth0、lo 的编号）
+    struct conn_id_s_t conn_id_s; // 连接 ID（标识事件属于哪个连接） ← 结构名疑似应为 `conn_id_t`？
+    enum step_t step;             // 当前事件处于哪一步（如 CONNECT、SEND、CLOSE 等状态）
+    uint32_t length_header;       // 如果 `prepend_length_header=true`，此字段是实际头部值
 };
 
 struct first_packet_evt {
-    uint64_t ts;
-    uint32_t len;
-    uint8_t flags;
-    uint32_t ifindex;
-    enum step_t step;
-    struct sock_key key;
+    uint64_t ts;         // 时间戳（通常为首包捕获的时间，单位 ns）
+    uint32_t len;        // 数据包长度（payload 的长度或整个报文长度）
+    uint8_t flags;       // 标志位（方向、是否丢包、是否有问题等，用于快速分类）
+    uint32_t ifindex;    // 网络接口索引（如 eth0, lo，值来自内核）
+    enum step_t step;    // 当前连接处于的阶段（如连接建立、协议识别等）
+    struct sock_key key; // 连接五元组（源 IP、目标 IP、源端口、目标端口）
 };
 
 #define MAX_MSG_SIZE 30720
@@ -195,12 +193,13 @@ struct kern_evt_data {
     uint32_t buf_size;
     char msg[MAX_MSG_SIZE];
 };
+
 struct kern_evt_ssl_data {
-    struct kern_evt ke;
-    uint32_t syscall_seq;
-    uint32_t syscall_len;
-    uint32_t buf_size;
-    char msg[MAX_MSG_SIZE];
+    struct kern_evt ke;   // 通用事件结构，包含时间戳、连接信息、事件状态等元数据
+    uint32_t syscall_seq; // 系统调用序列号（用于跟踪读写的顺序，或与对应的调用日志关联）
+    uint32_t syscall_len; // 实际系统调用的返回长度（也就是实际读写了多少字节）
+    uint32_t buf_size;    // 缓冲区的总大小，即 msg[] 的可用字节数，避免溢出或截断误解
+    char msg[MAX_MSG_SIZE]; // 实际读取或写入的数据内容（加密或明文）
 };
 
 // struct data_evt {
@@ -222,39 +221,42 @@ static inline void my_strcpy(char *dest, const char *src, int n)
     dest[i] = '\0';
 }
 
+int my_str_ncmp(const char *a, const char *b, int n)
+{
+    for (int i = 0; i < n; i++) {
+        if (a[i] != b[i]) {
+            return 0;
+        }
+        if (a[i] == '\0') {
+            return 0;
+        }
+    }
+    return 1;
+}
+
 struct data_args {
-    // Represents the function from which this argument group originates.
-    enum source_function_t source_fn;
-
-    // Did the data event call sock_sendmsg/sock_recvmsg.
-    // Used to filter out read/write and readv/writev calls that are not to sockets.
-    int sock_event;
-
-    int32_t fd;
-
-    // For send()/recv()/write()/read().
-    const char *buf;
-
-    // For sendmsg()/recvmsg()/writev()/readv().
-    const struct iovec *iov;
-    size_t iovlen;
-
-    // For sendmmsg()
-    unsigned int *msg_len;
-    size_t *ssl_ex_len;
-    uint64_t start_ts;
-    uint64_t end_ts;
+    enum source_function_t source_fn; // 表示哪个函数发起了这次调用（如 write(), sendmsg() 等）
+    int sock_event;  // 是否是 socket 相关的调用（1 = 是；0 = 否），用于过滤如 stdout 的 write
+    int32_t fd;      // 被调用的文件描述符
+    const char *buf; // 指向数据缓冲区（适用于 read / write 类调用）
+    const struct iovec *iov; // readv / writev / sendmsg 等的多缓冲区数据
+    size_t iovlen;           // iov 数组的长度
+    unsigned int *msg_len;   // 专用于 sendmmsg() 等多消息调用，指向每条消息的长度数组
+    size_t *ssl_ex_len;      // 可能是 SSL 扩展用的长度信息（比如额外 payload 的长度）
+    uint64_t start_ts;       // 系统调用开始的时间戳（ns）
+    uint64_t end_ts;         // 系统调用结束的时间戳（ns）
 };
+
 struct close_args {
     uint32_t fd;
 };
 
 struct sendfile_args {
-    int32_t out_fd;
-    int32_t in_fd;
-    size_t count;
-    uint64_t start_ts;
-    uint64_t end_ts;
+    int32_t out_fd;    // 目标文件描述符，通常是一个 socket
+    int32_t in_fd;     // 源文件描述符，通常是一个文件（如 HTML、图片等）
+    size_t count;      // 要发送的数据字节数
+    uint64_t start_ts; // 调用开始的时间戳（ns）
+    uint64_t end_ts;   // 调用结束的时间戳（ns）
 };
 
 struct connect_args {
@@ -269,64 +271,50 @@ struct accept_args {
 };
 
 union sockaddr_t {
-    struct sockaddr_in6 in6;
-    struct sockaddr_in in4;
-    struct sockaddr sa;
+    struct sockaddr_in6 in6; // IPv6 地址结构
+    struct sockaddr_in in4;  // IPv4 地址结构
+    struct sockaddr sa;      // 通用 socket 地址结构（用于访问 sa_family 等通用字段）
 };
+
 struct conn_info_t {
-    // Connection identifier (PID, FD, etc.).
-    struct conn_id_t conn_id;
-    uint64_t read_bytes;
-    uint64_t write_bytes;
-    uint64_t ssl_read_bytes;
-    uint64_t ssl_write_bytes;
+    struct conn_id_t conn_id; // 唯一连接标识：进程、FD、时间戳
+    uint64_t read_bytes;      // 累计读取字节数（明文）
+    uint64_t write_bytes;     // 累计写入字节数（明文）
+    uint64_t ssl_read_bytes;  // 解密后读取字节数（SSL）
+    uint64_t ssl_write_bytes; // 加密前写入字节数（SSL）
 
-    // IP address of the local endpoint.
-    union sockaddr_t laddr;
-    union sockaddr_t raddr;
+    union sockaddr_t laddr; // 本地地址信息（IP + 端口）
+    union sockaddr_t raddr; // 远程地址信息
 
-    // The protocol of traffic on the connection (HTTP, MySQL, etc.).
-    enum traffic_protocol_t protocol;
-    // Classify traffic as requests, responses or mixed.
-    enum endpoint_role_t role;
-    // Keep the header of the last packet suspected to be MySQL/Kafka. MySQL/Kafka server does 2
-    // separate read syscalls, first to read the header, and second the body of the packet. Thus, we
-    // keep a state. (MySQL): Length(3 bytes) + seq_number(1 byte). (Kafka): Length(4 bytes)
-    size_t prev_count;
-    char prev_buf[4];
-    bool prepend_length_header;
+    enum traffic_protocol_t protocol; // 连接中使用的协议类型（HTTP, MySQL 等）
+    enum endpoint_role_t role;        // 当前连接端角色（服务端 / 客户端）
 
-    enum conn_trace_state_t no_trace;
-    bool ssl;
+    size_t prev_count; // 前一次记录的协议头部长度（如 MySQL/Kafka 等）
+    char prev_buf[4];  // 前一次协议头缓存（最多 4 字节）
+
+    bool prepend_length_header; // 是否在数据前插入长度头部（协议解析需求）
+
+    enum conn_trace_state_t no_trace; // 连接是否可被追踪（是否成功识别协议等）
+    bool ssl;                         // 是否是加密连接（SSL/TLS）
 };
 
 struct conn_evt_t {
-    struct conn_info_t conn_info;
-    enum conn_type_t conn_type;
-    uint64_t ts;
+    struct conn_info_t conn_info; // 连接的详细信息，包括 PID、FD、字节数、地址、协议、SSL 等状态
+    enum conn_type_t conn_type;   // 连接事件类型（连接建立、关闭、协议识别等）
+    uint64_t ts;                  // 事件时间戳（通常为单调递增时间，如 ktime_get_ns()）
 };
 
 struct parse_kern_evt_body {
-    void *ctx;
-    u32 inital_seq;
-    struct sock_key *key;
-    u32 cur_seq;
-    u32 len;
-    const char *func_name;
-    enum step_t step;
-    struct tcphdr *tcp;
-    u32 ifindex;
+    void *ctx;             // 上下文指针，通常指向 eBPF 程序或用户态解析上下文
+    u32 inital_seq;        // TCP 数据包的初始序列号，用于流量重组
+    struct sock_key *key;  // 指向连接唯一标识的 socket key（源/目的 IP 和端口）
+    u32 cur_seq;           // 当前数据包的序列号
+    u32 len;               // 当前数据包的有效负载长度（字节数）
+    const char *func_name; // 内核函数名称（如 sock_sendmsg 等），用于事件追踪定位
+    enum step_t step;      // 当前解析步骤或阶段（例如发送/接收阶段）
+    struct tcphdr *tcp;    // 指向 TCP 头部结构体，便于访问 TCP 标志位等信息
+    u32 ifindex;           // 网络接口索引，用于标识网卡
 };
-
-// const char SYSCALL_FUNC_NAME[] = "syscall";
-// const char XDP_FUNC_NAME[] = "xdp";
-// const char SKB_COPY_FUNC_NAME[] = "skb_copy_datagram_iter";
-// const char NET_RECEIVE_SKB_FUNC_NAME[] = "netif_receive_skb";
-// const char TCP_RCV_FUNC_NAME[] = "tcp_v4_do_rcv";
-// const char IP_RCV_FUNC_NAME[] = "ip_rcv_core";
-// const char DEV_HARD_XMIT_FUNC_NAME[] = "dev_hard_start_xmit";
-// const char DEV_QUEUE_XMIT_FUNC_NAME[] = "dev_queue_xmit";
-// const char IP_QUEUE_XMIT_FUNC_NAME[] = "ip_queue_xmit";
 
 #define MY_BPF_HASH(name, key_type, value_type)                                                                        \
     struct {                                                                                                           \
@@ -347,8 +335,8 @@ struct parse_kern_evt_body {
     } name SEC(".maps");
 
 #define ETH_P_IP 0x0800
-#define ETH_P_IPV6 0x86DD /* IPv6 over bluebook		*/
-#define ETH_HLEN 14       /* Total octets in header.	 */
+#define ETH_P_IPV6 0x86DD /* IPv6 over bluebook		*/ // 以太网标准（IEEE 802.3）起草文件的代号
+#define ETH_HLEN 14                                    /* Total octets in header.	 */
 
 #define _(src)                                                                                                         \
     ({                                                                                                                 \
@@ -374,6 +362,13 @@ struct parse_kern_evt_body {
 #define PROTOCOL_VEC_LIMIT 1
 #define LOOP_LIMIT 3
 
+// trace_event_raw_sys_enter
+// struct trace_event_raw_sys_enter {
+//     struct trace_entry ent;        // 通用 trace 事件头，包含时间戳、CPU ID 等元数据
+//     long int id;                   // 系统调用号，标识调用的是哪个系统调用
+//     long unsigned int args[6];     // 系统调用的最多6个参数（64位无符号整数数组）
+//     char __data[0];                // 可变长数据的占位符（零长度数组，用于灵活扩展）
+// };
 #define TP_ARGS(dst, idx, ctx)                                                                                         \
     {                                                                                                                  \
         void *__p = (void *)ctx + sizeof(struct trace_entry) + sizeof(long int) + idx * (sizeof(long unsigned int));   \
@@ -386,10 +381,11 @@ struct parse_kern_evt_body {
         bpf_probe_read_kernel(dst, sizeof(*dst), __p);                                                                 \
     }
 
+// include/net/netfilter/nf_conntrack_tuple.h
 struct nf_conntrack_tuple___custom {
-    struct nf_conntrack_man src;
+    struct nf_conntrack_man src; // 源端地址信息（IP + 端口等）
     struct {
-        union nf_inet_addr u3;
+        union nf_inet_addr u3; // 存储目的地址（IPv4 或 IPv6）。
         union {
             __be16 all;
             struct {
@@ -413,10 +409,12 @@ struct nf_conntrack_tuple___custom {
             } gre;
         } u;
         u_int8_t protonum;
-        u_int8_t dir;
+        u_int8_t dir; // 连接方向
     } dst;
-} __attribute__((preserve_access_index));
+} __attribute__((preserve_access_index)); // LLVM 生成的用于保持结构体字段访问信息的标记，支持 CO-RE 动态修正
 
+// include/net/netfilter/nf_conntrack_tuple.h
+// 在哈希表中，每个连接都有两个条目：分别对应两种不同的方式。
 struct nf_conntrack_tuple_hash___custom {
     struct hlist_nulls_node hnnode;
     struct nf_conntrack_tuple___custom tuple;

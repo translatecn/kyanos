@@ -202,23 +202,42 @@ static __always_inline int is_redis_protocol(const char *old_buf, size_t count)
 
 static __always_inline enum message_type_t is_http_protocol(const char *old_buf, size_t count)
 {
-    if (count < 5) {
+    if (count < 7) {
         return 0;
     }
-    char buf[4] = {};
-    bpf_probe_read_user(buf, 4, old_buf);
-    if (buf[0] == 'H' && buf[1] == 'T' && buf[2] == 'T' && buf[3] == 'P') {
+    char buf[7] = {};
+    bpf_probe_read_user(buf, 7, old_buf);
+    if (my_str_ncmp(buf, "HTTP", 4)) {
         return kResponse;
     }
-    if (buf[0] == 'G' && buf[1] == 'E' && buf[2] == 'T') {
+    if (my_str_ncmp(buf, "GET", 3)) {
         return kRequest;
     }
-    if (buf[0] == 'H' && buf[1] == 'E' && buf[2] == 'A' && buf[3] == 'D') {
+    if (my_str_ncmp(buf, "POST", 4)) {
         return kRequest;
     }
-    if (buf[0] == 'P' && buf[1] == 'O' && buf[2] == 'S' && buf[3] == 'T') {
+    if (my_str_ncmp(buf, "PUT", 3)) {
         return kRequest;
     }
+    if (my_str_ncmp(buf, "DELETE", 6)) {
+        return kRequest;
+    }
+    if (my_str_ncmp(buf, "PATCH", 5)) {
+        return kRequest;
+    }
+    if (my_str_ncmp(buf, "HEAD", 4)) {
+        return kRequest;
+    }
+    if (my_str_ncmp(buf, "OPTIONS", 7)) {
+        return kRequest;
+    }
+    if (my_str_ncmp(buf, "TRACE", 5)) {
+        return kRequest;
+    }
+    if (my_str_ncmp(buf, "CONNECT", 7)) {
+        return kRequest;
+    }
+
     return kUnknown;
 }
 
@@ -411,7 +430,7 @@ static __always_inline struct protocol_message_t infer_protocol(const char *buf,
     }
     conn_info->prev_count = count;
     if (count == 4) {
-        bpf_probe_read(conn_info->prev_buf, 4, buf);
+        bpf_probe_read(conn_info->prev_buf, 4, buf); // 字节数
     }
     return protocol_message;
 }
