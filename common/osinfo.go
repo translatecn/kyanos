@@ -118,39 +118,6 @@ func OSBTFEnabled() bool {
 	return err == nil
 }
 
-// GetOSInfo creates a OSInfo object and runs discoverOSDistro() on its creation
-func GetOSInfo() (*OSInfo, error) {
-	info := OSInfo{}
-	var err error
-
-	if info.osReleaseFieldValues == nil {
-		info.osReleaseFieldValues = make(map[OSReleaseField]string)
-	}
-
-	info.osReleaseFieldValues[OS_KERNEL_RELEASE], err = UnameRelease()
-	if err != nil {
-		return &info, fmt.Errorf("could not determine uname release: %w", err)
-	}
-
-	info.osReleaseFieldValues[OS_ARCH], err = UnameMachine()
-	if err != nil {
-		return &info, fmt.Errorf("could not determine uname machine: %w", err)
-	}
-
-	info.osReleaseFilePath, err = checkEnvPath("LIBBPFGO_OSRELEASE_FILE") // useful if users wants to mount host os-release in a container
-	if err != nil {
-		return &info, err
-	} else if info.osReleaseFilePath == "" {
-		info.osReleaseFilePath = "/etc/os-release"
-	}
-
-	if err = info.discoverOSDistro(); err != nil {
-		return &info, err
-	}
-
-	return &info, nil
-}
-
 // OSInfo object contains all OS relevant information
 //
 // OSRelease is relevant to examples such as:
@@ -295,4 +262,37 @@ func Lockdown() (LockdownMode, error) {
 	}
 
 	return NOVALUE, fmt.Errorf("could not get lockdown mode")
+}
+
+// GetOSInfo creates a OSInfo object and runs discoverOSDistro() on its creation
+func GetOSInfo() (*OSInfo, error) {
+	info := OSInfo{}
+	var err error
+
+	if info.osReleaseFieldValues == nil {
+		info.osReleaseFieldValues = make(map[OSReleaseField]string)
+	}
+
+	info.osReleaseFieldValues[OS_KERNEL_RELEASE], err = UnameRelease()
+	if err != nil {
+		return &info, fmt.Errorf("could not determine uname release: %w", err)
+	}
+
+	info.osReleaseFieldValues[OS_ARCH], err = UnameMachine()
+	if err != nil {
+		return &info, fmt.Errorf("could not determine uname machine: %w", err)
+	}
+
+	info.osReleaseFilePath, err = checkEnvPath("LIBBPFGO_OSRELEASE_FILE") // useful if users wants to mount host os-release in a container
+	if err != nil {
+		return &info, err
+	} else if info.osReleaseFilePath == "" {
+		info.osReleaseFilePath = "/etc/os-release"
+	}
+
+	if err = info.discoverOSDistro(); err != nil {
+		return &info, err
+	}
+
+	return &info, nil
 }

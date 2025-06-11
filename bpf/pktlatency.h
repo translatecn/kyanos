@@ -9,9 +9,9 @@
 #define AF_INET 2          // IPv4 地址族
 #define AF_INET6 10        // IPv6 地址族
 #define MAX_MSG_SIZE 30720 // 最大的消息缓冲区大小为 30,720 字节（30 KB）。
-#define EINPROGRESS 115 // 是 POSIX 标准错误码的一种，表示“操作正在进行中”。 见于非阻塞 socket 操作，比如非阻塞连接时
-#define MSG_OOB 1       // 发送 高优先级的数据包
-#define MSG_PEEK 2      // 在使用 recv() 接收数据时表示窥视数据而不将其从缓冲区移除。
+#define EINPROGRESS 115    // 是 POSIX 标准错误码的一种，表示“操作正在进行中”。 见于非阻塞 socket 操作，比如非阻塞连接时
+#define MSG_OOB 1          // 发送 高优先级的数据包
+#define MSG_PEEK 2         // 在使用 recv() 接收数据时表示窥视数据而不将其从缓冲区移除。
 
 // 描述网络数据包（或请求）在系统中传输的完整生命周期过程 ——
 // 从用户空间的应用程序发出请求，一直到通过网络发送出去，并从远端接收到响应
@@ -102,8 +102,7 @@ enum control_value_index_t {
     // TODO: 生产环境应采用更健壮的机制，例如：
     // - 支持最多 1024 个 PID 的指定；
     // - 在 BPF 中高效查找以减少性能开销。
-    kTargetTGIDIndex = 0, // 目标进程 TGID（通常等于 PID）
-
+    kTargetTGIDIndex = 0,      // 目标进程 TGID（通常等于 PID）
     kStirlingTGIDIndex,        // Stirling 本身的进程 ID，用于排除自身影响
     kEnabledXdpIndex,          // 是否启用 XDP（eXpress Data Path）
     kEnableFilterByPid,        // 是否按 PID 过滤
@@ -111,10 +110,8 @@ enum control_value_index_t {
     kEnableFilterByRemotePort, // 是否按远程端口过滤
     kEnableFilterByRemoteHost, // 是否按远程 IP 主机过滤
     kSideFilter,               // 端类型过滤：0=全部，1=服务端，2=客户端
-
-    kNumControlValues, // 控制值数量（用于数组大小等场景）
-
-    kTraceProtocol, // 指定要追踪的协议类型，见 traffic_protocol_t 枚举
+    kNumControlValues,         // 控制值数量（用于数组大小等场景）
+    kTraceProtocol,            // 指定要追踪的协议类型，见 traffic_protocol_t 枚举
 };
 
 enum message_type_t { kUnknown, kRequest, kResponse };
@@ -156,7 +153,7 @@ struct upid_t {
 struct conn_id_t {
     struct upid_t upid; // 唯一进程标识（包括 PID/TGID + 启动时间）
     int32_t fd;         // 网络连接对应的文件描述符
-    uint64_t tsid; // 时间戳形式的连接唯一标识符，通常用于区分连接实例（如多个连接复用了同一个 FD）
+    uint64_t tsid;      // 时间戳形式的连接唯一标识符，通常用于区分连接实例（如多个连接复用了同一个 FD）
 };
 
 struct conn_id_s_t {
@@ -173,9 +170,9 @@ struct kern_evt {
     uint8_t flags;                   // 事件标志（位字段，描述事件属性）
     bool prepend_length_header;      // 是否在数据前加上长度头（用于 framing）
     uint32_t ifindex;                // 网络接口索引（如 eth0、lo 的编号）
-    struct conn_id_s_t conn_id_s; // 连接 ID（标识事件属于哪个连接） ← 结构名疑似应为 `conn_id_t`？
-    enum step_t step;             // 当前事件处于哪一步（如 CONNECT、SEND、CLOSE 等状态）
-    uint32_t length_header;       // 如果 `prepend_length_header=true`，此字段是实际头部值
+    struct conn_id_s_t conn_id_s;    // 连接 ID（标识事件属于哪个连接） ← 结构名疑似应为 `conn_id_t`？
+    enum step_t step;                // 当前事件处于哪一步（如 CONNECT、SEND、CLOSE 等状态）
+    uint32_t length_header;          // 如果 `prepend_length_header=true`，此字段是实际头部值
 };
 
 struct first_packet_evt {
@@ -195,10 +192,10 @@ struct kern_evt_data {
 };
 
 struct kern_evt_ssl_data {
-    struct kern_evt ke;   // 通用事件结构，包含时间戳、连接信息、事件状态等元数据
-    uint32_t syscall_seq; // 系统调用序列号（用于跟踪读写的顺序，或与对应的调用日志关联）
-    uint32_t syscall_len; // 实际系统调用的返回长度（也就是实际读写了多少字节）
-    uint32_t buf_size;    // 缓冲区的总大小，即 msg[] 的可用字节数，避免溢出或截断误解
+    struct kern_evt ke;     // 通用事件结构，包含时间戳、连接信息、事件状态等元数据
+    uint32_t syscall_seq;   // 系统调用序列号（用于跟踪读写的顺序，或与对应的调用日志关联）
+    uint32_t syscall_len;   // 实际系统调用的返回长度（也就是实际读写了多少字节）
+    uint32_t buf_size;      // 缓冲区的总大小，即 msg[] 的可用字节数，避免溢出或截断误解
     char msg[MAX_MSG_SIZE]; // 实际读取或写入的数据内容（加密或明文）
 };
 
@@ -236,15 +233,15 @@ int my_str_ncmp(const char *a, const char *b, int n)
 
 struct data_args {
     enum source_function_t source_fn; // 表示哪个函数发起了这次调用（如 write(), sendmsg() 等）
-    int sock_event;  // 是否是 socket 相关的调用（1 = 是；0 = 否），用于过滤如 stdout 的 write
-    int32_t fd;      // 被调用的文件描述符
-    const char *buf; // 指向数据缓冲区（适用于 read / write 类调用）
-    const struct iovec *iov; // readv / writev / sendmsg 等的多缓冲区数据
-    size_t iovlen;           // iov 数组的长度
-    unsigned int *msg_len;   // 专用于 sendmmsg() 等多消息调用，指向每条消息的长度数组
-    size_t *ssl_ex_len;      // 可能是 SSL 扩展用的长度信息（比如额外 payload 的长度）
-    uint64_t start_ts;       // 系统调用开始的时间戳（ns）
-    uint64_t end_ts;         // 系统调用结束的时间戳（ns）
+    int sock_event;                   // 是否是 socket 相关的调用（1 = 是；0 = 否），用于过滤如 stdout 的 write
+    int32_t fd;                       // 被调用的文件描述符
+    const char *buf;                  // 指向数据缓冲区（适用于 read / write 类调用）
+    const struct iovec *iov;          // readv / writev / sendmsg 等的多缓冲区数据
+    size_t iovlen;                    // iov 数组的长度
+    unsigned int *msg_len;            // 专用于 sendmmsg() 等多消息调用，指向每条消息的长度数组
+    size_t *ssl_ex_len;               // 可能是 SSL 扩展用的长度信息（比如额外 payload 的长度）
+    uint64_t start_ts;                // 系统调用开始的时间戳（ns）
+    uint64_t end_ts;                  // 系统调用结束的时间戳（ns）
 };
 
 struct close_args {

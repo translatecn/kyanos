@@ -5,6 +5,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/cilium/ebpf/features"
 	ac "kyanos/agent/common"
 	"kyanos/agent/compatible"
 	"kyanos/agent/metadata"
@@ -20,7 +21,6 @@ import (
 
 	"github.com/cilium/ebpf"
 	"github.com/cilium/ebpf/asm"
-	"github.com/cilium/ebpf/features"
 	"github.com/cilium/ebpf/link"
 	"github.com/shirou/gopsutil/process"
 	"github.com/spf13/viper"
@@ -52,6 +52,201 @@ func (b *BPF) Close() {
 		}
 	}
 	common.AgentLog.Debugln("All links closed!")
+}
+
+const (
+	execEventChannelBufferSize = 10
+	exitEventChannelBufferSize = 10
+)
+
+func (bf *BPF) AttachProgs(options *ac.AgentOptions) error {
+	var links *list.List
+	var err error
+	if options.LoadBpfProgramFunction != nil {
+		links = options.LoadBpfProgramFunction()
+	} else {
+		links, err = attachBpfProgs(options.IfName, options.Kv, options)
+		if err != nil {
+			return err
+		}
+	}
+
+	options.LoadPorgressChannel <- "🍆 Attached base eBPF programs."
+
+	bf.attachExecEventChannels(options)
+	bf.attachExitEventChannels(options)
+
+	if options.WatchOptions.TraceSslEvent {
+		uprobeSchedEventChannel := make(chan *bpf.AgentProcessExecEvent, 10)
+		uprobe.StartHandleSchedExecEvent(uprobeSchedEventChannel)
+		execEventChannels := []chan *bpf.AgentProcessExecEvent{uprobeSchedEventChannel}
+		if options.ProcessExecEventChannel != nil {
+			execEventChannels = append(execEventChannels, options.ProcessExecEventChannel)
+		}
+		bpf.PullProcessExecEvents(options.Ctx, &execEventChannels)
+
+		attachUprobes(links, options, options.Kv, bf.Objs)
+		options.LoadPorgressChannel <- "🍕 Attached ssl eBPF programs."
+	}
+	attachSchedProgs(links)
+	attachNfFunctions(links)
+	options.LoadPorgressChannel <- "🥪 Attached conntrack eBPF programs."
+	bf.Links = links
+	return nil
+}
+
+func (bf *BPF) attachExecEventChannels(options *ac.AgentOptions) {
+	var execEventChannels []chan *bpf.AgentProcessExecEvent
+	execEventChannelForMetadata := make(chan *bpf.AgentProcessExecEvent, execEventChannelBufferSize) // 10
+	execEventChannels = append(execEventChannels, execEventChannelForMetadata)
+	metadata.StartHandleSchedExecEvent(execEventChannelForMetadata, options.Ctx) // 内存记录进程启动的时间
+
+	if options.WatchOptions.TraceSslEvent {
+		uprobeSchedEventChannel := make(chan *bpf.AgentProcessExecEvent, execEventChannelBufferSize)
+		uprobe.StartHandleSchedExecEvent(uprobeSchedEventChannel)
+		execEventChannels = append(execEventChannels, uprobeSchedEventChannel)
+		if options.ProcessExecEventChannel != nil {
+			execEventChannels = append(execEventChannels, options.ProcessExecEventChannel)
+		}
+		bpf.PullProcessExecEvents(options.Ctx, &execEventChannels)
+	}
+}
+
+func (bf *BPF) attachExitEventChannels(options *ac.AgentOptions) {
+	exitEventChannels := []chan *bpf.AgentProcessExitEvent{}
+	exitEventChannelForMetadata := make(chan *bpf.AgentProcessExitEvent, exitEventChannelBufferSize)
+	metadata.StartHandleSchedExitEvent(exitEventChannelForMetadata, options.Ctx)
+	exitEventChannels = append(exitEventChannels, exitEventChannelForMetadata)
+	bpf.PullProcessExitEvents(options.Ctx, exitEventChannels)
+}
+
+// writeToFile writes the []uint8 slice to a specified file in the system's temp directory.
+// If the temp directory does not exist, it creates a ".kyanos" directory in the current directory.
+func writeToFile(data []uint8, filename string) (string, error) {
+	// Get the system's temp directory
+	tempDir := os.TempDir()
+
+	// Check if the temp directory exists
+	if _, err := os.Stat(tempDir); os.IsNotExist(err) {
+		// Create a ".kyanos" directory in the current directory
+		tempDir = "."
+	}
+
+	// Create the file path
+	filePath := filepath.Join(tempDir, filename)
+
+	// Write the byte slice to the file
+	err := os.WriteFile(filePath, data, 0644)
+	if err != nil {
+		return "", fmt.Errorf("failed to write file: %v", err)
+	}
+
+	// Return the absolute path of the file
+	absPath, err := filepath.Abs(filePath)
+	if err != nil {
+		return "", fmt.Errorf("failed to get absolute path: %v", err)
+	}
+
+	return absPath, nil
+}
+
+func AgentObjectsFromLagacyKernel310(legacy *bpf.AgentLagacyKernel310Objects) *bpf.AgentObjects {
+	ret := &bpf.AgentObjects{}
+	ret.AgentMaps = bpf.AgentMaps(legacy.AgentLagacyKernel310Maps)
+	ret.AgentPrograms = bpf.AgentPrograms(legacy.AgentLagacyKernel310Programs)
+	return ret
+}
+
+var socketFilterSpec = &ebpf.ProgramSpec{
+	Name:        "test",
+	Type:        ebpf.Kprobe,
+	SectionName: "kprobe/sys_accept",
+	Instructions: asm.Instructions{
+		asm.LoadImm(asm.R0, 2, asm.DWord),
+		asm.Return(),
+	},
+	License: "MIT",
+}
+
+func attachUprobes(links *list.List, options *ac.AgentOptions, kernelVersion *compatible.KernelVersion, objs any) {
+	pids, err := common.GetAllPids()
+	loadGoTlsErr := uprobe.LoadGoTlsUprobe()
+	if loadGoTlsErr != nil {
+		common.UprobeLog.Debugf("Load GoTls Probe failed: %+v", loadGoTlsErr)
+	}
+	if err == nil {
+		for _, pid := range pids {
+			uprobeLinks, err := uprobe.AttachSslUprobe(int(pid))
+			if err == nil && len(uprobeLinks) > 0 {
+				for _, l := range uprobeLinks {
+					links.PushBack(l)
+				}
+				common.UprobeLog.Infof("Attach OpenSsl uprobes success for pid: %d", pid)
+			} else if err != nil {
+				common.UprobeLog.Infof("Attach OpenSsl uprobes failed: %+v for pid: %d", err, pid)
+			} else if len(uprobeLinks) == 0 {
+				common.UprobeLog.Infof("Attach OpenSsl uprobes success for pid: %d use previous libssl path", pid)
+			}
+			if loadGoTlsErr == nil {
+				gotlsUprobeLinks, err := uprobe.AttachGoTlsProbes(int(pid))
+
+				if err == nil && len(gotlsUprobeLinks) > 0 {
+					for _, l := range gotlsUprobeLinks {
+						links.PushBack(l)
+					}
+					common.UprobeLog.Infof("Attach GoTls uprobes success for pid: %d", pid)
+				} else if err != nil {
+					common.UprobeLog.Infof("Attach GoTls uprobes failed: %+v for pid: %d", err, pid)
+				} else {
+					common.UprobeLog.Infof("Attach GoTls uprobes failed: %+v for pid: %d links is empty %v", err, pid, gotlsUprobeLinks)
+				}
+			}
+		}
+	} else {
+		common.UprobeLog.Warnf("get all pid failed: %v", err)
+	}
+}
+
+func attachOpensslToSpecificProcess() bool {
+	return viper.GetInt64(common.FilterPidVarName) > 0
+}
+
+func attachSchedProgs(links *list.List) {
+	_link, err := bpf.AttachSchedProcessExec()
+	if err != nil {
+		common.AgentLog.Debugf("Attach sched_process_exec failed: %v", err)
+	} else {
+		links.PushBack(_link)
+	}
+	_link, err = bpf.AttachSchedProcessExit()
+	if err != nil {
+		common.AgentLog.Debugf("Attach sched_process_exit failed: %v", err)
+	} else {
+		links.PushBack(_link)
+	}
+}
+
+func attachNfFunctions(links *list.List) {
+	l, err := bpf.AttachNfNatManipPkt()
+	if err != nil {
+		common.AgentLog.Debugf("Attahc kprobe/nf_nat_manip_pkt failed: %v", err)
+	} else {
+		links.PushBack(l)
+	}
+	l, err = bpf.AttachNfNatPacket()
+	if err != nil {
+		common.AgentLog.Debugf("Attahc kprobe/nf_nat_packet failed: %v", err)
+	} else {
+		links.PushBack(l)
+	}
+}
+
+func getNonCriticalSteps() map[bpf.AgentStepT]bool { // 性能损失会大一些
+	return map[bpf.AgentStepT]bool{
+		bpf.AgentStepTIP_OUT:    true,
+		bpf.AgentStepTQDISC_OUT: true,
+		bpf.AgentStepTIP_IN:     true,
+	}
 }
 
 func LoadBPF(options *ac.AgentOptions) (*BPF, error) {
@@ -129,108 +324,6 @@ func LoadBPF(options *ac.AgentOptions) (*BPF, error) {
 	return bf, nil
 }
 
-const (
-	execEventChannelBufferSize = 10
-	exitEventChannelBufferSize = 10
-)
-
-func (bf *BPF) AttachProgs(options *ac.AgentOptions) error {
-	var links *list.List
-	var err error
-	if options.LoadBpfProgramFunction != nil {
-		links = options.LoadBpfProgramFunction()
-	} else {
-		links, err = attachBpfProgs(options.IfName, options.Kv, options)
-		if err != nil {
-			return err
-		}
-	}
-
-	options.LoadPorgressChannel <- "🍆 Attached base eBPF programs."
-
-	bf.attachExecEventChannels(options)
-	bf.attachExitEventChannels(options)
-
-	if options.WatchOptions.TraceSslEvent {
-		uprobeSchedEventChannel := make(chan *bpf.AgentProcessExecEvent, 10)
-		uprobe.StartHandleSchedExecEvent(uprobeSchedEventChannel)
-		execEventChannels := []chan *bpf.AgentProcessExecEvent{uprobeSchedEventChannel}
-		if options.ProcessExecEventChannel != nil {
-			execEventChannels = append(execEventChannels, options.ProcessExecEventChannel)
-		}
-		bpf.PullProcessExecEvents(options.Ctx, &execEventChannels)
-
-		attachUprobes(links, options, options.Kv, bf.Objs)
-		options.LoadPorgressChannel <- "🍕 Attached ssl eBPF programs."
-	}
-	attachSchedProgs(links)
-	attachNfFunctions(links)
-	options.LoadPorgressChannel <- "🥪 Attached conntrack eBPF programs."
-	bf.Links = links
-	return nil
-}
-
-func (bf *BPF) attachExecEventChannels(options *ac.AgentOptions) {
-	execEventChannels := []chan *bpf.AgentProcessExecEvent{}
-	execEventChannelForMetadata := make(chan *bpf.AgentProcessExecEvent, execEventChannelBufferSize)
-	execEventChannels = append(execEventChannels, execEventChannelForMetadata)
-	metadata.StartHandleSchedExecEvent(execEventChannelForMetadata, options.Ctx)
-	if options.WatchOptions.TraceSslEvent {
-		uprobeSchedEventChannel := make(chan *bpf.AgentProcessExecEvent, execEventChannelBufferSize)
-		uprobe.StartHandleSchedExecEvent(uprobeSchedEventChannel)
-		execEventChannels = append(execEventChannels, uprobeSchedEventChannel)
-		if options.ProcessExecEventChannel != nil {
-			execEventChannels = append(execEventChannels, options.ProcessExecEventChannel)
-		}
-		bpf.PullProcessExecEvents(options.Ctx, &execEventChannels)
-	}
-}
-
-func (bf *BPF) attachExitEventChannels(options *ac.AgentOptions) {
-	exitEventChannels := []chan *bpf.AgentProcessExitEvent{}
-	exitEventChannelForMetadata := make(chan *bpf.AgentProcessExitEvent, exitEventChannelBufferSize)
-	metadata.StartHandleSchedExitEvent(exitEventChannelForMetadata, options.Ctx)
-	exitEventChannels = append(exitEventChannels, exitEventChannelForMetadata)
-	bpf.PullProcessExitEvents(options.Ctx, exitEventChannels)
-}
-
-// writeToFile writes the []uint8 slice to a specified file in the system's temp directory.
-// If the temp directory does not exist, it creates a ".kyanos" directory in the current directory.
-func writeToFile(data []uint8, filename string) (string, error) {
-	// Get the system's temp directory
-	tempDir := os.TempDir()
-
-	// Check if the temp directory exists
-	if _, err := os.Stat(tempDir); os.IsNotExist(err) {
-		// Create a ".kyanos" directory in the current directory
-		tempDir = "."
-	}
-
-	// Create the file path
-	filePath := filepath.Join(tempDir, filename)
-
-	// Write the byte slice to the file
-	err := os.WriteFile(filePath, data, 0644)
-	if err != nil {
-		return "", fmt.Errorf("failed to write file: %v", err)
-	}
-
-	// Return the absolute path of the file
-	absPath, err := filepath.Abs(filePath)
-	if err != nil {
-		return "", fmt.Errorf("failed to get absolute path: %v", err)
-	}
-
-	return absPath, nil
-}
-
-func AgentObjectsFromLagacyKernel310(legacy *bpf.AgentLagacyKernel310Objects) *bpf.AgentObjects {
-	ret := &bpf.AgentObjects{}
-	ret.AgentMaps = bpf.AgentMaps(legacy.AgentLagacyKernel310Maps)
-	ret.AgentPrograms = bpf.AgentPrograms(legacy.AgentLagacyKernel310Programs)
-	return ret
-}
-
 func filterFunctions(coll *ebpf.CollectionSpec, kernelVersion compatible.KernelVersion) {
 	finalCProgNames := make([]string, 0)
 
@@ -269,16 +362,15 @@ func filterFunctions(coll *ebpf.CollectionSpec, kernelVersion compatible.KernelV
 		coll.Programs[each] = socketFilterSpec
 	}
 }
-
-var socketFilterSpec = &ebpf.ProgramSpec{
-	Name:        "test",
-	Type:        ebpf.Kprobe,
-	SectionName: "kprobe/sys_accept",
-	Instructions: asm.Instructions{
-		asm.LoadImm(asm.R0, 2, asm.DWord),
-		asm.Return(),
-	},
-	License: "MIT",
+func isProcNameMacthed(proc *process.Process, filterComm string) bool {
+	procName, _ := proc.Name()
+	if procName == filterComm {
+		return true
+	}
+	if strings.Contains(procName, "/"+filterComm) {
+		return true
+	}
+	return false
 }
 
 func setAndValidateParameters(ctx context.Context, options *ac.AgentOptions) bool {
@@ -445,15 +537,18 @@ func setAndValidateParameters(ctx context.Context, options *ac.AgentOptions) boo
 	return true
 }
 
-func isProcNameMacthed(proc *process.Process, filterComm string) bool {
-	procName, _ := proc.Name()
-	if procName == filterComm {
-		return true
+var stepToOptions = map[bpf.AgentStepT]func(ac.AgentOptions) bool{
+	bpf.AgentStepTDEV_IN:    func(options ac.AgentOptions) bool { return options.WatchOptions.TraceDevEvent },
+	bpf.AgentStepTDEV_OUT:   func(options ac.AgentOptions) bool { return options.WatchOptions.TraceDevEvent },
+	bpf.AgentStepTTCP_IN:    func(options ac.AgentOptions) bool { return options.WatchOptions.TraceSocketEvent },
+	bpf.AgentStepTUSER_COPY: func(options ac.AgentOptions) bool { return options.WatchOptions.TraceSocketEvent },
+}
+
+func traceStep(options ac.AgentOptions, step bpf.AgentStepT) bool {
+	if f, ok := stepToOptions[step]; ok {
+		return f(options)
 	}
-	if strings.Contains(procName, "/"+filterComm) {
-		return true
-	}
-	return false
+	return true
 }
 
 func attachBpfProgs(ifName string, kernelVersion *compatible.KernelVersion, options *ac.AgentOptions) (links *list.List, err error) {
@@ -487,7 +582,7 @@ func attachBpfProgs(ifName string, kernelVersion *compatible.KernelVersion, opti
 	nonCriticalSteps := getNonCriticalSteps()
 	for step, functions := range kernelVersion.InstrumentFunctions {
 		_, isNonCriticalStep := nonCriticalSteps[step]
-		if options.PerformanceMode && isNonCriticalStep {
+		if options.PerformanceMode && isNonCriticalStep { // 性能模式下，一些损耗大的 不会挂载
 			continue
 		}
 		if !traceStep(*options, step) {
@@ -499,8 +594,7 @@ func attachBpfProgs(ifName string, kernelVersion *compatible.KernelVersion, opti
 			if function.IsKprobe() {
 				l, err = bpf.Kprobe(function.GetKprobeName(), bpf.GetProgramFromObjs(bpf.Objs, function.BPFGoProgName))
 			} else if function.IsTracepoint() {
-				l, err = bpf.Tracepoint(function.GetTracepointGroupName(), function.GetTracepointName(),
-					bpf.GetProgramFromObjs(bpf.Objs, function.BPFGoProgName))
+				l, err = bpf.Tracepoint(function.GetTracepointGroupName(), function.GetTracepointName(), bpf.GetProgramFromObjs(bpf.Objs, function.BPFGoProgName))
 			} else if function.IsKRetprobe() {
 				l, err = bpf.Kretprobe(function.GetKprobeName(), bpf.GetProgramFromObjs(bpf.Objs, function.BPFGoProgName))
 			} else if function.IsFentry() {
@@ -718,99 +812,4 @@ func attachBpfProgs(ifName string, kernelVersion *compatible.KernelVersion, opti
 	linkList.PushBack(l)
 
 	return linkList, nil
-}
-
-func attachUprobes(links *list.List, options *ac.AgentOptions, kernelVersion *compatible.KernelVersion, objs any) {
-	pids, err := common.GetAllPids()
-	loadGoTlsErr := uprobe.LoadGoTlsUprobe()
-	if loadGoTlsErr != nil {
-		common.UprobeLog.Debugf("Load GoTls Probe failed: %+v", loadGoTlsErr)
-	}
-	if err == nil {
-		for _, pid := range pids {
-			uprobeLinks, err := uprobe.AttachSslUprobe(int(pid))
-			if err == nil && len(uprobeLinks) > 0 {
-				for _, l := range uprobeLinks {
-					links.PushBack(l)
-				}
-				common.UprobeLog.Infof("Attach OpenSsl uprobes success for pid: %d", pid)
-			} else if err != nil {
-				common.UprobeLog.Infof("Attach OpenSsl uprobes failed: %+v for pid: %d", err, pid)
-			} else if len(uprobeLinks) == 0 {
-				common.UprobeLog.Infof("Attach OpenSsl uprobes success for pid: %d use previous libssl path", pid)
-			}
-			if loadGoTlsErr == nil {
-				gotlsUprobeLinks, err := uprobe.AttachGoTlsProbes(int(pid))
-
-				if err == nil && len(gotlsUprobeLinks) > 0 {
-					for _, l := range gotlsUprobeLinks {
-						links.PushBack(l)
-					}
-					common.UprobeLog.Infof("Attach GoTls uprobes success for pid: %d", pid)
-				} else if err != nil {
-					common.UprobeLog.Infof("Attach GoTls uprobes failed: %+v for pid: %d", err, pid)
-				} else {
-					common.UprobeLog.Infof("Attach GoTls uprobes failed: %+v for pid: %d links is empty %v", err, pid, gotlsUprobeLinks)
-				}
-			}
-		}
-	} else {
-		common.UprobeLog.Warnf("get all pid failed: %v", err)
-	}
-}
-
-func attachOpensslToSpecificProcess() bool {
-	return viper.GetInt64(common.FilterPidVarName) > 0
-}
-
-func attachSchedProgs(links *list.List) {
-	_link, err := bpf.AttachSchedProcessExec()
-	if err != nil {
-		common.AgentLog.Debugf("Attach sched_process_exec failed: %v", err)
-	} else {
-		links.PushBack(_link)
-	}
-	_link, err = bpf.AttachSchedProcessExit()
-	if err != nil {
-		common.AgentLog.Debugf("Attach sched_process_exit failed: %v", err)
-	} else {
-		links.PushBack(_link)
-	}
-}
-
-func attachNfFunctions(links *list.List) {
-	l, err := bpf.AttachNfNatManipPkt()
-	if err != nil {
-		common.AgentLog.Debugf("Attahc kprobe/nf_nat_manip_pkt failed: %v", err)
-	} else {
-		links.PushBack(l)
-	}
-	l, err = bpf.AttachNfNatPacket()
-	if err != nil {
-		common.AgentLog.Debugf("Attahc kprobe/nf_nat_packet failed: %v", err)
-	} else {
-		links.PushBack(l)
-	}
-}
-
-func getNonCriticalSteps() map[bpf.AgentStepT]bool {
-	return map[bpf.AgentStepT]bool{
-		bpf.AgentStepTIP_OUT:    true,
-		bpf.AgentStepTQDISC_OUT: true,
-		bpf.AgentStepTIP_IN:     true,
-	}
-}
-
-var stepToOptions = map[bpf.AgentStepT]func(ac.AgentOptions) bool{
-	bpf.AgentStepTDEV_IN:    func(options ac.AgentOptions) bool { return options.WatchOptions.TraceDevEvent },
-	bpf.AgentStepTDEV_OUT:   func(options ac.AgentOptions) bool { return options.WatchOptions.TraceDevEvent },
-	bpf.AgentStepTTCP_IN:    func(options ac.AgentOptions) bool { return options.WatchOptions.TraceSocketEvent },
-	bpf.AgentStepTUSER_COPY: func(options ac.AgentOptions) bool { return options.WatchOptions.TraceSocketEvent },
-}
-
-func traceStep(options ac.AgentOptions, step bpf.AgentStepT) bool {
-	if f, ok := stepToOptions[step]; ok {
-		return f(options)
-	}
-	return true
 }

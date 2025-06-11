@@ -6,8 +6,8 @@
 const struct kern_evt_ssl_data *kern_evt_ssl_data_unused __attribute__((unused));
 
 struct nested_syscall_fd_t {
-    int fd;              // 当前正在追踪的文件描述符（File Descriptor），比如 read(fd, ...) 中的 fd
-    bool mismatched_fds; // 标志位：是否发生了 不匹配的文件描述符访问，如嵌套调用中使用了不同的 fd
+    int fd;               // 当前正在追踪的文件描述符（File Descriptor），比如 read(fd, ...) 中的 fd
+    bool mismatched_fds;  // 标志位：是否发生了 不匹配的文件描述符访问，如嵌套调用中使用了不同的 fd
     uint32_t syscall_len; // 与该系统调用相关的字节数（如 read 返回的长度），可能用于数据统计或完整性验证
 };
 

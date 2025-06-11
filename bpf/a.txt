@@ -1,0 +1,70 @@
+fentry/__sys_accept4            =>    syscalls:sys_enter_accept4
+fexit/__sys_accept4             =>    syscalls:sys_exit_accept4
+
+fentry/__sys_connect            =>    syscalls:sys_enter_connect
+fexit/__sys_accept4             =>    syscalls:sys_exit_connect
+
+fentry/__x64_sys_write            =>    syscalls:sys_enter_write
+fexit/__x64_sys_write             =>    syscalls:sys_exit_write
+
+fentry/__x64_sys_close            =>    syscalls:sys_enter_close
+fexit/__x64_sys_close             =>    syscalls:sys_exit_close
+
+fentry/__sys_sendmsg            =>    syscalls:sys_enter_sendmsg
+fexit/__x64_sys_sendmsg             =>    syscalls:sys_exit_sendmsg
+
+fentry/__sys_sendmmsg            =>    syscalls:sys_enter_sendmmsg
+fexit/__x64_sys_sendmmsg             =>    syscalls:sys_exit_sendmmsg
+
+fentry/__x64_sys_recvmmsg            =>    syscalls:sys_enter_recvmmsg
+fexit/__x64_sys_recvmmsg             =>    syscalls:sys_exit_recvmmsg
+
+fentry/__x64_sys_sendfile64            =>    syscalls:sys_enter_sendfile64
+fexit/__x64_sys_sendfile64             =>    syscalls:sys_exit_sendfile64
+
+fentry/__x64_sys_recvmsg            =>    syscalls:sys_enter_recvmsg
+fexit/__x64_sys_recvmsg             =>    syscalls:sys_exit_recvmsg
+
+fentry/__x64_sys_writev            =>    syscalls:sys_enter_writev
+fexit/__x64_sys_writev             =>    syscalls:sys_exit_writev
+
+fentry/__sys_sendto            =>    syscalls:sys_enter_sendto
+fexit/__x64_sys_sendto             =>    syscalls:sys_exit_sendto
+
+fentry/__x64_sys_read            =>    syscalls:sys_enter_read
+fexit/__x64_sys_read             =>    syscalls:sys_exit_read
+
+fentry/__x64_sys_readv            =>    syscalls:sys_enter_readv
+fexit/__x64_sys_readv             =>    syscalls:sys_exit_readv
+
+fentry/__x64_sys_recvfrom            =>    syscalls:sys_enter_recvfrom
+fexit/__x64_sys_recvfrom             =>    syscalls:sys_exit_recvfrom
+
+kretprobe/sock_alloc
+kprobe/nf_nat_manip_pkt
+kprobe/nf_nat_packet
+kprobe/dev_queue_xmit
+kprobe/dev_hard_start_xmit
+kprobe/tcp_v4_do_rcv
+
+sched:sched_process_exec
+sched:sched_process_exit
+net:netif_receive_skb
+
+
+
+fentry/security_socket_recvmsg     =>    kprobe/security_socket_recvmsg
+fentry/security_socket_sendmsg     =>    kprobe/security_socket_sendmsg
+
+rawtracepoint:tcp_destroy_sock
+
+
+
+
+
+
+
+
+
+
+

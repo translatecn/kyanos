@@ -81,7 +81,10 @@ func SetupAgent(options ac.AgentOptions) {
 	var recordsChannel chan *anc.AnnotatedRecord = nil
 	recordsChannel = make(chan *anc.AnnotatedRecord, 1000)
 
-	pm := conn.InitProcessorManager(options.ProcessorsNum, connManager, options.MessageFilter, options.LatencyFilter, options.SizeFilter, options.TraceSide, options.ConntrackCloseWaitTimeMills)
+	pm := conn.InitProcessorManager(options.ProcessorsNum, connManager, options.MessageFilter,
+		options.LatencyFilter, options.SizeFilter, options.TraceSide,
+		options.ConntrackCloseWaitTimeMills)
+
 	conn.RecordFunc = func(r protocol.Record, c *conn.Connection4) error {
 		return statRecorder.ReceiveRecord(r, c, recordsChannel)
 	}
@@ -139,6 +142,7 @@ func SetupAgent(options ac.AgentOptions) {
 		if err != nil {
 			return
 		}
+
 		firstPacketChannel := make(chan *bpf.AgentFirstPacketEvt, 10)
 		firstPacketProcessor := conn.NewFirstPacketProcessor(firstPacketChannel, pm.GetFirstPacketEventsChannels())
 		go firstPacketProcessor.Start()

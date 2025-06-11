@@ -31,6 +31,141 @@ func GetProgramFromObjs(objs any, progName string) *ebpf.Program {
 	}
 }
 
+func AttachXdpWithSpecifiedIfName(ifname string) (link.Link, error) {
+	iface, err := net.InterfaceByName(ifname)
+	if err != nil {
+		// log.Fatalf("Getting interface %s: %s", ifname, err)
+		return nil, err
+	}
+
+	l, err := link.AttachXDP(link.XDPOptions{
+		Program:   GetProgramFromObjs(Objs, "XdpProxy"),
+		Interface: iface.Index,
+		Flags:     link.XDPDriverMode,
+	})
+	if err != nil {
+		l, err = link.AttachXDP(link.XDPOptions{
+			Program:   GetProgramFromObjs(Objs, "XdpProxy"),
+			Interface: iface.Index,
+			Flags:     link.XDPGenericMode,
+		})
+	}
+	return l, err
+}
+func AttachXdp() (link.Link, error) {
+	return AttachXdpWithSpecifiedIfName("eth0")
+}
+
+func Kprobe(func_name string, prog *ebpf.Program) (link.Link, error) {
+	return link.Kprobe(func_name, prog, nil)
+}
+
+func Kretprobe(func_name string, prog *ebpf.Program) (link.Link, error) {
+	return link.Kretprobe(func_name, prog, nil)
+}
+
+func TracepointNoError(group string, name string, prog *ebpf.Program) link.Link {
+	l, err := link.Tracepoint(group, name, prog, nil)
+	if err != nil {
+		common.BPFLog.Warnf("failed to attach tracepoint, group: %s name: %s, err: %v", group, name, err)
+		return nil
+	} else {
+		return l
+	}
+}
+
+func FentryOrKprobe(func_name string, fentryProg *ebpf.Program, kprobeProg *ebpf.Program) (link.Link, error) {
+	l, err := Fentry(func_name, fentryProg)
+	if err != nil {
+		l, err = Kprobe(func_name, kprobeProg)
+		if err != nil {
+			common.BPFLog.Errorf("failed to attach fentry or kprobe, func_name: %s, err: %v", func_name, err)
+		}
+	} else {
+		common.BPFLog.Debugf("attached fentry to %s", func_name)
+	}
+	if l != nil {
+		common.BPFLog.Debugf("attached fentry to %s", func_name)
+		return l, nil
+	} else {
+		common.BPFLog.Errorf("failed to attach fentry to %s", func_name)
+		return nil, err
+	}
+}
+
+func FexitOrTracepoint(func_name string, fexitProg *ebpf.Program, group string, name string, tracepointProg *ebpf.Program) (link.Link, error) {
+	l, err := Fexit(func_name, fexitProg)
+	if err != nil {
+		l, err = Tracepoint(group, name, tracepointProg)
+		if err != nil {
+			common.BPFLog.Errorf("failed to attach fexit or tracepoint, group: %s name: %s, err: %v", group, name, err)
+		}
+	} else {
+		common.BPFLog.Debugf("attached fexit to %s", func_name)
+	}
+	if l != nil {
+		common.BPFLog.Debugf("attached fexit to %s", func_name)
+		return l, nil
+	} else {
+		common.BPFLog.Errorf("failed to attach fexit to %s", func_name)
+		return nil, err
+	}
+}
+
+func FexitOrKretprobe(func_name string, fexitProg *ebpf.Program, kretprobeProg *ebpf.Program) (link.Link, error) {
+	l, err := Fexit(func_name, fexitProg)
+	if err != nil {
+		l, err = Kretprobe(func_name, kretprobeProg)
+		if err != nil {
+			common.BPFLog.Errorf("failed to attach fexit or kretprobe, func_name: %s, err: %v", func_name, err)
+		}
+	} else {
+		common.BPFLog.Debugf("attached fexit to %s", func_name)
+	}
+	if l != nil {
+		common.BPFLog.Debugf("attached fexit to %s", func_name)
+		return l, nil
+	} else {
+		common.BPFLog.Errorf("failed to attach fexit to %s", func_name)
+		return nil, err
+	}
+}
+
+func Fentry(funcName string, prog *ebpf.Program) (link.Link, error) {
+	return link.AttachTracing(link.TracingOptions{
+		Program:    prog,
+		AttachType: ebpf.AttachTraceFEntry,
+	})
+}
+
+func Fexit(funcName string, prog *ebpf.Program) (link.Link, error) {
+	return link.AttachTracing(link.TracingOptions{
+		Program:    prog,
+		AttachType: ebpf.AttachTraceFExit,
+	})
+}
+func Tracepoint(group string, name string, prog *ebpf.Program) (link.Link, error) {
+	return link.Tracepoint(group, name, prog, nil)
+}
+func FentryOrTracepoint(func_name string, fentryProg *ebpf.Program, group string, name string, tracepointProg *ebpf.Program) (link.Link, error) {
+	l, err := Fentry(func_name, fentryProg)
+	if err != nil {
+		l, err = Tracepoint(group, name, tracepointProg)
+		if err != nil {
+			common.BPFLog.Errorf("failed to attach fentry or tracepoint, group: %s name: %s, err: %v", group, name, err)
+		}
+	} else {
+		common.BPFLog.Debugf("attached fentry to %s", func_name)
+	}
+	if l != nil {
+		common.BPFLog.Debugf("attached fentry to %s", func_name)
+		return l, nil
+	} else {
+		common.BPFLog.Errorf("failed to attach fentry to %s", func_name)
+		return nil, err
+	}
+}
+
 /* accept pair */
 func AttachSyscallAcceptEntry() (link.Link, error) {
 	return FentryOrTracepoint("__sys_accept4", GetProgramFromObjs(Objs, "FentrySysAccept4"),
@@ -44,36 +179,17 @@ func AttachSyscallAcceptExit() (link.Link, error) {
 		GetProgramFromObjs(Objs, "TracepointSyscallsSysExitAccept4"))
 }
 
-/* sock_alloc */
-func AttachSyscallSockAllocExit() (link.Link, error) {
-	return Kretprobe("sock_alloc", GetProgramFromObjs(Objs, "SockAllocRet"))
-}
-
 /* connect pair */
 func AttachSyscallConnectEntry() (link.Link, error) {
 	return FentryOrTracepoint("__sys_connect", GetProgramFromObjs(Objs, "FentrySysConnect"),
 		"syscalls", "sys_enter_connect",
 		GetProgramFromObjs(Objs, "TracepointSyscallsSysEnterConnect"))
-
 }
 
 func AttachSyscallConnectExit() (link.Link, error) {
 	return FexitOrTracepoint("__sys_connect", GetProgramFromObjs(Objs, "FexitSysConnect"),
 		"syscalls", "sys_exit_connect",
 		GetProgramFromObjs(Objs, "TracepointSyscallsSysExitConnect"))
-}
-
-/* close pair */
-func AttachSyscallCloseEntry() (link.Link, error) {
-	return FentryOrTracepoint("__x64_sys_close", GetProgramFromObjs(Objs, "FentrySysClose"),
-		"syscalls", "sys_enter_close",
-		GetProgramFromObjs(Objs, "TracepointSyscallsSysEnterClose"))
-}
-
-func AttachSyscallCloseExit() (link.Link, error) {
-	return FexitOrTracepoint("__x64_sys_close", GetProgramFromObjs(Objs, "FexitSysClose"),
-		"syscalls", "sys_exit_close",
-		GetProgramFromObjs(Objs, "TracepointSyscallsSysExitClose"))
 }
 
 /* write pair */
@@ -219,6 +335,19 @@ func AttachSyscallRecvfromExit() (link.Link, error) {
 		GetProgramFromObjs(Objs, "TracepointSyscallsSysExitRecvfrom"))
 }
 
+/* close pair */
+func AttachSyscallCloseEntry() (link.Link, error) {
+	return FentryOrTracepoint("__x64_sys_close", GetProgramFromObjs(Objs, "FentrySysClose"),
+		"syscalls", "sys_enter_close",
+		GetProgramFromObjs(Objs, "TracepointSyscallsSysEnterClose"))
+}
+
+func AttachSyscallCloseExit() (link.Link, error) {
+	return FexitOrTracepoint("__x64_sys_close", GetProgramFromObjs(Objs, "FexitSysClose"),
+		"syscalls", "sys_exit_close",
+		GetProgramFromObjs(Objs, "TracepointSyscallsSysExitClose"))
+}
+
 func AttachSchedProcessExec() (link.Link, error) {
 	return Tracepoint("sched", "sched_process_exec", GetProgramFromObjs(Objs, "TracepointSchedSchedProcessExec"))
 }
@@ -227,12 +356,31 @@ func AttachSchedProcessExit() (link.Link, error) {
 	return Tracepoint("sched", "sched_process_exit", GetProgramFromObjs(Objs, "TracepointSchedSchedProcessExit"))
 }
 
+/* sock_alloc */
+func AttachSyscallSockAllocExit() (link.Link, error) {
+	return Kretprobe("sock_alloc", GetProgramFromObjs(Objs, "SockAllocRet"))
+}
+
 func AttachNfNatManipPkt() (link.Link, error) {
 	return Kprobe("nf_nat_manip_pkt", GetProgramFromObjs(Objs, "KprobeNfNatManipPkt"))
 }
 
 func AttachNfNatPacket() (link.Link, error) {
 	return Kprobe("nf_nat_packet", GetProgramFromObjs(Objs, "KprobeNfNatPacket"))
+}
+
+func AttachKProbeDevQueueXmitEntry() (link.Link, error) {
+	return Kprobe("dev_queue_xmit", GetProgramFromObjs(Objs, "DevQueueXmit"))
+}
+func AttachKProbeDevHardStartXmitEntry() (link.Link, error) {
+	return Kprobe("dev_hard_start_xmit", GetProgramFromObjs(Objs, "DevHardStartXmit"))
+}
+func AttachKProbeTcpV4DoRcvEntry() (link.Link, error) {
+	return Kprobe("tcp_v4_do_rcv", GetProgramFromObjs(Objs, "TcpV4DoRcv"))
+}
+
+func AttachTracepointNetifReceiveSkb() (link.Link, error) {
+	return Tracepoint("net", "netif_receive_skb", GetProgramFromObjs(Objs, "TracepointNetifReceiveSkb"))
 }
 
 /* security_socket_recvmsg */
@@ -259,155 +407,4 @@ func AttachRawTracepointTcpDestroySockEntry() (link.Link, error) {
 	// 	log.Fatal("tcp_destroy_sock failed: ", err)
 	// }
 	// return l
-}
-
-func AttachKProbeDevQueueXmitEntry() (link.Link, error) {
-	return Kprobe("dev_queue_xmit", GetProgramFromObjs(Objs, "DevQueueXmit"))
-}
-func AttachKProbeDevHardStartXmitEntry() (link.Link, error) {
-	return Kprobe("dev_hard_start_xmit", GetProgramFromObjs(Objs, "DevHardStartXmit"))
-}
-func AttachKProbeTcpV4DoRcvEntry() (link.Link, error) {
-	return Kprobe("tcp_v4_do_rcv", GetProgramFromObjs(Objs, "TcpV4DoRcv"))
-}
-
-func AttachTracepointNetifReceiveSkb() (link.Link, error) {
-	return Tracepoint("net", "netif_receive_skb", GetProgramFromObjs(Objs, "TracepointNetifReceiveSkb"))
-}
-func AttachXdpWithSpecifiedIfName(ifname string) (link.Link, error) {
-
-	iface, err := net.InterfaceByName(ifname)
-	if err != nil {
-		// log.Fatalf("Getting interface %s: %s", ifname, err)
-		return nil, err
-	}
-
-	l, err := link.AttachXDP(link.XDPOptions{
-		Program:   GetProgramFromObjs(Objs, "XdpProxy"),
-		Interface: iface.Index,
-		Flags:     link.XDPDriverMode,
-	})
-	if err != nil {
-		l, err = link.AttachXDP(link.XDPOptions{
-			Program:   GetProgramFromObjs(Objs, "XdpProxy"),
-			Interface: iface.Index,
-			Flags:     link.XDPGenericMode,
-		})
-	}
-	return l, err
-}
-func AttachXdp() (link.Link, error) {
-	return AttachXdpWithSpecifiedIfName("eth0")
-}
-
-func Kprobe(func_name string, prog *ebpf.Program) (link.Link, error) {
-	return link.Kprobe(func_name, prog, nil)
-}
-
-func Kretprobe(func_name string, prog *ebpf.Program) (link.Link, error) {
-	return link.Kretprobe(func_name, prog, nil)
-}
-
-func Tracepoint(group string, name string, prog *ebpf.Program) (link.Link, error) {
-	return link.Tracepoint(group, name, prog, nil)
-}
-
-func TracepointNoError(group string, name string, prog *ebpf.Program) link.Link {
-	l, err := link.Tracepoint(group, name, prog, nil)
-	if err != nil {
-		common.BPFLog.Warnf("failed to attach tracepoint, group: %s name: %s, err: %v", group, name, err)
-		return nil
-	} else {
-		return l
-	}
-}
-
-func Fentry(funcName string, prog *ebpf.Program) (link.Link, error) {
-	return link.AttachTracing(link.TracingOptions{
-		Program:    prog,
-		AttachType: ebpf.AttachTraceFEntry,
-	})
-}
-
-func Fexit(funcName string, prog *ebpf.Program) (link.Link, error) {
-	return link.AttachTracing(link.TracingOptions{
-		Program:    prog,
-		AttachType: ebpf.AttachTraceFExit,
-	})
-}
-
-func FentryOrTracepoint(func_name string, fentryProg *ebpf.Program, group string, name string, tracepointProg *ebpf.Program) (link.Link, error) {
-	l, err := Fentry(func_name, fentryProg)
-	if err != nil {
-		l, err = Tracepoint(group, name, tracepointProg)
-		if err != nil {
-			common.BPFLog.Errorf("failed to attach fentry or tracepoint, group: %s name: %s, err: %v", group, name, err)
-		}
-	} else {
-		common.BPFLog.Debugf("attached fentry to %s", func_name)
-	}
-	if l != nil {
-		common.BPFLog.Debugf("attached fentry to %s", func_name)
-		return l, nil
-	} else {
-		common.BPFLog.Errorf("failed to attach fentry to %s", func_name)
-		return nil, err
-	}
-}
-
-func FentryOrKprobe(func_name string, fentryProg *ebpf.Program, kprobeProg *ebpf.Program) (link.Link, error) {
-	l, err := Fentry(func_name, fentryProg)
-	if err != nil {
-		l, err = Kprobe(func_name, kprobeProg)
-		if err != nil {
-			common.BPFLog.Errorf("failed to attach fentry or kprobe, func_name: %s, err: %v", func_name, err)
-		}
-	} else {
-		common.BPFLog.Debugf("attached fentry to %s", func_name)
-	}
-	if l != nil {
-		common.BPFLog.Debugf("attached fentry to %s", func_name)
-		return l, nil
-	} else {
-		common.BPFLog.Errorf("failed to attach fentry to %s", func_name)
-		return nil, err
-	}
-}
-
-func FexitOrTracepoint(func_name string, fexitProg *ebpf.Program, group string, name string, tracepointProg *ebpf.Program) (link.Link, error) {
-	l, err := Fexit(func_name, fexitProg)
-	if err != nil {
-		l, err = Tracepoint(group, name, tracepointProg)
-		if err != nil {
-			common.BPFLog.Errorf("failed to attach fexit or tracepoint, group: %s name: %s, err: %v", group, name, err)
-		}
-	} else {
-		common.BPFLog.Debugf("attached fexit to %s", func_name)
-	}
-	if l != nil {
-		common.BPFLog.Debugf("attached fexit to %s", func_name)
-		return l, nil
-	} else {
-		common.BPFLog.Errorf("failed to attach fexit to %s", func_name)
-		return nil, err
-	}
-}
-
-func FexitOrKretprobe(func_name string, fexitProg *ebpf.Program, kretprobeProg *ebpf.Program) (link.Link, error) {
-	l, err := Fexit(func_name, fexitProg)
-	if err != nil {
-		l, err = Kretprobe(func_name, kretprobeProg)
-		if err != nil {
-			common.BPFLog.Errorf("failed to attach fexit or kretprobe, func_name: %s, err: %v", func_name, err)
-		}
-	} else {
-		common.BPFLog.Debugf("attached fexit to %s", func_name)
-	}
-	if l != nil {
-		common.BPFLog.Debugf("attached fexit to %s", func_name)
-		return l, nil
-	} else {
-		common.BPFLog.Errorf("failed to attach fexit to %s", func_name)
-		return nil, err
-	}
 }

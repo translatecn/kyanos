@@ -20,21 +20,6 @@ type ProcessorManager struct {
 	cancel      context.CancelFunc
 }
 
-func InitProcessorManager(n int, connManager *ConnManager, filter protocol.ProtocolFilter,
-	latencyFilter protocol.LatencyFilter, sizeFilter protocol.SizeFilter, side common.SideEnum, conntrackCloseWaitTimeMills int) *ProcessorManager {
-	pm := new(ProcessorManager)
-	pm.processors = make([]*Processor, n)
-	pm.wg = new(sync.WaitGroup)
-	pm.ctx, pm.cancel = context.WithCancel(context.Background())
-	pm.connManager = connManager
-	for i := 0; i < n; i++ {
-		pm.processors[i] = initProcessor("Processor-"+fmt.Sprint(i), pm.wg, pm.ctx, pm.connManager, filter, latencyFilter, sizeFilter, side, conntrackCloseWaitTimeMills)
-		go pm.processors[i].run()
-		pm.wg.Add(1)
-	}
-	return pm
-}
-
 func (pm *ProcessorManager) GetProcessor(i int) *Processor {
 	if i < 0 || i >= len(pm.processors) {
 		return nil
@@ -127,33 +112,6 @@ type TimedSyscallEvent struct {
 type TimedSslEvent struct {
 	event     *bpf.SslData
 	timestamp time.Time
-}
-
-func initProcessor(name string, wg *sync.WaitGroup, ctx context.Context, connManager *ConnManager, filter protocol.ProtocolFilter,
-	latencyFilter protocol.LatencyFilter, sizeFilter protocol.SizeFilter, side common.SideEnum, conntrackCloseWaitTimeMills int) *Processor {
-	p := new(Processor)
-	p.wg = wg
-	p.ctx = ctx
-	p.connManager = connManager
-	p.connEvents = make(chan *bpf.AgentConnEvtT)
-	p.syscallEvents = make(chan *bpf.SyscallEventData)
-	p.sslEvents = make(chan *bpf.SslData)
-	p.kernEvents = make(chan *bpf.AgentKernEvt)
-	p.firstPacketsEvents = make(chan *agentKernEvtWithConn)
-	p.name = name
-	p.messageFilter = filter
-	p.latencyFilter = latencyFilter
-	p.SizeFilter = sizeFilter
-	p.side = side
-	p.recordProcessor = &RecordsProcessor{
-		records: make([]RecordWithConn, 0),
-	}
-	p.conntrackCloseWaitTimeMills = conntrackCloseWaitTimeMills
-	p.tempKernEvents = common.NewRingBuffer(1000)    // Preallocate with a capacity of 100
-	p.tempSyscallEvents = common.NewRingBuffer(1000) // Preallocate with a capacity of 100
-	p.tempFirstPacketEvents = common.NewRingBuffer(100)
-	p.tempSslEvents = common.NewRingBuffer(100) // Preallocate with a capacity of 100
-	return p
 }
 
 func (p *Processor) AddConnEvent(evt *bpf.AgentConnEvtT) {
@@ -324,27 +282,6 @@ func (p *Processor) handleFirstPacketEvent(event *agentKernEvtWithConn, recordCh
 	p.processOldFirstPacketEvents(recordChannel)
 }
 
-func (p *Processor) processTimedFirstPacketEvents(recordChannel chan RecordWithConn) {
-	p.processOldFirstPacketEvents(recordChannel)
-}
-
-func (p *Processor) processOldFirstPacketEvents(recordChannel chan RecordWithConn) {
-	now := time.Now()
-	for !p.tempFirstPacketEvents.IsEmpty() {
-		_event, err := p.tempFirstPacketEvents.Peek()
-		if err != nil {
-			break
-		}
-		event := _event.(TimedFirstPacketEvent)
-		if now.Sub(event.timestamp) > 100*time.Millisecond {
-			p.processFirstPacketEvent(event.event, recordChannel)
-			p.tempFirstPacketEvents.Read()
-		} else {
-			break
-		}
-	}
-}
-
 func (p *Processor) processFirstPacketEvent(event *agentKernEvtWithConn, recordChannel chan RecordWithConn) {
 	// log
 	event.Ts += common.LaunchEpochTime
@@ -358,27 +295,6 @@ func (p *Processor) handleKernEvent(event *bpf.AgentKernEvt, recordChannel chan 
 
 	// Process events in the queue that have been there for more than 100ms
 	p.processOldKernEvents(recordChannel)
-}
-
-func (p *Processor) processTimedKernEvents(recordChannel chan RecordWithConn) {
-	p.processOldKernEvents(recordChannel)
-}
-
-func (p *Processor) processOldKernEvents(recordChannel chan RecordWithConn) {
-	now := time.Now()
-	for !p.tempKernEvents.IsEmpty() {
-		_event, err := p.tempKernEvents.Peek()
-		if err != nil {
-			break
-		}
-		event := _event.(TimedEvent)
-		if now.Sub(event.timestamp) > 100*time.Millisecond {
-			p.processKernEvent(event.event, recordChannel)
-			p.tempKernEvents.Read()
-		} else {
-			break
-		}
-	}
 }
 
 func (p *Processor) processKernEvent(event *bpf.AgentKernEvt, recordChannel chan RecordWithConn) {
@@ -439,27 +355,6 @@ func (p *Processor) handleSyscallEvent(event *bpf.SyscallEventData, recordChanne
 	// p.processSyscallEvent(event, recordChannel)
 }
 
-func (p *Processor) processTimedSyscallEvents(recordChannel chan RecordWithConn) {
-	p.processOldSyscallEvents(recordChannel)
-}
-
-func (p *Processor) processOldSyscallEvents(recordChannel chan RecordWithConn) {
-	now := time.Now()
-	for !p.tempSyscallEvents.IsEmpty() {
-		_event, err := p.tempSyscallEvents.Peek()
-		if err != nil {
-			break
-		}
-		event := _event.(TimedSyscallEvent)
-		if now.Sub(event.timestamp) > 100*time.Millisecond {
-			p.processSyscallEvent(event.event, recordChannel)
-			p.tempSyscallEvents.Read()
-		} else {
-			break
-		}
-	}
-}
-
 func (p *Processor) processSyscallEvent(event *bpf.SyscallEventData, recordChannel chan RecordWithConn) {
 	tgidFd := event.SyscallEvent.Ke.ConnIdS.TgidFd
 	event.SyscallEvent.Ke.Ts += common.LaunchEpochTime
@@ -507,27 +402,6 @@ func (p *Processor) handleSslEvent(event *bpf.SslData, recordChannel chan Record
 
 	// Process events in the queue that have been there for more than 100ms
 	p.processOldSslEvents(recordChannel)
-}
-
-func (p *Processor) processTimedSslEvents(recordChannel chan RecordWithConn) {
-	p.processOldSslEvents(recordChannel)
-}
-
-func (p *Processor) processOldSslEvents(recordChannel chan RecordWithConn) {
-	now := time.Now()
-	for !p.tempSslEvents.IsEmpty() {
-		_event, err := p.tempSslEvents.Peek()
-		if err != nil {
-			break
-		}
-		event := _event.(TimedSslEvent)
-		if now.Sub(event.timestamp) > 100*time.Millisecond {
-			p.processSslEvent(event.event, recordChannel)
-			p.tempSslEvents.Read()
-		} else {
-			break
-		}
-	}
 }
 
 func (p *Processor) processSslEvent(event *bpf.SslData, recordChannel chan RecordWithConn) {
@@ -601,5 +475,129 @@ func FormatKernEvt(evt *bpf.AgentKernEvt, conn *Connection4) string {
 		return fmt.Sprintf("[kern][ts=%d]%s[%s]%s | %d|%d flags:%s\n", evt.Ts, interfaceStr, bpf.StepCNNames[evt.Step], conn.ToString(), evt.Seq, evt.Len, common.DisplayTcpFlags(evt.Flags))
 	} else {
 		return fmt.Sprintf("[kern][ts=%d]%s[%s] | %d|%d flags:%s\n", evt.Ts, interfaceStr, bpf.StepCNNames[evt.Step], evt.Seq, evt.Len, common.DisplayTcpFlags(evt.Flags))
+	}
+}
+
+func InitProcessorManager(n int, connManager *ConnManager, filter protocol.ProtocolFilter,
+	latencyFilter protocol.LatencyFilter, sizeFilter protocol.SizeFilter, side common.SideEnum, conntrackCloseWaitTimeMills int) *ProcessorManager {
+	pm := new(ProcessorManager)
+	pm.processors = make([]*Processor, n)
+	pm.wg = new(sync.WaitGroup)
+	pm.ctx, pm.cancel = context.WithCancel(context.Background())
+	pm.connManager = connManager
+	for i := 0; i < n; i++ {
+		pm.processors[i] = initProcessor("Processor-"+fmt.Sprint(i), pm.wg, pm.ctx, pm.connManager, filter, latencyFilter, sizeFilter, side, conntrackCloseWaitTimeMills)
+		go pm.processors[i].run()
+		pm.wg.Add(1)
+	}
+	return pm
+}
+
+func initProcessor(name string, wg *sync.WaitGroup, ctx context.Context, connManager *ConnManager, filter protocol.ProtocolFilter,
+	latencyFilter protocol.LatencyFilter, sizeFilter protocol.SizeFilter, side common.SideEnum, conntrackCloseWaitTimeMills int) *Processor {
+	p := new(Processor)
+	p.wg = wg
+	p.ctx = ctx
+	p.connManager = connManager
+	p.connEvents = make(chan *bpf.AgentConnEvtT)
+	p.syscallEvents = make(chan *bpf.SyscallEventData)
+	p.sslEvents = make(chan *bpf.SslData)
+	p.kernEvents = make(chan *bpf.AgentKernEvt)
+	p.firstPacketsEvents = make(chan *agentKernEvtWithConn)
+	p.name = name
+	p.messageFilter = filter
+	p.latencyFilter = latencyFilter
+	p.SizeFilter = sizeFilter
+	p.side = side
+	p.recordProcessor = &RecordsProcessor{
+		records: make([]RecordWithConn, 0),
+	}
+	p.conntrackCloseWaitTimeMills = conntrackCloseWaitTimeMills
+	p.tempKernEvents = common.NewRingBuffer(1000)    // Preallocate with a capacity of 100
+	p.tempSyscallEvents = common.NewRingBuffer(1000) // Preallocate with a capacity of 100
+	p.tempFirstPacketEvents = common.NewRingBuffer(100)
+	p.tempSslEvents = common.NewRingBuffer(100) // Preallocate with a capacity of 100
+	return p
+}
+
+func (p *Processor) processTimedSslEvents(recordChannel chan RecordWithConn) {
+	p.processOldSslEvents(recordChannel)
+}
+
+func (p *Processor) processOldSslEvents(recordChannel chan RecordWithConn) {
+	now := time.Now()
+	for !p.tempSslEvents.IsEmpty() {
+		_event, err := p.tempSslEvents.Peek()
+		if err != nil {
+			break
+		}
+		event := _event.(TimedSslEvent)
+		if now.Sub(event.timestamp) > 100*time.Millisecond {
+			p.processSslEvent(event.event, recordChannel)
+			p.tempSslEvents.Read()
+		} else {
+			break
+		}
+	}
+}
+func (p *Processor) processTimedKernEvents(recordChannel chan RecordWithConn) {
+	p.processOldKernEvents(recordChannel)
+}
+
+func (p *Processor) processOldKernEvents(recordChannel chan RecordWithConn) {
+	now := time.Now()
+	for !p.tempKernEvents.IsEmpty() {
+		_event, err := p.tempKernEvents.Peek()
+		if err != nil {
+			break
+		}
+		event := _event.(TimedEvent)
+		if now.Sub(event.timestamp) > 100*time.Millisecond {
+			p.processKernEvent(event.event, recordChannel)
+			p.tempKernEvents.Read()
+		} else {
+			break
+		}
+	}
+}
+
+func (p *Processor) processTimedFirstPacketEvents(recordChannel chan RecordWithConn) {
+	p.processOldFirstPacketEvents(recordChannel)
+}
+
+func (p *Processor) processOldFirstPacketEvents(recordChannel chan RecordWithConn) {
+	now := time.Now()
+	for !p.tempFirstPacketEvents.IsEmpty() {
+		_event, err := p.tempFirstPacketEvents.Peek()
+		if err != nil {
+			break
+		}
+		event := _event.(TimedFirstPacketEvent)
+		if now.Sub(event.timestamp) > 100*time.Millisecond {
+			p.processFirstPacketEvent(event.event, recordChannel)
+			p.tempFirstPacketEvents.Read()
+		} else {
+			break
+		}
+	}
+}
+func (p *Processor) processTimedSyscallEvents(recordChannel chan RecordWithConn) {
+	p.processOldSyscallEvents(recordChannel)
+}
+
+func (p *Processor) processOldSyscallEvents(recordChannel chan RecordWithConn) {
+	now := time.Now()
+	for !p.tempSyscallEvents.IsEmpty() {
+		_event, err := p.tempSyscallEvents.Peek()
+		if err != nil {
+			break
+		}
+		event := _event.(TimedSyscallEvent)
+		if now.Sub(event.timestamp) > 100*time.Millisecond {
+			p.processSyscallEvent(event.event, recordChannel)
+			p.tempSyscallEvents.Read()
+		} else {
+			break
+		}
 	}
 }

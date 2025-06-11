@@ -4,6 +4,9 @@ import (
 	"debug/elf"
 	"errors"
 	"fmt"
+	"github.com/cilium/ebpf"
+	"github.com/cilium/ebpf/link"
+	"github.com/shirou/gopsutil/process"
 	ac "kyanos/agent/common"
 	"kyanos/bpf"
 	"kyanos/common"
@@ -12,35 +15,11 @@ import (
 	"strings"
 	"sync"
 	"time"
-
-	"github.com/cilium/ebpf"
-	"github.com/cilium/ebpf/link"
-	"github.com/shirou/gopsutil/process"
 )
 
 var attachedLibPaths map[string]bool = make(map[string]bool)
 var attachedLibPathsMutex sync.Mutex
 var uprobeLinks []link.Link = make([]link.Link, 0)
-
-func StartHandleSchedExecEvent(ch chan *bpf.AgentProcessExecEvent) {
-	go func() {
-		filterByPIDEnabled, err := checkFilterByPIDEnabled()
-		if err != nil {
-			common.AgentLog.Logger.Error(err)
-			return
-		}
-		for event := range ch {
-			go func(e *bpf.AgentProcessExecEvent) {
-				// Delay some time to give the process time to map the SSL library
-				// but there is still a chance that the process doesn't map the SSL library
-				// at the start time.
-				// TODO: There may be a better way to handle this.
-				time.Sleep(1000 * time.Millisecond)
-				handleSchedExecEvent(filterByPIDEnabled, e)
-			}(event)
-		}
-	}()
-}
 
 func checkFilterByPIDEnabled() (bool, error) {
 	var controlValues *ebpf.Map = bpf.GetMapFromObjs(bpf.Objs, "ControlValues")
@@ -55,21 +34,8 @@ func checkFilterByPIDEnabled() (bool, error) {
 	return enabledValue != 0, nil
 }
 
-func isPIDInFilter(pid int32) (bool, error) {
-	var filterPIDMap *ebpf.Map = bpf.GetMapFromObjs(bpf.Objs, "FilterPidMap")
-	var existsFlag int8
-	if err := filterPIDMap.Lookup(&pid, &existsFlag); err != nil {
-		if errors.Is(err, ebpf.ErrKeyNotExist) {
-			return false, nil
-		} else {
-			return false, fmt.Errorf("pid %d filter lookup failed: %w", pid, err)
-		}
-	}
-	return existsFlag != 0, nil
-}
-
 func handleSchedExecEvent(filterByPIDEnabled bool, event *bpf.AgentProcessExecEvent) {
-	if filterByPIDEnabled {
+	if filterByPIDEnabled { // 只抓某几个进程
 		pidMatches, err := isPIDInFilter(event.Pid)
 		if err != nil {
 			common.UprobeLog.Errorf("PID filter check failed for %d: %v", event.Pid, err)
@@ -79,6 +45,7 @@ func handleSchedExecEvent(filterByPIDEnabled bool, event *bpf.AgentProcessExecEv
 			return
 		}
 	}
+
 	links, err := AttachSslUprobe(int(event.Pid))
 	var procName string
 	if proc, err := process.NewProcess(event.Pid); err == nil {
@@ -355,4 +322,37 @@ func getOpenSslVersionKey(libSslPath string) (string, error) {
 	} else {
 		return "", fmt.Errorf("no openssl version found in openssl so path: %s", libSslPath)
 	}
+}
+
+func StartHandleSchedExecEvent(ch chan *bpf.AgentProcessExecEvent) {
+	go func() {
+		filterByPIDEnabled, err := checkFilterByPIDEnabled()
+		if err != nil {
+			common.AgentLog.Logger.Error(err)
+			return
+		}
+		for event := range ch {
+			go func(e *bpf.AgentProcessExecEvent) {
+				// Delay some time to give the process time to map the SSL library
+				// but there is still a chance that the process doesn't map the SSL library
+				// at the start time.
+				// TODO: There may be a better way to handle this.
+				time.Sleep(1000 * time.Millisecond)
+				handleSchedExecEvent(filterByPIDEnabled, e)
+			}(event)
+		}
+	}()
+}
+
+func isPIDInFilter(pid int32) (bool, error) {
+	var filterPIDMap *ebpf.Map = bpf.GetMapFromObjs(bpf.Objs, "FilterPidMap")
+	var existsFlag int8
+	if err := filterPIDMap.Lookup(&pid, &existsFlag); err != nil {
+		if errors.Is(err, ebpf.ErrKeyNotExist) {
+			return false, nil
+		} else {
+			return false, fmt.Errorf("pid %d filter lookup failed: %w", pid, err)
+		}
+	}
+	return existsFlag != 0, nil
 }

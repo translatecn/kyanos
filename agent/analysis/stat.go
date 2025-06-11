@@ -19,29 +19,6 @@ var traceSocketEvent bool
 type StatRecorder struct {
 }
 
-func InitStatRecorder(options *AgentOptions) *StatRecorder {
-	sr := new(StatRecorder)
-	traceDevEvent = options.WatchOptions.TraceDevEvent
-	traceSocketEvent = options.WatchOptions.TraceSocketEvent
-	return sr
-}
-
-func CreateAnnotedRecord() *analysisCommon.AnnotatedRecord {
-	return &analysisCommon.AnnotatedRecord{
-		StartTs:                      0,
-		EndTs:                        0,
-		ReqSize:                      -1,
-		RespSize:                     -1,
-		TotalDuration:                -1,
-		BlackBoxDuration:             -1,
-		ReadFromSocketBufferDuration: -1,
-		ReqSyscallEventDetails:       make([]analysisCommon.SyscallEventDetail, 0),
-		RespSyscallEventDetails:      make([]analysisCommon.SyscallEventDetail, 0),
-		ReqNicEventDetails:           make([]analysisCommon.NicEventDetail, 0),
-		RespNicEventDetails:          make([]analysisCommon.NicEventDetail, 0),
-	}
-}
-
 func timeUnitName(nano bool) string {
 	if nano {
 		return "ns"
@@ -337,7 +314,7 @@ func (s *StatRecorder) ReceiveRecord(r protocol.Record, connection *conn.Connect
 				analysisCommon.BlackBoxDuration:             true,
 				analysisCommon.TotalDuration:                true,
 			}, IncludeSyscallStat: true,
-			IncludeConnDesc: true,
+			IncludeConnDesc:       true,
 			RecordToStringOptions: protocol.RecordToStringOptions{
 				IncludeReqBody:     true,
 				IncludeRespBody:    true,
@@ -432,4 +409,26 @@ func getParsedMessageBySide(r protocol.Record, IsServerSide bool, direct DirectE
 	}
 }
 func (s *StatRecorder) RemoveRecord(tgidFd uint64) {
+}
+
+func InitStatRecorder(options *AgentOptions) *StatRecorder {
+	sr := new(StatRecorder)
+	traceDevEvent = options.WatchOptions.TraceDevEvent
+	traceSocketEvent = options.WatchOptions.TraceSocketEvent
+	return sr
+}
+func CreateAnnotedRecord() *analysisCommon.AnnotatedRecord {
+	return &analysisCommon.AnnotatedRecord{
+		StartTs:                      0,
+		EndTs:                        0,
+		ReqSize:                      -1,
+		RespSize:                     -1,
+		TotalDuration:                -1,
+		BlackBoxDuration:             -1,
+		ReadFromSocketBufferDuration: -1,
+		ReqSyscallEventDetails:       make([]analysisCommon.SyscallEventDetail, 0),
+		RespSyscallEventDetails:      make([]analysisCommon.SyscallEventDetail, 0),
+		ReqNicEventDetails:           make([]analysisCommon.NicEventDetail, 0),
+		RespNicEventDetails:          make([]analysisCommon.NicEventDetail, 0),
+	}
 }

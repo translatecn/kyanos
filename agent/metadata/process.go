@@ -2,12 +2,11 @@ package metadata
 
 import (
 	"context"
+	"github.com/shirou/gopsutil/process"
 	"kyanos/bpf"
 	"kyanos/common"
 	"sync"
 	"time"
-
-	"github.com/shirou/gopsutil/process"
 )
 
 var cleanupTimeout = 5 * time.Second
@@ -40,24 +39,6 @@ func init() {
 	}()
 }
 
-func StartHandleSchedExecEvent(ch chan *bpf.AgentProcessExecEvent, ctx context.Context) {
-	go func() {
-		for {
-			select {
-			case <-ctx.Done():
-				return
-			case execEvent := <-ch:
-				proc, err := process.NewProcess(execEvent.Pid)
-				if err != nil {
-					common.AgentLog.Infof("Failed to create process for PID %d: %v", execEvent.Pid, err)
-					continue
-				}
-				startPID(int(proc.Pid), common.GetNetworkNamespaceFromPid(int(proc.Pid)))
-			}
-		}
-	}()
-}
-
 func StartHandleSchedExitEvent(ch chan *bpf.AgentProcessExitEvent, ctx context.Context) {
 	go func() {
 		for {
@@ -69,17 +50,6 @@ func StartHandleSchedExitEvent(ch chan *bpf.AgentProcessExitEvent, ctx context.C
 			}
 		}
 	}()
-}
-
-func startPID(pid int, netns int64) {
-	cacheLock.Lock()
-	defer cacheLock.Unlock()
-	common.AgentLog.Infof("Start tracking PID %d, netns: %d", pid, netns)
-	pidCache.Store(pid, PIDInfo{
-		PID:       pid,
-		NetNS:     netns,
-		Timestamp: time.Now(),
-	})
 }
 
 func stopPID(pid int) {
@@ -117,4 +87,33 @@ func GetPidInfo(pid int) PIDInfo {
 	}
 
 	return PIDInfo{}
+}
+
+func StartHandleSchedExecEvent(ch chan *bpf.AgentProcessExecEvent, ctx context.Context) {
+	go func() {
+		for {
+			select {
+			case <-ctx.Done():
+				return
+			case execEvent := <-ch:
+				proc, err := process.NewProcess(execEvent.Pid)
+				if err != nil {
+					common.AgentLog.Infof("Failed to create process for PID %d: %v", execEvent.Pid, err)
+					continue
+				}
+				startPID(int(proc.Pid), common.GetNetworkNamespaceFromPid(int(proc.Pid)))
+			}
+		}
+	}()
+}
+
+func startPID(pid int, netns int64) {
+	cacheLock.Lock()
+	defer cacheLock.Unlock()
+	common.AgentLog.Infof("Start tracking PID %d, netns: %d", pid, netns)
+	pidCache.Store(pid, PIDInfo{
+		PID:       pid,
+		NetNS:     netns,
+		Timestamp: time.Now(),
+	})
 }

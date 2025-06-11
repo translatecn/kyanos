@@ -67,7 +67,7 @@ type AgentOptions struct {
 	Kv                  *compatible.KernelVersion
 	LoadPorgressChannel chan string
 
-	SyscallPerfEventMapPageNum int
+	SyscallPerfEventMapPageNum int // 2048
 	SslPerfEventMapPageNum     int
 	ConnPerfEventMapPageNum    int
 	KernPerfEventMapPageNum    int

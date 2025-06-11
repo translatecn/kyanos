@@ -9,7 +9,6 @@
 *.dylib
 *.o
 *_bpfel.o
-*_bpfel.go
 
 __debug**
 node_modules/

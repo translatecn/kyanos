@@ -80,55 +80,6 @@ func parseExitEvent(rawSample []byte) (*AgentProcessExitEvent, error) {
 	return &event, nil
 }
 
-func PullProcessExecEvents(ctx context.Context, channels *[]chan *AgentProcessExecEvent) error {
-	pageSize := os.Getpagesize()
-	perCPUBuffer := pageSize * 4
-	eventSize := int(unsafe.Sizeof(AgentProcessExecEvent{}))
-	if eventSize >= perCPUBuffer {
-		perCPUBuffer = perCPUBuffer * (1 + (eventSize / perCPUBuffer))
-	}
-	reader, err := perf.NewReader(GetMapFromObjs(Objs, "ProcExecEvents"), perCPUBuffer)
-	if err == nil {
-		go func(*perf.Reader) {
-			defer reader.Close()
-			for {
-				select {
-				case <-ctx.Done():
-					return
-				default:
-				}
-				record, err := reader.Read()
-				if err != nil {
-					if errors.Is(err, perf.ErrClosed) {
-						common.BPFLog.Debug("[dataReader] Received signal, exiting..")
-						return
-					}
-					common.BPFLog.Debugf("[dataReader] reading from reader: %s\n", err)
-					continue
-				}
-				if record.LostSamples > 0 {
-					ProcessExecEventLostCnt.Add(record.LostSamples)
-					common.BPFLog.Warningf("[dataReader] lost %d process exec event\n", record.LostSamples)
-					continue
-				}
-
-				if evt, err := parseExecEvent(record.RawSample); err != nil {
-					common.AgentLog.Errorf("[dataReader] handleKernEvt err: %s\n", err)
-					continue
-				} else {
-					for _, ch := range *channels {
-						ch <- evt
-					}
-				}
-			}
-		}(reader)
-	}
-	if err != nil {
-		common.BPFLog.Warningf("[bpf] set up perf reader failed: %s\n", err)
-	}
-	return err
-}
-
 func parseExecEvent(rawSample []byte) (*AgentProcessExecEvent, error) {
 	event := AgentProcessExecEvent{}
 	if err := binary.Read(bytes.NewBuffer(rawSample), binary.LittleEndian, &event); err != nil {
@@ -139,9 +90,9 @@ func parseExecEvent(rawSample []byte) (*AgentProcessExecEvent, error) {
 
 func PullSyscallDataEvents(ctx context.Context, channels []chan *SyscallEventData, perfCPUBufferPageNum int, hook SyscallEventHook) error {
 	pageSize := os.Getpagesize()
-	perCPUBuffer := pageSize * perfCPUBufferPageNum
+	perCPUBuffer := pageSize * perfCPUBufferPageNum // 2048
 	eventSize := int(unsafe.Sizeof(AgentProcessExecEvent{}))
-	if eventSize >= perCPUBuffer {
+	if eventSize >= perCPUBuffer { // 向上取整
 		perCPUBuffer = perCPUBuffer * (1 + (eventSize / perCPUBuffer))
 	}
 	reader, err := perf.NewReader(GetMapFromObjs(Objs, "SyscallRb"), perCPUBuffer)
@@ -188,27 +139,6 @@ func PullSyscallDataEvents(ctx context.Context, channels []chan *SyscallEventDat
 		common.BPFLog.Warningf("[bpf] set up perf reader failed: %s\n", err)
 	}
 	return err
-}
-
-func parseSyscallDataEvent(rawSample []byte) (*SyscallEventData, error) {
-	event := new(SyscallEventData)
-	err := binary.Read(bytes.NewBuffer(rawSample), binary.LittleEndian, &event.SyscallEvent)
-	if err != nil {
-		return nil, err
-	}
-	msgSize := event.SyscallEvent.BufSize
-	buf := make([]byte, msgSize)
-	if msgSize > 0 {
-		headerSize := uint(unsafe.Sizeof(event.SyscallEvent)) - 4
-		err = binary.Read(bytes.NewBuffer(rawSample[headerSize:]), binary.LittleEndian, &buf)
-		if err != nil {
-			return nil, err
-		}
-	}
-	event.Buf = buf
-
-	// tgidFd := event.SyscallEvent.Ke.ConnIdS.TgidFd
-	return event, nil
 }
 
 func PullSslDataEvents(ctx context.Context, channels []chan *SslData, perfCPUBufferPageNum int, hook SslEventHook) error {
@@ -461,3 +391,73 @@ type SyscallEventHook func(evt *SyscallEventData)
 type SslEventHook func(evt *SslData)
 type ConnEventHook func(evt *AgentConnEvtT)
 type KernEventHook func(evt *AgentKernEvt)
+
+func parseSyscallDataEvent(rawSample []byte) (*SyscallEventData, error) {
+	event := new(SyscallEventData)
+	err := binary.Read(bytes.NewBuffer(rawSample), binary.LittleEndian, &event.SyscallEvent)
+	if err != nil {
+		return nil, err
+	}
+	msgSize := event.SyscallEvent.BufSize
+	buf := make([]byte, msgSize)
+	if msgSize > 0 {
+		headerSize := uint(unsafe.Sizeof(event.SyscallEvent)) - 4
+		err = binary.Read(bytes.NewBuffer(rawSample[headerSize:]), binary.LittleEndian, &buf)
+		if err != nil {
+			return nil, err
+		}
+	}
+	event.Buf = buf
+
+	// tgidFd := event.SyscallEvent.Ke.ConnIdS.TgidFd
+	return event, nil
+}
+
+func PullProcessExecEvents(ctx context.Context, channels *[]chan *AgentProcessExecEvent) error {
+	pageSize := os.Getpagesize()
+	perCPUBuffer := pageSize * 4
+	eventSize := int(unsafe.Sizeof(AgentProcessExecEvent{}))
+	if eventSize >= perCPUBuffer {
+		perCPUBuffer = perCPUBuffer * (1 + (eventSize / perCPUBuffer))
+	}
+	reader, err := perf.NewReader(GetMapFromObjs(Objs, "ProcExecEvents"), perCPUBuffer)
+	if err == nil {
+		go func(*perf.Reader) {
+			defer reader.Close()
+			for {
+				select {
+				case <-ctx.Done():
+					return
+				default:
+				}
+				record, err := reader.Read()
+				if err != nil {
+					if errors.Is(err, perf.ErrClosed) {
+						common.BPFLog.Debug("[dataReader] Received signal, exiting..")
+						return
+					}
+					common.BPFLog.Debugf("[dataReader] reading from reader: %s\n", err)
+					continue
+				}
+				if record.LostSamples > 0 {
+					ProcessExecEventLostCnt.Add(record.LostSamples)
+					common.BPFLog.Warningf("[dataReader] lost %d process exec event\n", record.LostSamples)
+					continue
+				}
+
+				if evt, err := parseExecEvent(record.RawSample); err != nil {
+					common.AgentLog.Errorf("[dataReader] handleKernEvt err: %s\n", err)
+					continue
+				} else {
+					for _, ch := range *channels {
+						ch <- evt
+					}
+				}
+			}
+		}(reader)
+	}
+	if err != nil {
+		common.BPFLog.Warningf("[bpf] set up perf reader failed: %s\n", err)
+	}
+	return err
+}

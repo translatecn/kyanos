@@ -86,7 +86,6 @@ func (f *InstrumentFunction) GetTracepointGroupName() string {
 	secondIdx := strings.LastIndex(f.KernelFunctionName, "/")
 	return f.KernelFunctionName[firstIdx+1 : secondIdx]
 }
-
 func (f *InstrumentFunction) GetTracepointName() string {
 	secondIdx := strings.LastIndex(f.KernelFunctionName, "/")
 	return f.KernelFunctionName[secondIdx+1:]
@@ -110,22 +109,6 @@ func GetCurrentKernelVersion() KernelVersion {
 	return v
 }
 
-func GetBestMatchedKernelVersion(version string) KernelVersion {
-	foundKey, foundValue := KernelVersionsMap.Floor(version)
-	if foundKey == nil {
-		foundKey, foundValue := KernelVersionsMap.Ceiling(version)
-		if foundKey != nil {
-			log.Debugf("Can't find version: %s, use the smallest version current supported: %s", version, foundKey)
-			return foundValue.(KernelVersion)
-		} else {
-			log.Fatalln(fmt.Sprintf("kernel version: %s is too old, currently not suppport", version))
-			return KernelVersion{}
-		}
-	} else {
-		return foundValue.(KernelVersion)
-	}
-}
-
 func init() {
 	KernelVersionsMap = treemap.NewWith(func(a, b interface{}) int {
 		return cmp.Compare(a.(string), b.(string))
@@ -134,12 +117,18 @@ func init() {
 	baseVersion := KernelVersion{
 		Version: "5.15.0",
 		InstrumentFunctions: map[bpf.AgentStepT][]InstrumentFunction{
-			bpf.AgentStepTIP_OUT:    {MakeInstrumentFunction("kprobe/__ip_queue_xmit", "IpQueueXmit")},
-			bpf.AgentStepTQDISC_OUT: {MakeInstrumentFunction("kprobe/dev_queue_xmit", "DevQueueXmit")},
-			bpf.AgentStepTDEV_OUT:   {MakeInstrumentFunction("kprobe/dev_hard_start_xmit", "DevHardStartXmit")},
-			bpf.AgentStepTDEV_IN:    {MakeInstrumentFunction("tracepoint/net/netif_receive_skb", "TracepointNetifReceiveSkb")},
-			bpf.AgentStepTIP_IN:     {MakeInstrumentFunction("kprobe/ip_rcv_core", "IpRcvCore")},
-			bpf.AgentStepTTCP_IN:    {MakeInstrumentFunction("kprobe/tcp_v4_do_rcv", "TcpV4DoRcv"), MakeInstrumentFunction("kprobe/tcp_v6_do_rcv", "TcpV6DoRcv")},
+			bpf.AgentStepTIP_OUT: {MakeInstrumentFunction("kprobe/__ip_queue_xmit", "IpQueueXmit")},
+			bpf.AgentStepTQDISC_OUT: {
+				MakeInstrumentFunction("kprobe/dev_queue_xmit", "DevQueueXmit"),
+				MakeBackupInstrumentFunction("kprobe/__dev_queue_xmit", "DevQueueXmit"),
+			},
+			bpf.AgentStepTDEV_OUT: {MakeInstrumentFunction("kprobe/dev_hard_start_xmit", "DevHardStartXmit")},
+			bpf.AgentStepTDEV_IN:  {MakeInstrumentFunction("tracepoint/net/netif_receive_skb", "TracepointNetifReceiveSkb")},
+			bpf.AgentStepTIP_IN:   {MakeInstrumentFunction("kprobe/ip_rcv_core", "IpRcvCore")},
+			bpf.AgentStepTTCP_IN: {
+				MakeInstrumentFunction("kprobe/tcp_v4_do_rcv", "TcpV4DoRcv"),
+				MakeInstrumentFunction("kprobe/tcp_v6_do_rcv", "TcpV6DoRcv"),
+			},
 			bpf.AgentStepTUSER_COPY: {MakeInstrumentFunction("tracepoint/skb/skb_copy_datagram_iovec", "TracepointSkbCopyDatagramIovec")},
 		},
 		Capabilities: map[Capability]bool{
@@ -151,7 +140,6 @@ func init() {
 			SupportFentry:            true,
 		},
 	}
-	baseVersion.addBackupInstrumentFunction(bpf.AgentStepTQDISC_OUT, MakeBackupInstrumentFunction("kprobe/__dev_queue_xmit", "DevQueueXmit"))
 	v5d15 := copyKernelVersion(baseVersion)
 	KernelVersionsMap.Put(v5d15.Version, v5d15)
 
@@ -197,6 +185,22 @@ func (i *KernelVersion) addBackupInstrumentFunction(step bpf.AgentStepT, functio
 func (i *KernelVersion) removeCapability(cap Capability) *KernelVersion {
 	delete(i.Capabilities, cap)
 	return i
+}
+
+func GetBestMatchedKernelVersion(version string) KernelVersion {
+	foundKey, foundValue := KernelVersionsMap.Floor(version)
+	if foundKey == nil {
+		foundKey, foundValue := KernelVersionsMap.Ceiling(version)
+		if foundKey != nil {
+			log.Debugf("Can't find version: %s, use the smallest version current supported: %s", version, foundKey)
+			return foundValue.(KernelVersion)
+		} else {
+			log.Fatalln(fmt.Sprintf("kernel version: %s is too old, currently not suppport", version))
+			return KernelVersion{}
+		}
+	} else {
+		return foundValue.(KernelVersion)
+	}
 }
 
 func copyKernelVersion(this KernelVersion) KernelVersion {

@@ -69,7 +69,6 @@ func submitRecord(record protocol.Record, c *Connection4) {
 		} else {
 			needSubmit = true
 		}
-
 	} else {
 		needSubmit = false
 	}

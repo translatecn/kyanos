@@ -12,8 +12,7 @@ type ContainerCache struct {
 	k8s *k8s.MetaData
 }
 
-func NewContainerCache(ctx context.Context,
-	dockerEndpoint, containerdEndpoint, criRuntimeEndpoint string) (*ContainerCache, error, error) {
+func NewContainerCache(ctx context.Context, dockerEndpoint, containerdEndpoint, criRuntimeEndpoint string) (*ContainerCache, error, error) {
 	d := container.NewMultipleEngineMetaData(dockerEndpoint, containerdEndpoint)
 
 	if err := d.Start(ctx); err != nil {

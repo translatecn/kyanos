@@ -6,6 +6,8 @@ import (
 	"encoding/binary"
 	"errors"
 	"fmt"
+	"github.com/hashicorp/go-version"
+	"github.com/zcalusic/sysinfo"
 	"net"
 	"os"
 	"reflect"
@@ -13,9 +15,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/hashicorp/go-version"
 	"github.com/jefurry/logrus"
-	"github.com/zcalusic/sysinfo"
 )
 
 func IntToIP(ipInt uint32) string {
@@ -275,25 +275,6 @@ func ConvertDurationToMillisecondsIfNeeded(duration float64, nano bool) float64 
 	}
 }
 
-// "5.15.0-72-generic"
-func GetKernelVersion() *version.Version {
-	var si sysinfo.SysInfo
-	si.GetSysInfo()
-	release := si.Kernel.Release
-	v, err := version.NewVersion(release)
-	if err != nil {
-		DefaultLog.Debugf("Parse kernel version failed: %v, may be centos version, adjust and retry", err)
-		release = release[:strings.Index(release, "-")]
-		v, err = version.NewVersion(release)
-		if err != nil {
-			DefaultLog.Fatalf("Can't parse kernel version: %v, may be a bug, please submit a issue on http://github.com/hengyoush/kyanos", err)
-		} else {
-			return v
-		}
-	}
-	return v
-}
-
 var osReleaseFiles = []string{
 	"/etc/os-release",
 	"/usr/lib/os-release",
@@ -378,4 +359,23 @@ func UnwrapErr(err error) error {
 			return err
 		}
 	}
+}
+
+// "5.15.0-72-generic"
+func GetKernelVersion() *version.Version {
+	var si sysinfo.SysInfo
+	si.GetSysInfo()
+	release := si.Kernel.Release
+	v, err := version.NewVersion(release)
+	if err != nil {
+		DefaultLog.Debugf("Parse kernel version failed: %v, may be centos version, adjust and retry", err)
+		release = release[:strings.Index(release, "-")]
+		v, err = version.NewVersion(release)
+		if err != nil {
+			DefaultLog.Fatalf("Can't parse kernel version: %v, may be a bug, please submit a issue on http://github.com/hengyoush/kyanos", err)
+		} else {
+			return v
+		}
+	}
+	return v
 }
