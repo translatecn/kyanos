@@ -110,9 +110,9 @@ func AttachSslUprobe(pid int) ([]link.Link, error) {
 		Programs: ebpf.ProgramOptions{
 			// LogLevel: ebpf.LogLevelInstruction,
 			LogSize:     10 * 1024,
-			KernelTypes: ac.CollectionOpts.Programs.KernelTypes,
+			KernelTypes: ac.CollectionOpts.Programs.KernelTypes, // btf
 		},
-		MapReplacements: getMapReplacementsForOpenssl(),
+		MapReplacements: getMapReplacementsForOpenssl(), // 将控制面的map  应该到另一个bpf obj
 	}
 	err = spec.LoadAndAssign(objs, collectionOptions)
 	if err != nil {

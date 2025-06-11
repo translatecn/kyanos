@@ -112,7 +112,7 @@ format-md:
 
 .PHONY: dlv
 dlv:
-	chmod +x kyanos && dlv --headless --listen=:2345 --api-version=2 --check-go-version=false exec ./kyanos 
+	chmod +x kyanos && dlv --headless --listen=:2345 --api-version=2 --check-go-version=false exec ./kyanos -- $@
 
 .PHONY: kyanos-debug
 kyanos-debug: $(GO_FILES)

@@ -34,7 +34,7 @@ const (
 type SSLSocketFDAccess int
 
 const (
-	kNestedSyscall SSLSocketFDAccess = iota
+	kNestedSyscall SSLSocketFDAccess = iota // 嵌套系统调用
 	kUserSpaceOffsets
 	// 可以根据需要添加更多
 )
@@ -48,31 +48,31 @@ type SSLLibMatcher struct {
 
 var kLibSSLMatchers = []SSLLibMatcher{
 	{
-		Libssl:         kLibSSL_1_0,
+		Libssl:         kLibSSL_1_0, // libssl.so.1.0
 		Libcrypto:      "libcrypto.so.1.0",
 		SearchType:     kSearchTypeContains,
 		SocketFDAccess: kNestedSyscall,
 	},
 	{
-		Libssl:         kLibSSL_1_1,
+		Libssl:         kLibSSL_1_1, // libssl.so.1.1
 		Libcrypto:      "libcrypto.so.1.1",
 		SearchType:     kSearchTypeEndsWith,
 		SocketFDAccess: kNestedSyscall,
 	},
 	{
-		Libssl:         kLibSSL_3,
+		Libssl:         kLibSSL_3, // libssl.so.3
 		Libcrypto:      "libcrypto.so.3",
 		SearchType:     kSearchTypeEndsWith,
 		SocketFDAccess: kNestedSyscall,
 	},
 	{
-		Libssl:         kLibPython,
+		Libssl:         kLibPython, // libpython
 		Libcrypto:      kLibPython,
 		SearchType:     kSearchTypeContains,
 		SocketFDAccess: kNestedSyscall,
 	},
 	{
-		Libssl:         kLibNettyTcnativePrefix,
+		Libssl:         kLibNettyTcnativePrefix, // libnetty_tcnative_linux_x86
 		Libcrypto:      kLibNettyTcnativePrefix,
 		SearchType:     kSearchTypeContains,
 		SocketFDAccess: kUserSpaceOffsets,
